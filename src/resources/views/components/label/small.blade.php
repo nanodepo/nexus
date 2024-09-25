@@ -5,7 +5,7 @@
     'description' => null,
 ])
 
-<x-hint>
+<x-ui::hint>
     <div {{ $attributes->merge(['class' => 'inline-flex flex-row items-center h-5 py-0.5 px-1.5 text-white rounded']) }} style="background: {{ $color }}">
         <x-dynamic-component component="icon::{{ $icon }}" type="micro" />
     </div>
@@ -18,4 +18,4 @@
             </div>
         @endif
     </x-slot>
-</x-hint>
+</x-ui::hint>

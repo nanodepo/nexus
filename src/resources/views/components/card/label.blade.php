@@ -11,9 +11,9 @@
     'bg-light-on-error-container dark:bg-dark-on-error-container text-light-on-error dark:text-dark-on-error' => $color == 'error',
 ])>
     @if($icon)
-        <x-dynamic-component component="icon::{{ $icon }}" type="micro" class="w-4 h-4" />
+        <x-dynamic-component component="icon::{{ $icon }}" type="micro" />
     @endif
     @if($slot->isNotEmpty())
-        <div class="text-xs font-medium">{{ $slot }}</div>
+        <div class="text-xs font-medium tracking-wide">{{ $slot }}</div>
     @endif
 </div>

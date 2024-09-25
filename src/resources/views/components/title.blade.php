@@ -1,18 +1,8 @@
-@props([
-    'title' => null,
-    'subtitle' => null,
-    'action' => null
-])
+@props(['title', 'subtitle' => null])
 
-<div {{ $attributes->merge(['class' => 'flex flex-row']) }}>
-    <div class="flex flex-col flex-auto justify-center">
-        <div class="text-xs font-medium tracking-wide text-light-on-surface dark:text-dark-on-surface uppercase">{{ $title }}</div>
-        @if(isset($subtitle))
-            <div class="mt-1 text-sm text-balance text-light-on-surface-variant dark:text-dark-on-surface-variant">{{ $subtitle }}</div>
-        @endif
-    </div>
-
-    <div class="flex flex-row items-center justify-center flex-none">
-        {{ $action }}
-    </div>
+<div {{ $attributes->merge(['class' => 'flex flex-col gap-1']) }}>
+    <div class="text-sm font-medium tracking-wide text-light-primary dark:text-dark-primary">{{ $title }}</div>
+    @if(!is_null($subtitle))
+        <div class="text-sm text-balance tracking-wide text-light-on-surface-variant dark:text-dark-on-surface-variant">{{ $subtitle }}</div>
+    @endif
 </div>

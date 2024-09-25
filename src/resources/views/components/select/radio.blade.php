@@ -45,13 +45,13 @@
     >
         <div class="flex justify-between items-center px-2">
             <div class="text-sm">{{ $label }}</div>
-            <x-navigation.top.icon x-on:click="toggle" icon="chevron-left" x-bind:class="{ '-rotate-90': opened }" />
+            <x-ui::circle x-on:click="toggle" icon="chevron-left" x-bind:class="{ '-rotate-90': opened }" />
         </div>
     </div>
 
     <div x-ref="options" x-show="opened" class="bg-light-primary/5 dark:bg-dark-primary/5 rounded-b max-h-52 overflow-y-auto" x-cloak>
         <div x-show="with_search" class="m-4">
-            <x-input.text x-model="search" />
+            <x-ui::input.text x-model="search" />
         </div>
         <template x-for="(item, index) in filteredItems" :key="index">
             <div x-on:click="checked(index)" class="flex justify-between cursor-pointer border-b border-transparent py-4 px-2 items-center hover:bg-light-primary/5 hover:dark:bg-dark-primary/5 ">

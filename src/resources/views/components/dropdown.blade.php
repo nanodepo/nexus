@@ -1,10 +1,3 @@
-@props([
-    'position' => 'bottom',
-    'width' => 44,
-    'disabled' => false,
-    'teleport' => 'body'
-])
-
 @php
     $ref = str(str()->random(8))->prepend('dropdown');
 @endphp
@@ -12,16 +5,16 @@
 <div
     x-data="{ open: false }"
     x-modelable="open"
-    {{ $attributes->merge()->class(['pointer-events-none cursor-default opacity-50' => $disabled]) }}
+    {{ $attributes->merge()->class(['pointer-events-none cursor-default opacity-50' => $attributes->has('disabled')]) }}
 >
     <div x-on:click="open = !open" x-ref="{{ $ref }}" {{ $trigger->attributes }}>
         {{ $trigger }}
     </div>
 
-    <template x-teleport="{{ $teleport }}">
+    <template x-teleport="body">
         <div
             x-show="open"
-            x-anchor.{{ $position }}="$refs.{{ $ref }}"
+            x-anchor="$refs.{{ $ref }}"
             x-transition:enter="transition ease-out duration-200"
             x-transition:enter-start="transform opacity-0 scale-95"
             x-transition:enter-end="transform opacity-100 scale-100"

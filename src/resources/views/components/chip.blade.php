@@ -1,4 +1,7 @@
 @props([
+    'before' => null,
+    'title' => null,
+    'after' => null,
     'color' => 'primary',
     'active' => false,
     'disabled' => false,
@@ -6,7 +9,7 @@
 
 <button
     type="button" {{ $attributes->class([
-        'inline-flex flex-none justify-center items-center h-8 px-2 leading-4 text-sm font-medium tracking-wide rounded-lg focus:outline-none focus:ring-none transition',
+        'inline-flex flex-none justify-center items-center h-8 px-2 rounded-lg focus:outline-none focus:ring-none transition',
 
         'text-light-on-surface-variant dark:text-dark-on-surface-variant hover:text-light-primary dark:hover:text-dark-primary hover:bg-light-primary/8 dark:hover:bg-dark-primary/8 focus:bg-light-primary/12 dark:focus:bg-dark-primary/12 active:bg-light-primary/12 dark:active:bg-dark-primary/12 border border-light-outline dark:border-dark-outline hover:border-light-primary dark:hover:border-dark-primary' => $color == 'primary' && !$active,
         'bg-light-primary/14 dark:bg-dark-primary/14 text-light-primary dark:text-dark-primary border border-light-primary dark:border-dark-primary' => $color == 'primary' && $active,
@@ -22,5 +25,15 @@
 
         'pointer-events-none opacity-50' => $disabled
 ]) }}>
-    {{ $slot }}
+    @if($before)
+        <x-dynamic-component component="icon::{{ $before }}" type="mini" class="w-4.5 h-4.5" />
+    @endif
+
+    @if($title)
+        <div class="mx-2 leading-4 text-sm font-medium tracking-wide">{{ $title }}</div>
+    @endif
+
+    @if($after)
+        <x-dynamic-component component="icon::{{ $after }}" type="mini" class="w-4.5 h-4.5" />
+    @endif
 </button>

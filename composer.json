@@ -11,12 +11,21 @@
         }
     ],
     "require": {
-        "php": "^8.3"
+        "php": "^8.3",
+        "laravel/framework": "^v11.11.0",
+        "livewire/livewire": "^3.0",
+        "livewire/volt": "^v1.6.0",
+        "nanodepo/heroicons": "^v2.1.4",
+        "intervention/image": "^3.7",
+        "intervention/image-laravel": "^1.2"
     },
     "autoload": {
         "psr-4": {
             "NanoDepo\\GemsUI\\": "src"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "extra": {
         "laravel": {
