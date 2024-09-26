@@ -3,17 +3,17 @@
 <div class="flex flex-col flex-auto px-6 space-y-2">
     @if($slot->isEmpty())
         @if($title)
-            <div class="text-lg font-medium truncate text-light-on-surface dark:text-dark-on-surface">
+            <div class="text-lg font-medium truncate text-on-section">
                 {{ $title }}
             </div>
         @endif
         @if($subtitle)
-            <div class="line-clamp-3 text-sm text-light-on-surface-variant dark:text-dark-on-surface-variant">
+            <div class="line-clamp-3 text-sm text-subtitle">
                 {{ $subtitle }}
             </div>
         @endif
         @if($text)
-            <div class="line-clamp-3 text-xs text-light-on-surface-variant dark:text-dark-on-surface-variant">
+            <div class="line-clamp-3 text-xs text-subtitle">
                 {{ $text }}
             </div>
         @endif

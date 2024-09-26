@@ -8,7 +8,7 @@
     'required' => false,
 ])
 
-<x-input.label :label="$label" />
+<x-ui::input.label :label="$label" />
 
 <div
     x-data="{ count: {{ $value ?? 0 }} }"

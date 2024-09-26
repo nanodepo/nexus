@@ -26,6 +26,42 @@
 }
 
 
+
+.text-primary { @apply text-light-primary dark:text-dark-primary; }
+.text-on-primary { @apply text-light-on-primary dark:text-dark-on-primary; }
+
+.text-secondary { @apply text-light-secondary dark:text-dark-secondary; }
+.text-on-secondary { @apply text-light-on-secondary dark:text-dark-on-secondary; }
+
+.text-tertiary { @apply text-light-tertiary dark:text-dark-tertiary; }
+.text-on-tertiary { @apply text-light-on-tertiary dark:text-dark-on-tertiary; }
+
+.text-error { @apply text-light-error dark:text-dark-error; }
+.text-on-error { @apply text-light-on-error dark:text-dark-on-error; }
+
+.text-on-section { @apply text-light-on-surface dark:text-dark-on-surface; }
+.text-subtitle { @apply text-light-on-surface-variant dark:text-dark-on-surface-variant; }
+.text-hint { @apply text-light-outline dark:text-dark-outline; }
+.text-destructive { @apply text-light-error dark:text-dark-error; }
+
+.bg-primary { @apply bg-light-primary dark:bg-dark-primary; }
+.bg-secondary { @apply bg-light-secondary dark:bg-dark-secondary; }
+.bg-tertiary { @apply bg-light-tertiary dark:bg-dark-tertiary; }
+.bg-error { @apply bg-light-error dark:bg-dark-error; }
+
+.bg-section { @apply bg-light-primary/5 dark:bg-dark-primary/5; }
+.bg-section-active { @apply bg-light-primary/5 dark:bg-dark-primary/5 hover:bg-light-primary/8 dark:hover:bg-dark-primary/8; }
+
+.border-primary { @apply border-light-primary dark:border-dark-primary; }
+.border-secondary { @apply border-light-secondary dark:border-dark-secondary; }
+.border-tertiary { @apply border-light-tertiary dark:border-dark-tertiary; }
+.border-error { @apply border-light-error dark:border-dark-error; }
+.border-outline { @apply border-light-outline dark:border-dark-outline; }
+
+.border-divider { @apply border-light-primary/5 dark:border-dark-primary/5; }
+.divide-divider { @apply divide-light-primary/5 dark:divide-dark-primary/5; }
+
+
 .button {
     @apply relative inline-flex flex-row justify-start items-center py-2.5 h-10 font-medium leading-4 rounded-full text-sm tracking-wide focus:outline-none focus:ring-0 transition cursor-pointer;
 }
@@ -118,4 +154,15 @@
 
 .link {
     @apply hover:text-light-primary dark:hover:text-dark-primary hover:underline;
+}
+
+
+.field {
+    @apply relative w-full h-12 bg-light-primary/5 hover:bg-light-primary/8 dark:bg-dark-primary/5 dark:hover:bg-dark-primary/8 rounded-t border-b border-light-outline dark:border-dark-outline transition;
+}
+.field > .input {
+    @apply w-full h-full px-4 pb-0 pt-4 text-sm font-sans font-normal border-b border-t-0 border-x-0 outline outline-0 bg-transparent text-light-on-surface dark:text-dark-on-surface border-transparent transition-all focus:outline-0 focus:border focus:border-t-0 focus:border-x-0 focus:border-light-primary dark:focus:border-dark-primary focus:ring-0;
+}
+.field > .label {
+    @apply absolute top-1.5 left-0 flex w-full h-full px-4 pointer-events-none select-none text-xs font-normal truncate leading-tight text-light-on-surface-variant dark:text-dark-on-surface-variant transition-all;
 }

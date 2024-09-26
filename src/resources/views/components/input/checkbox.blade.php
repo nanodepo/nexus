@@ -10,7 +10,7 @@
 ])
 
 <label @class([
-    'relative flex flex-row items-center cursor-pointer',
+    'relative flex flex-row items-center gap-3 cursor-pointer',
     'opacity-50' => $disabled
 ])>
 
@@ -23,10 +23,10 @@
         @required($required)
         @disabled($disabled)
         @checked($checked)
-        class="w-5 h-5 {{ $label ? 'mr-3' : '' }} rounded bg-light-primary/8 dark:bg-dark-primary/8  text-light-primary dark:text-dark-primary border-light-outline dark:border-dark-outline focus:outline-none focus:border-light-primary dark:focus:border-dark-primary focus:ring-2 focus:ring-light-primary/38 dark:focus:ring-dark-primary/38 ring-offset-4 ring-offset-light-surface dark:ring-offset-dark-surface disabled:opacity-50 transition"
+        class="w-5 h-5 rounded bg-light-primary/8 dark:bg-dark-primary/8  text-light-primary dark:text-dark-primary border-light-outline dark:border-dark-outline focus:outline-none focus:border-light-primary dark:focus:border-dark-primary focus:ring-2 focus:ring-light-primary/38 dark:focus:ring-dark-primary/38 ring-offset-4 ring-offset-light-surface dark:ring-offset-dark-surface disabled:opacity-50 transition"
     />
 
-    <x-input.label :label="$label" :required="$required" :hint="$hint" />
+    <x-ui::input.label :label="$label" :required="$required" :hint="$hint" />
 
 </label>
 

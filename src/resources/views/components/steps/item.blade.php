@@ -14,7 +14,7 @@
     ])></div>
 @endif
 
-<x-hint>
+<x-ui::hint>
     @if($completed)
         <div class="flex items-center justify-center flex-none w-7 h-7 p-1 bg-light-primary dark:bg-dark-primary rounded-full">
             <x-icon::check type="micro" />
@@ -32,7 +32,7 @@
     <x-slot name="hint">
         {{ $title }}
     </x-slot>
-</x-hint>
+</x-ui::hint>
 
 @if(!$last)
     <div @class([

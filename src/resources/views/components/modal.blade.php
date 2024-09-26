@@ -1,17 +1,14 @@
-@props([
-    'size' => 'max-w-2xl',
-    'footer' => null,
-])
+@props(['size' => 'max-w-2xl'])
 
 <div
-    @if($attributes->wire('model')->value)
-        x-data="{
-            modal: @entangle($attributes->wire('model'))
-        }"
-    @endif
+    x-data="{
+        modal: false
+    }"
+    x-modelable="modal"
     x-on:close.stop="modal = false"
     x-on:keydown.escape.window="modal = false"
     x-show="modal"
+    {{ $attributes }}
     class="fixed flex flex-row justify-center items-end inset-0 z-50"
     style="display: none;"
 >
@@ -49,8 +46,8 @@
             {{ $slot }}
         </div>
 
-        @if($footer)
-            <div class="flex flex-row items-center justify-between flex-none w-full h-16 px-6">
+        @if(isset($footer))
+            <div class="flex flex-row items-center justify-between flex-none w-full py-4 px-6">
                 {{ $footer }}
             </div>
         @endif
