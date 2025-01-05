@@ -40,7 +40,13 @@ php artisan vendor:publish --tag=gems-ui
 ])
 ```
 
-#### 6. Для панелей навигации нужно добавить к body этот код:
+#### 6. Добавить vite.config.js
+
+```bladehtml
+'resources/css/gems-ui.css',
+```
+
+#### 7. Для панелей навигации нужно добавить к body этот код:
 
 ```html
 x-data="{ drawer: false }"

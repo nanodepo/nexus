@@ -1,1 +1,1 @@
-<hr class="border-light-outline-variant dark:border-dark-outline-variant my-1 -mx-3" />
+<hr class="border-light-outline-variant dark:border-dark-outline-variant -mx-3" />

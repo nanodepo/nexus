@@ -158,11 +158,17 @@
 
 
 .field {
-    @apply relative w-full h-12 bg-light-primary/5 hover:bg-light-primary/8 dark:bg-dark-primary/5 dark:hover:bg-dark-primary/8 rounded-t border-b border-light-outline dark:border-dark-outline transition;
+    @apply relative w-full bg-light-primary/5 hover:bg-light-primary/8 dark:bg-dark-primary/5 dark:hover:bg-dark-primary/8 rounded-t border-b border-light-outline dark:border-dark-outline transition;
+}
+.field.sm {
+    @apply h-12;
 }
 .field > .input {
     @apply w-full h-full px-4 pb-0 pt-4 text-sm font-sans font-normal border-b border-t-0 border-x-0 outline outline-0 bg-transparent text-light-on-surface dark:text-dark-on-surface border-transparent transition-all focus:outline-0 focus:border focus:border-t-0 focus:border-x-0 focus:border-light-primary dark:focus:border-dark-primary focus:ring-0;
 }
 .field > .label {
     @apply absolute top-1.5 left-0 flex w-full h-full px-4 pointer-events-none select-none text-xs font-normal truncate leading-tight text-light-on-surface-variant dark:text-dark-on-surface-variant transition-all;
+}
+.field > .textarea {
+    @apply w-full h-full px-4 pb-2 pt-6 text-sm font-sans font-normal border-b border-t-0 border-x-0 outline outline-0 bg-transparent text-light-on-surface dark:text-dark-on-surface border-transparent transition-all focus:outline-0 focus:border focus:border-t-0 focus:border-x-0 focus:border-light-primary dark:focus:border-dark-primary focus:ring-0;
 }

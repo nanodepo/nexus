@@ -11,15 +11,16 @@
     {{ $attributes->wire('model')->value ? $attributes->wire('model') : null }}
     class="flex flex-col w-full"
 >
-    <div @class(['field sm', 'opacity-50 pointer-events-none' => $attributes->get('disabled', false)])>
+    <div @class(['field', 'opacity-50 pointer-events-none' => $attributes->get('disabled', false)])>
 
-        <input
+        <textarea
             x-model="field"
             type="{{ $type }}"
             {{ $attributes->wire('model')->directive ? $attributes->except($attributes->wire('model')->directive) : $attributes }}
             placeholder=" "
-            class="input peer"
-        />
+            class="textarea peer"
+            style="margin-bottom: -7px"
+        ></textarea>
 
         <x-ui::input.label :label="$label" :required="$attributes->get('required', false)" />
     </div>
