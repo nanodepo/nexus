@@ -58,8 +58,8 @@
 .border-error { @apply border-light-error dark:border-dark-error; }
 .border-outline { @apply border-light-outline dark:border-dark-outline; }
 
-.border-divider { @apply border-light-primary/5 dark:border-dark-primary/5; }
-.divide-divider { @apply divide-light-primary/5 dark:divide-dark-primary/5; }
+.border-divider { @apply border-black/5 dark:border-black/12; }
+.divide-divider { @apply divide-black/5 dark:divide-black/12; }
 
 
 .button {
