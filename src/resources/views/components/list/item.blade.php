@@ -9,15 +9,10 @@
     'truncate' => true,
 ])
 
-<a
-    {{ $attributes->merge(['class' => 'group flex flex-row flex-auto gap-6 px-6 py-3 hover:bg-light-primary/8 dark:hover:bg-dark-primary/8 overflow-hidden transition cursor-pointer'])->class(['items-center' => $truncate, 'pointer-events-none opacity-50' => $disabled, 'bg-light-primary/5 dark:bg-dark-primary/5' => $active]) }}
-    @if($attributes->has('href'))
-        wire:navigate
-    @endif
->
+<a {{ $attributes->merge(['class' => 'group flex flex-row flex-auto gap-6 px-6 py-3 hover:bg-light-primary/8 dark:hover:bg-dark-primary/8 overflow-hidden transition cursor-pointer'])->class(['items-center' => $truncate, 'pointer-events-none opacity-50' => $disabled, 'bg-light-primary/5 dark:bg-dark-primary/5' => $active]) }}>
 
     @if(isset($before) && $before->isNotEmpty())
-        <div class="flex-none">
+        <div {{ $before->attributes->merge(['class' => 'flex-none']) }}>
             {{ $before }}
         </div>
     @endif
@@ -44,7 +39,7 @@
     </div>
 
     @if(isset($after) && $after->isNotEmpty())
-        <div class="flex flex-row items-center justify-end flex-none">
+        <div {{ $after->attributes->merge(['class' => 'flex flex-row items-center justify-end flex-none']) }}>
             {{ $after }}
         </div>
     @endif

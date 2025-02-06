@@ -1,5 +1,4 @@
 <a
-    href="{{ $href }}"
     {{ $attributes->class([
         'button', $variant, $color,
         'px-4' => $slot->isNotEmpty(),
