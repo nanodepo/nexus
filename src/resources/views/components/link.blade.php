@@ -6,6 +6,7 @@
         'pointer-events-auto' => !$disabled,
         'opacity-50 pointer-events-none' => $disabled,
     ]) }}
+    href="{{ $href }}"
     @disabled($disabled)
     wire:loading.attr="disabled"
 >
