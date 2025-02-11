@@ -1,5 +1,4 @@
 @props([
-    'name' => '',
     'min' => 0,
     'max' => 100,
     'value' => null,
@@ -7,7 +6,7 @@
 ])
 
 <div
-    x-data="{ count: {{ $value ?? 0 }} }"
+    x-data="{ count: {{ $value ?? $min }} }"
     x-modelable="count"
     {{ $attributes }}
     @class([
@@ -15,19 +14,15 @@
         'pointer-events-none opacity-50' => $disabled
     ])
 >
-    <div x-on:click="count--" x-bind:class="{ 'pointer-events-none opacity-50': count <= {{ $min }} }" class="flex items-center justify-center w-9 h-9 border-l border-y border-light-outline dark:border-dark-outline rounded-l-lg cursor-pointer">
+    <div x-on:click="count--" x-bind:class="{ 'pointer-events-none opacity-50': count <= {{ $min }} }" class="flex items-center justify-center w-9 h-9 border-l border-y border-hint rounded-l-lg cursor-pointer">
         <x-icon::minus type="mini" class="w-4 h-4" />
     </div>
     <input
         type="text"
-        class="flex items-center justify-center w-14 h-9 text-sm text-center border border-light-outline dark:border-dark-outline outline-none bg-transparent dark:bg-transparent"
+        class="flex items-center justify-center w-14 h-9 text-sm text-center border border-hint outline-none bg-transparent outline-0 focus:border-1 focus:border-hint focus:outline-0 focus:ring-0"
         x-model="count"
     />
-    <div x-on:click="count++" x-bind:class="{ 'pointer-events-none opacity-50': count >= {{ $max }} }" class="flex items-center justify-center w-9 h-9 border-r border-y border-light-outline dark:border-dark-outline rounded-r-lg cursor-pointer">
+    <div x-on:click="count++" x-bind:class="{ 'pointer-events-none opacity-50': count >= {{ $max }} }" class="flex items-center justify-center w-9 h-9 border-r border-y border-hint rounded-r-lg cursor-pointer">
         <x-icon::plus type="mini" class="w-4 h-4" />
     </div>
 </div>
-
-@error(str($name)->replace('[', '.')->rtrim(']')->toString())
-<div class="py-2 text-sm font-medium text-light-error dark:text-dark-error">{{ $message }}</div>
-@enderror

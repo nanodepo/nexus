@@ -22,5 +22,5 @@
         @disabled($disabled)
         @checked($checked)
     />
-    <div class="w-11 h-6 bg-light-outline-variant dark:bg-dark-outline-variant peer-focus:outline-none peer-focus:ring-0 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-light-surface dark:peer-checked:after:border-dark-surface after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-light-surface dark:after:bg-dark-surface after:border-light-surface dark:after:border-dark-surface after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-light-primary dark:peer-checked:bg-dark-primary"></div>
+    <div class="w-11 h-6 bg-hint peer-focus:outline-none peer-focus:ring-0 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-section-separator after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-section-separator after:border-section-separator after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-button"></div>
 </label>

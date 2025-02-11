@@ -4,18 +4,19 @@
     'subtitle' => null,
     'description' => null,
     'badge' => false,
-    'active' => false,
     'disabled' => false,
     'truncate' => true,
 ])
 
-<a {{ $attributes->merge(['class' => 'group flex flex-row flex-auto gap-6 px-6 py-3 hover:bg-secondary overflow-hidden transition cursor-pointer'])->class(['items-center' => $truncate, 'pointer-events-none opacity-50' => $disabled, 'bg-secondary' => $active]) }}>
+<label @class([
+    'flex flex-row flex-auto gap-6 px-6 py-3 hover:bg-secondary overflow-hidden transition cursor-pointer',
+    'items-center' => $truncate,
+    'pointer-events-none opacity-50' => $disabled,
+])>
 
-    @if(isset($before) && $before->isNotEmpty())
-        <div {{ $before->attributes->merge(['class' => 'flex-none']) }}>
-            {{ $before }}
-        </div>
-    @endif
+    <div class="flex-none">
+        <x-ui::input.checkbox {{ $attributes }} />
+    </div>
 
     <div class="flex flex-col flex-auto overflow-hidden">
         @if($subhead)
@@ -23,7 +24,7 @@
         @endif
 
         <div class="flex flex-row items-center">
-            <div class="leading-6 font-medium tracking-wide {{ $truncate ? 'truncate' : '' }} {{ $attributes->has('href') ? 'group-hover:text-link group-hover:underline' : '' }} transition">{{ $title }}</div>
+            <div class="leading-6 font-medium tracking-wide {{ $truncate ? 'truncate' : '' }} transition">{{ $title }}</div>
             @if($badge)
                 <div class="w-1.5 h-1.5 ml-2 rounded-full bg-accent"></div>
             @endif
@@ -39,8 +40,8 @@
     </div>
 
     @if(isset($after) && $after->isNotEmpty())
-        <div {{ $after->attributes->merge(['class' => 'flex flex-row items-center justify-end flex-none']) }}>
+        <div class="flex flex-row items-center justify-end flex-none">
             {{ $after }}
         </div>
     @endif
-</a>
+</label>

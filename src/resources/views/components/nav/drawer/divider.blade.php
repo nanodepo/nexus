@@ -1,1 +1,1 @@
-<hr class="border-divider -mx-3" />
+<hr class="border-section-separator -mx-3" />

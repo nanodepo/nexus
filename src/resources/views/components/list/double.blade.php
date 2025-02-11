@@ -6,7 +6,7 @@
     </x-slot>
 
     <x-slot name="after">
-        <div class="text-hint group-hover:text-light-on-surface dark:group-hover:text-dark-on-surface transition">
+        <div class="text-hint group-hover:text-on-section transition">
             <x-dynamic-component :component="str($after)->prepend('icon::')->value()" />
         </div>
     </x-slot>

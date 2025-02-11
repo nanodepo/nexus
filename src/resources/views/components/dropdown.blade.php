@@ -25,7 +25,7 @@
             x-on:close.stop="open = false"
             {{ $content->attributes->merge(['class' => 'absolute z-50 mt-1 rounded-md shadow-lg']) }}
         >
-            <div class="py-1 bg-white dark:bg-black  text-light-on-surface dark:text-dark-on-surface rounded-md">
+            <div class="py-1 bg-secondary text-on-section rounded-md">
                 {{ $content }}
             </div>
         </div>

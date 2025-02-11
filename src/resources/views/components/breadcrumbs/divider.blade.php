@@ -1,3 +1,3 @@
-<div class="text-light-outline dark:text-dark-outline">
+<div class="text-hint">
     <x-icon::chevron-right type="micro" />
 </div>

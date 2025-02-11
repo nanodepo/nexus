@@ -7,19 +7,8 @@
     x-on:toggle-drawer.window="opened = !opened"
     class="fixed top-0 left-0 bottom-0 flex sm:hidden z-10"
 >
-    <div
-        x-show="opened"
-        x-on:click="opened = false"
-        x-transition:enter="ease-out duration-300"
-        x-transition:enter-start="opacity-0"
-        x-transition:enter-end="opacity-100"
-        x-transition:leave="ease-in duration-200"
-        x-transition:leave-start="opacity-100"
-        x-transition:leave-end="opacity-0"
-        class="fixed inset-0 transform backdrop-blur-xs transition-all"
-    >
-        <div class="absolute inset-0 bg-light-surface-variant/50 dark:bg-dark-surface-variant/50"></div>
-    </div>
+    <x-ui::scrim x-model="opened" />
+
     <div
         x-show="opened"
         x-transition:enter="ease-out duration-300"
@@ -30,7 +19,7 @@
         x-transition:leave-end="-translate-x-88"
         class="flex flex-col h-full w-88 transform transition-all"
     >
-        <x-ui::nav.drawer class="h-full w-88 bg-light-background dark:bg-dark-background">
+        <x-ui::nav.drawer class="h-full w-88 bg-background">
             <x-ui::nav.drawer.header title="Menu" class="mb-1" />
 
             <x-ui::nav.drawer.link
@@ -67,6 +56,12 @@
                     icon="user-circle"
                 />
             </x-ui::nav.drawer.dropdown>
+
+            <x-ui::nav.drawer.link
+                label="Looooooooooooong menuuuuu iteeeeeeem"
+                icon="bug-ant"
+                badge="12"
+            />
 
             <x-ui::nav.drawer.header title="Other" class="mt-3 mb-1" />
 

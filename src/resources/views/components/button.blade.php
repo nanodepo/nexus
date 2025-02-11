@@ -1,6 +1,6 @@
 <button
     {{ $attributes->class([
-        'button', $variant, $color,
+        'button', $variant,
         'px-4' => $slot->isNotEmpty(),
         'px-2.5' => $slot->isEmpty(),
         'pointer-events-auto' => !$disabled,

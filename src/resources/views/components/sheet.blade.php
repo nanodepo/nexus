@@ -9,11 +9,11 @@
         x-transition:leave="ease-in duration-200"
         x-transition:leave-start="opacity-100 translate-y-0"
         x-transition:leave-end="opacity-0 translate-y-44"
-        class="flex flex-col w-full {{ $width }} max-h-modal bg-light-background dark:bg-dark-background rounded-t-3xl overflow-hidden shadow-modal transform transition-all z-50"
+        class="flex flex-col w-full {{ $width }} max-h-screen bg-secondary rounded-t-3xl overflow-hidden shadow-xl transform transition-all z-50"
     >
 
         <div class="flex items-center justify-center pt-3">
-            <div x-on:click="modal = false" class="w-12 h-0.5 bg-light-outline-variant dark:bg-dark-outline-variant"></div>
+            <div x-on:click="modal = false" class="w-12 h-1 rounded bg-hint"></div>
         </div>
 
         <div class="flex flex-col p-6 overflow-auto">

@@ -2,108 +2,76 @@
 
     <x-ui::base-layout>
         <x-slot name="left">
-            <x-ui::section>
-
-                <div class="mb-1 text-2xl font-bold tracking-wide text-center text-light-on-surface dark:text-dark-on-surface">
-                    Buttons
+            <x-ui::section header="Colors">
+                <div class="flex flex-col items-center justify-center gap-1">
+                    <div class="w-full px-6 py-2 rounded bg-background">background</div>
+                    <div class="w-full px-6 py-2 rounded bg-on-background text-hint">on-background</div>
+                    <div class="w-full px-6 py-2 rounded bg-secondary">secondary</div>
+                    <div class="w-full px-6 py-2 rounded bg-hint">hint</div>
+                    <div class="w-full px-6 py-2 rounded bg-link">link</div>
+                    <div class="w-full px-6 py-2 rounded bg-accent">accent</div>
+                    <div class="w-full px-6 py-2 rounded bg-subtitle">subtitle</div>
+                    <div class="w-full px-6 py-2 rounded bg-destructive">destructive</div>
+                    <div class="w-full px-6 py-2 rounded bg-button">button</div>
+                    <div class="w-full px-6 py-2 rounded bg-on-button text-hint">on-button</div>
+                    <div class="w-full px-6 py-2 rounded bg-section">section</div>
+                    <div class="w-full px-6 py-2 rounded bg-section-header">section-header</div>
+                    <div class="w-full px-6 py-2 rounded bg-section-separator">section-separator</div>
+                    <div class="w-full px-6 py-2 rounded bg-on-section text-hint">on-section</div>
                 </div>
-                <div class="mb-6 text-sm tracking-wide text-center text-balance text-light-on-surface-variant dark:text-dark-on-surface-variant">
-                    Четыре стиля и четыре цвета, с возможностью добавить иконку в начале и в конце кнопки.
-                </div>
+            </x-ui::section>
 
-                <div class="flex flex-col items-center gap-6">
+            <x-ui::section
+                title="Buttons"
+                hint="Один цвет, три варианта"
+            >
+                <div class="flex flex-col items-center gap-3">
                     <div class="flex flex-row gap-3">
                         <x-ui::button before="plus">Filled</x-ui::button>
-                        <x-ui::button variant="tonal" after="chevron-down">Tonal</x-ui::button>
                         <x-ui::button variant="outlined" before="gift" after="arrow-long-right">Outline</x-ui::button>
                         <x-ui::button href="#!" variant="text">Text</x-ui::button>
                     </div>
 
                     <div class="flex flex-row gap-3">
-                        <x-ui::button color="secondary" before="plus">Filled</x-ui::button>
-                        <x-ui::button color="secondary" variant="tonal" after="chevron-down">Tonal</x-ui::button>
-                        <x-ui::button color="secondary" variant="outlined" before="gift" after="arrow-long-right">Outline</x-ui::button>
-                        <x-ui::button href="#!" color="secondary" variant="text">Text</x-ui::button>
-                    </div>
-
-                    <div class="flex flex-row gap-3">
-                        <x-ui::button color="tertiary" before="plus">Filled</x-ui::button>
-                        <x-ui::button color="tertiary" variant="tonal" after="chevron-down">Tonal</x-ui::button>
-                        <x-ui::button color="tertiary" variant="outlined" before="gift" after="arrow-long-right">Outline</x-ui::button>
-                        <x-ui::button href="#!" color="tertiary" variant="text">Text</x-ui::button>
-                    </div>
-
-                    <div class="flex flex-row gap-3">
-                        <x-ui::button color="error" before="plus">Filled</x-ui::button>
-                        <x-ui::button color="error" variant="tonal" after="chevron-down">Tonal</x-ui::button>
-                        <x-ui::button color="error" variant="outlined" before="gift" after="arrow-long-right">Outline</x-ui::button>
-                        <x-ui::button href="#!" color="error" variant="text">Text</x-ui::button>
-                    </div>
-
-                    <div class="flex flex-row gap-3">
                         <x-ui::button disabled before="plus">Filled</x-ui::button>
-                        <x-ui::button disabled variant="tonal" after="chevron-down">Tonal</x-ui::button>
                         <x-ui::button disabled variant="outlined" before="gift" after="arrow-long-right">Outline</x-ui::button>
                         <x-ui::button disabled href="#!" variant="text">Text</x-ui::button>
                     </div>
                 </div>
             </x-ui::section>
 
-            <x-ui::section>
-
-                <div class="mb-1 text-2xl font-bold tracking-wide text-center text-light-on-surface dark:text-dark-on-surface">
-                    Chips
-                </div>
-                <div class="mb-6 text-sm tracking-wide text-center text-balance text-light-on-surface-variant dark:text-dark-on-surface-variant">
-                    Читайте доку M3 если не знаете что такое чипы.
-                </div>
-
-                <div class="flex flex-col items-center gap-6">
-                    <div class="flex flex-row flex-wrap justify-center gap-3">
-                        <x-ui::chip before="fire" />
-                        <x-ui::chip title="Empty" />
-                        <x-ui::chip before="cube" title="Icon" />
-                        <x-ui::chip before="user" title="Double" after="chevron-down" />
-                        <x-ui::chip title="Go" after="arrow-long-right" />
-                        <x-ui::chip before="folder" title="Secondary" color="secondary" />
-                        <x-ui::chip before="folder-plus" title="Tertiary" color="tertiary" />
-                        <x-ui::chip before="folder-open" title="Error" color="error" />
-                        <x-ui::chip before="folder-arrow-down" title="Active" active />
-                        <x-ui::chip before="folder-minus" title="Disabled" disabled />
-                    </div>
+            <x-ui::section
+                title="Chips"
+                hint="Читайте доку M3 если не знаете что такое чипы"
+            >
+                <div class="flex flex-row flex-wrap justify-center gap-3">
+                    <x-ui::chip before="fire" />
+                    <x-ui::chip title="Empty" />
+                    <x-ui::chip before="cube" title="Icon" />
+                    <x-ui::chip before="user" title="Double" after="chevron-down" />
+                    <x-ui::chip title="Go" after="arrow-long-right" />
+                    <x-ui::chip before="folder-arrow-down" title="Active" active />
+                    <x-ui::chip before="folder-minus" title="Disabled" disabled />
                 </div>
             </x-ui::section>
 
-            <x-ui::section>
-                <div class="mb-1 text-2xl font-bold tracking-wide text-center text-light-on-surface dark:text-dark-on-surface">
-                    Banners
-                </div>
-
-                <div class="mb-6 text-sm tracking-wide text-center text-balance text-light-on-surface-variant dark:text-dark-on-surface-variant">
-                    Баннеры можно выводить как в секциях так и в базовом шаблоне, на всю ширину экрана.
-                </div>
-
-                <div class="flex flex-col gap-4">
+            <x-ui::section
+                title="Banners"
+                hint="Баннеры можно выводить как в секциях так и в базовом шаблоне, на всю ширину экрана"
+            >
+                <div class="flex flex-col gap-3">
                     <x-ui::banner
                         title="Погиб поэт! - невольник чести - пал, оклеветанный молвой..."
                         class="-mx-6"
                     />
 
                     <x-ui::banner
-                        title="Мы придумали как решить проблему века!"
-                        type="primary"
-                        icon="bolt"
-                        class="-mx-6"
-                    />
-
-                    <x-ui::banner
                         title="Обновление #241021"
-                        subtitle="Новые функции уже ждут вас."
-                        type="tertiary"
+                        type="primary"
                         icon="cake"
                         class="-mx-6"
                     >
-                        <x-ui::button variant="outlined" :href="route('home')" color="tertiary">Подробнее</x-ui::button>
+                        <x-ui::button :href="route('home')" color="tertiary">Подробнее</x-ui::button>
                     </x-ui::banner>
 
                     <x-ui::banner
@@ -118,14 +86,10 @@
                 </div>
             </x-ui::section>
 
-            <x-ui::section>
-                <div class="mb-1 text-2xl font-bold tracking-wide text-center text-light-on-surface dark:text-dark-on-surface">
-                    List
-                </div>
-                <div class="mb-6 text-sm tracking-wide text-center text-balance text-light-on-surface-variant dark:text-dark-on-surface-variant">
-                    Списки и элементы списков (представлены стандартные реализации, но вы можете определять свои, базируясь на этих).
-                </div>
-
+            <x-ui::section
+                title="List"
+                hint="Списки и элементы списков (представлены стандартные реализации, но вы можете определять свои, базируясь на этих)"
+            >
                 <x-ui::list>
                     <x-ui::list.item title="Empty list item" />
 
@@ -136,10 +100,12 @@
                     </x-ui::list.item>
 
                     <x-ui::list.item
+                        href="#!"
                         subhead="Subhead"
                         title="Extend list item"
                         subtitle="Subtitle item and icon"
                         description="Description extended list item"
+                        badge
                     >
                         <x-slot name="before">
                             <x-ui::avatar class="w-12 h-12" url="https://placehold.co/64x64?text=AW" />
@@ -149,19 +115,66 @@
                             <x-ui::circle icon="ellipsis-vertical" />
                         </x-slot>
                     </x-ui::list.item>
+
+                    <x-ui::list.info
+                        title="Info list item"
+                        description="Description extended list item extended list item Description extended list item Description extended list item"
+                    >
+                        <x-slot name="before">
+                            <x-icon::cube />
+                        </x-slot>
+                    </x-ui::list.info>
+
+                    <x-ui::list.icon
+                        icon="emerald"
+                        title="Icon list item"
+                        subtitle="Subtitle item and icon"
+                    />
+
+                    <x-ui::list.double
+                        before="calendar"
+                        after="arrow-long-right"
+                        title="Double icon list item"
+                    />
+
+                    <x-ui::list.button
+                        icon="fire"
+                        title="Button list item"
+                    />
+
+                    <x-ui::list.button
+                        icon="bug-ant"
+                        title="Button list item (with error)"
+                        destructive
+                    />
+
+                    <x-ui::list.value
+                        icon="ruby"
+                        title="Value list item"
+                        :accent="false"
+                    >
+                        Select
+                    </x-ui::list.value>
+
+                    <x-ui::list.radio
+                        name="r1"
+                        title="Radio list item"
+                        subtitle="Subtitle item and radio"
+                    />
+
+                    <x-ui::list.checkbox
+                        name="r1"
+                        title="Checkbox list item"
+                        subtitle="Subtitle item and checkbox"
+                    />
                 </x-ui::list>
             </x-ui::section>
 
-            <x-ui::section>
-                <div class="mb-1 text-2xl font-bold tracking-wide text-center text-light-on-surface dark:text-dark-on-surface">
-                    Cards
-                </div>
-                <div class="mb-6 text-sm tracking-wide text-center text-balance text-light-on-surface-variant dark:text-dark-on-surface-variant">
-                    Типичные карточки, которые можно использовать по разному, где только душа пожелает
-                </div>
-
+            <x-ui::section
+                title="Cards"
+                hint="Типичные карточки, которые можно использовать по разному, где только душа пожелает"
+            >
                 <div class="flex flex-row flex-wrap -m-3">
-
                     <div class="w-1/2 p-3">
                         <x-ui::card
                             title="Гиперион"
@@ -174,14 +187,14 @@
                         <x-ui::card
                             title="Падение Гипериона"
                             subtitle="Шрайк и дерево боли"
-                            class="border border-light-outline dark:border-dark-outline hover:border-light-primary dark:hover:border-dark-primary"
+                            class="border border-hint hover:border-accent"
                         >
                             <x-slot name="header">
                                 <div class="flex flex-row items-center flex-auto gap-3 overflow-hidden">
                                     <x-ui::avatar class="w-8 h-8" url="https://placehold.co/64x64?text=AW" />
                                     <div class="flex flex-col overflow-hidden">
                                         <div class="text-xs font-medium truncate">Bernhard Wilson</div>
-                                        <div class="text-xs truncate text-light-on-surface-variant dark:text-dark-on-surface-variant">1 hour 46 min ago</div>
+                                        <div class="text-xs truncate text-hint">1 hour 46 min ago</div>
                                     </div>
                                 </div>
 
@@ -222,80 +235,96 @@
                             </x-slot>
                         </x-ui::card>
                     </div>
-
                 </div>
-
             </x-ui::section>
         </x-slot>
 
         <x-slot name="right">
-            <x-ui::section>
-                <div class="mb-1 text-2xl font-bold tracking-wide text-center text-light-on-surface dark:text-dark-on-surface">
-                    Input
-                </div>
-                <div class="mb-6 text-sm tracking-wide text-center text-balance text-light-on-surface-variant dark:text-dark-on-surface-variant">
-                    Поля ввода, чекбоксы, выпадающие списки и радио кнопки.
-                </div>
+            <x-ui::section
+                title="Input"
+                hint="Поля ввода, чекбоксы, выпадающие списки и радио кнопки."
+            >
+                <div class="flex flex-col gap-6">
 
-                <div class="flex flex-col gap-4">
+                    <x-ui::field label="Name">
+                        <x-ui::input
+                            name="name"
+                            placeholder="Your Name"
+                            required
+                        />
+                    </x-ui::field>
 
-                    <x-ui::input
-                        name="name"
-                        label="Your Name"
-                        max="16"
-                        maxlength="16"
-                        hint="Введите ваше имя"
-                        required
-                    />
-
-                    @livewire('test-input')
+                    <x-ui::field label="Поле со счетчиком" hint="Lorem ipsum dolor sit amet" max="160">
+                        <x-ui::input
+                            name="position"
+                            placeholder="Position"
+                            x-model="field"
+                            max="160"
+                            maxlength="160"
+                        />
+                    </x-ui::field>
 
                     <x-ui::input
                         name="org"
-                        label="Organization"
+                        placeholder="Organization"
                         disabled
                     />
 
+                    <x-ui::divider />
+
                     <x-ui::input.textarea
                         name="description"
-                        label="Description"
+                        placeholder="Description"
                         rows="6"
-                        hint="Можно использовать Markdown"
                         required
                     />
 
-                    <x-ui::input.checkbox label="Вам есть 18 лет?" />
+                    <x-ui::divider />
 
-                    <div class="flex flex-row">
-                        <div class="flex flex-col w-1/2 gap-3">
-                            <x-ui::input.label label="Вы любите котов?" />
-                            <x-ui::input.radio name="cat" label="Да" checked />
-                            <x-ui::input.radio name="cat" label="Нет" disabled />
-                        </div>
+                    <x-ui::input.select
+                        name="city"
+                        placeholder="City"
+                    >
+                        <x-ui::input.select.item value="poltava">Poltava</x-ui::input.select.item>
+                        <x-ui::input.select.item value="odessa">Odessa</x-ui::input.select.item>
+                    </x-ui::input.select>
 
-                        <div class="flex flex-col w-1/2 gap-3">
-                            <x-ui::input.label label="Выберите уровень сложности" />
-                            <x-ui::input.counter min="0" max="7" value="3" />
-                        </div>
+                    <x-ui::divider />
+
+                    <x-ui::input.checkbox />
+                    <x-ui::input.checkbox disabled />
+
+                    <x-ui::divider />
+
+                    <div class="flex flex-col w-1/2 gap-3">
+                        <x-ui::input.radio name="cat" checked />
+                        <x-ui::input.radio name="cat" />
+                        <x-ui::input.radio name="cat" disabled />
                     </div>
 
-                    <x-ui::input.stars label="Оцените погоду за окном" min="1" max="5" />
+                    <x-ui::divider />
+
+                    <div class="flex flex-col w-1/2 gap-3">
+                        <x-ui::input.counter min="0" max="7" value="3" />
+                    </div>
+
+                    <x-ui::divider />
+
+                    <x-ui::input.stars min="1" max="5" />
+
+                    <x-ui::divider />
 
                     <div class="flex flex-row justify-between">
-                        <x-ui::input.label label="Вы ходили сегодня в магазин за хлебом?" />
                         <x-ui::input.switch />
                     </div>
 
                 </div>
             </x-ui::section>
 
-            <x-ui::section>
-                <x-ui::header
-                    title="Other"
-                    subtitle="Куча атомарной фигни или всё что не является чем-то серьезным."
-                    class="mb-6"
-                />
-
+            <x-ui::section
+                title="Other"
+                hint="Куча атомарной фигни или всё что не является чем-то серьезным."
+            >
                 <div class="flex flex-col gap-6">
                     <div class="flex flex-row items-center gap-3">
                         <x-ui::avatar class="w-16 h-16" />
@@ -310,6 +339,13 @@
                         <x-ui::button color="error" before="bell-slash" x-on:click="$dispatch('makeAlert', { type: 'error', message: 'Get Out!' })">Push Danger</x-ui::button>
                     </div>
 
+                    <x-ui::segmented>
+                        <x-ui::segmented.item icon="fire" text="Fire to fire" />
+                        <x-ui::segmented.item icon="home" text="This is my home" active />
+                        <x-ui::segmented.item icon="diamond" text="Diamond" />
+                        <x-ui::segmented.item icon="topaz" text="Topaz" />
+                    </x-ui::segmented>
+
                     <x-ui::breadcrumbs>
                         <x-ui::breadcrumbs.item>Home</x-ui::breadcrumbs.item>
                         <x-ui::breadcrumbs.divider />
@@ -321,9 +357,8 @@
                     <div class="flex flex-row gap-3">
                         <x-ui::circle icon="fire" :href="route('home')" />
                         <x-ui::circle icon="fire" color="error" />
-                        <x-ui::circle icon="fire" variant="filled" color="primary" />
-                        <x-ui::circle icon="fire" variant="tonal" color="secondary" />
-                        <x-ui::circle icon="fire" variant="outlined" color="tertiary" />
+                        <x-ui::circle icon="fire" variant="filled" />
+                        <x-ui::circle icon="fire" variant="filled" disabled />
                         <x-ui::circle icon="fire" variant="text" color="error" />
 
                         <div class="relative">
@@ -383,23 +418,28 @@
                         <x-ui::steps.item title="Last" last />
                     </x-ui::steps>
 
-                    <x-ui::tab>
+                    <x-ui::tab class="-mx-6">
                         <x-ui::tab.item label="First" active />
                         <x-ui::tab.item label="Second" />
                         <x-ui::tab.item label="Last" />
                     </x-ui::tab>
 
-                    <div x-data="{ base: false, confirmation: false }" class="flex flex-row gap-3">
-                        <x-ui::button x-on:click="base = true" color="secondary" before="face-smile">Modal</x-ui::button>
-                        <x-ui::button x-on:click="confirmation = true" color="secondary" before="face-frown" variant="tonal">Confirmation</x-ui::button>
+                    <div x-data="{ sheet: false, dialog: false, confirmation: false }" class="flex flex-row gap-3">
+                        <x-ui::button x-on:click="sheet = true" before="face-smile">Sheet</x-ui::button>
+                        <x-ui::button x-on:click="dialog = true" before="face-smile" variant="outlined">Dialog</x-ui::button>
+                        <x-ui::button x-on:click="confirmation = true" before="face-frown" variant="text">Confirmation</x-ui::button>
 
-                        <x-ui::modal x-model="base">
+                        <x-ui::sheet x-model="sheet">
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi assumenda autem corporis culpa debitis, dignissimos earum eveniet exercitationem facilis fuga, fugit itaque laudantium nemo odio odit quos similique ut vero!
-                        </x-ui::modal>
+                        </x-ui::sheet>
+
+                        <x-ui::dialog x-model="dialog">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi assumenda autem corporis culpa debitis, dignissimos earum eveniet exercitationem facilis fuga, fugit itaque laudantium nemo odio odit quos similique ut vero!
+                        </x-ui::dialog>
 
                         <x-ui::modal.confirmation
                             x-model="confirmation"
-                            title="Вы действительно хотите удалить товар?"
+                            title="Хотите удалить товар?"
                             subtitle="Отменить это действие и вернуть товар будет невозможно."
                         >
                             <x-slot name="footer">
@@ -410,7 +450,6 @@
                     </div>
 
                 </div>
-
             </x-ui::section>
 
         </x-slot>

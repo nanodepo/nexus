@@ -9,7 +9,7 @@
         x-transition:leave="ease-in duration-200"
         x-transition:leave-start="opacity-100 scale-100 translate-y-0"
         x-transition:leave-end="opacity-0 scale-75 -translate-y-20"
-        class="flex flex-col w-full {{ $width }} max-h-modal py-3 bg-light-background dark:bg-dark-background rounded-3xl overflow-hidden shadow-modal transform transition-all z-50"
+        class="flex flex-col w-full {{ $width }} max-h-screen py-3 bg-secondary rounded-3xl overflow-hidden shadow-xl transform transition-all z-50"
     >
         @if(isset($header) && $header->isNotEmpty())
             <div class="flex flex-row items-center justify-between flex-none w-full pb-3 px-6">

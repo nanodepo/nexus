@@ -1,14 +1,10 @@
 @props([
-    'name' => '',
-    'label' => '',
     'min' => 1,
     'max' => 5,
     'value' => null,
     'disabled' => false,
     'required' => false,
 ])
-
-<x-ui::input.label :label="$label" />
 
 <div
     x-data="{ count: {{ $value ?? 0 }} }"
@@ -22,17 +18,17 @@
     @for($i = $min; $i <= $max; $i++)
         <div x-on:click="count = {{ $i }}" class="cursor-pointer">
             <template x-if="count >= {{ $i }}">
-                <x-icon::star type="solid" class="w-6 h-6" />
+                <x-icon::star type="solid" class="w-6 h-6 text-accent" />
             </template>
             <template x-if="count < {{ $i }}">
                 <x-icon::star class="w-6 h-6" />
             </template>
         </div>
     @endfor
-
-    <input type="hidden" name="{{ $name }}" x-bind:value="count" />
 </div>
 
-@error(str($name)->replace('[', '.')->rtrim(']')->toString())
-<div class="py-2 text-sm font-medium text-light-error dark:text-dark-error">{{ $message }}</div>
-@enderror
+@if($attributes->wire('model'))
+    @error($attributes->wire('model')->value)
+        <div class="py-2 text-sm tracking-wide text-destructive">{{ $message }}</div>
+    @enderror
+@endif

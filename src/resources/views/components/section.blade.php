@@ -1,32 +1,27 @@
-@props(['disabled' => false, 'color' => null])
+@props(['header' => null, 'title' => null, 'hint' => null, 'disabled' => false])
 
-<div {{ $attributes->merge(['class' => 'relative flex flex-col flex-none w-full py-3 overflow-hidden sm:rounded-2xl'])->class([
-    'bg-section text-on-section' => is_null($color),
-    'bg-light-primary-container dark:bg-dark-primary-container text-light-on-primary-container dark:text-dark-on-primary-container' => $color == 'primary',
-    'bg-light-secondary-container dark:bg-dark-secondary-container text-light-on-secondary-container dark:text-dark-on-secondary-container' => $color == 'secondary',
-    'bg-light-tertiary-container dark:bg-dark-tertiary-container text-light-on-tertiary-container dark:text-dark-on-tertiary-container' => $color == 'tertiary',
-    'bg-light-error-container dark:bg-dark-error-container text-light-on-error-container dark:text-dark-on-error-container' => $color == 'error',
-    'opacity-50 pointer-events-none' => $disabled,
-]) }}>
-    @if(isset($header) && $header->isNotEmpty())
-        <div {{ $header->attributes->merge(['class' => 'flex flex-row justify-between px-6']) }}>
+<div {{ $attributes->merge(['class' => 'flex flex-col gap-1'])->class(['opacity-50 pointer-events-none' => $disabled]) }}>
+    @if(!is_null($header))
+        <div class="px-6 text-sm font-medium leading-5 tracking-wide text-section-header">
             {{ $header }}
         </div>
     @endif
 
-    @if(isset($content) && $content->isNotEmpty())
-        <div {{ $content->attributes->merge(['class' => 'flex-auto overflow-hidden px-6 py-3 sm:rounded-2xl']) }}>
-            {{ $content }}
-        </div>
-    @elseif(isset($slot) && $slot->isNotEmpty())
-        <div class="flex-auto overflow-hidden">
+    <div class="relative flex flex-col w-full flex-auto gap-3 px-6 py-3 bg-section text-on-section overflow-hidden md:rounded-xl shadow">
+        @if(!is_null($title))
+            <div class="text-sm font-medium leading-5 tracking-wide text-accent">
+                {{ $title }}
+            </div>
+        @endif
+
+        <div class="flex flex-col flex-auto">
             {{ $slot }}
         </div>
-    @endif
+    </div>
 
-    @if(isset($footer) && $footer->isNotEmpty())
-        <div {{ $footer->attributes->merge(['class' => 'flex flex-row justify-between px-6']) }}>
-            {{ $footer }}
+    @if(!is_null($hint))
+        <div class="px-3 text-xs tracking-wide text-hint">
+            {{ $hint }}
         </div>
     @endif
 </div>

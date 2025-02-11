@@ -1,5 +1,5 @@
 <x-ui::hint>
-    <div class="ml-2 text-light-outline dark:text-dark-outline hover:text-light-on-surface dark:hover:text-dark-on-surface transition">
+    <div {{ $attributes->merge(['class' => 'text-hint hover:text-on-section transition']) }}>
         <x-icon::question-mark-circle type="micro" />
     </div>
 

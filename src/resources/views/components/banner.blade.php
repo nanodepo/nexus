@@ -8,20 +8,13 @@
 <div {{ $attributes->merge(['class' => 'flex flex-col']) }}>
     <div @class([
         'flex flex-row justify-between items-center gap-3 py-1 px-3',
-        'bg-light-primary-container dark:bg-dark-primary-container text-light-on-primary-container dark:text-dark-on-primary-container' => $type == 'primary',
-        'bg-light-secondary-container dark:bg-dark-secondary-container text-light-on-secondary-container dark:text-dark-on-secondary-container' => $type == 'secondary',
-        'bg-light-tertiary-container dark:bg-dark-tertiary-container text-light-on-tertiary-container dark:text-dark-on-tertiary-container' => $type == 'tertiary',
-        'bg-light-error-container dark:bg-dark-error-container text-light-on-error-container dark:text-dark-on-error-container' => $type == 'error',
+        'bg-button text-on-button' => $type == 'primary',
+        'bg-secondary text-on-section' => $type == 'secondary',
+        'bg-destructive text-on-button' => $type == 'error',
     ])>
         <div class="flex flex-row items-center flex-auto gap-3">
             @if($icon)
-                <div @class([
-                    'p-2 rounded-full',
-                    'bg-light-on-primary/8 dark:bg-dark-on-primary/8' => $type == 'primary',
-                    'bg-light-on-secondary/8 dark:bg-dark-on-secondary/8' => $type == 'secondary',
-                    'bg-light-on-tertiary/8 dark:bg-dark-on-tertiary/8' => $type == 'tertiary',
-                    'bg-light-on-error/8 dark:bg-dark-on-error/8' => $type == 'error',
-                ])>
+                <div class="p-2 rounded-full">
                     <x-dynamic-component component="icon::{{ $icon }}" type="solid" />
                 </div>
             @endif

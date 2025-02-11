@@ -1,3 +1,3 @@
-<div class="flex flex-row items-center text-light-on-primary dark:text-dark-on-primary">
+<div class="flex flex-row items-center text-on-button">
     {{ $slot }}
 </div>

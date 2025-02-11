@@ -2,7 +2,7 @@
 
 <x-ui::dialog {{ $attributes }}>
     <div class="flex flex-col items-center">
-        <div class="flex justify-center items-center flex-none w-24 h-24 my-6 bg-light-error dark:bg-dark-error text-light-on-error dark:text-dark-on-error rounded-full">
+        <div class="flex justify-center items-center flex-none w-24 h-24 my-6 bg-destructive text-white rounded-full">
             <x-icon::finger-print class="w-12 h-12" />
         </div>
 
