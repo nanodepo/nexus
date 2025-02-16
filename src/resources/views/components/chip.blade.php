@@ -7,7 +7,7 @@
 ])
 
 <button type="button" {{ $attributes->class([
-        'inline-flex flex-none justify-center items-center h-8 px-2 rounded-lg focus:outline-none focus:ring-none transition',
+        'inline-flex flex-none justify-center items-center h-8 px-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/30 transition',
         'text-on-section hover:bg-background focus:bg-background active:bg-background border border-hint hover:border-accent focus:border-accent active:border-accent' => !$active,
         'bg-button text-on-button border border-button' => $active,
         'pointer-events-none opacity-50' => $disabled
