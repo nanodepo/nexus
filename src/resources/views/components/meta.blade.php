@@ -1,7 +1,7 @@
 @props(['icon', 'text' => null, 'hint' => null, 'error' => false])
 
 @if($hint)
-    <x-ui::hint :hint="$hint">
+    <x-ui::hint :hint="$hint" class="w-44">
         <div {{ $attributes->merge(['class' => 'flex flex-row items-center flex-none space-x-1 text-xs tracking-wide'])->class(['text-destructive' => $error]) }}>
             <x-dynamic-component component="icon::{{ $icon }}" type="micro" />
             @if($text)

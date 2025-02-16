@@ -63,47 +63,25 @@ new class extends Component
         class="fixed right-0 top-0 flex flex-col justify-end items-end w-full max-w-md p-4 z-50 pointer-events-none"
     >
         <div @class([
-            'flex flex-row justify-between items-start p-2 rounded-md shadow',
-            'bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary' => $type == 'primary',
-            'bg-light-secondary dark:bg-dark-secondary text-light-on-secondary dark:text-dark-on-secondary' => $type == 'secondary',
-            'bg-light-tertiary dark:bg-dark-tertiary text-light-on-tertiary dark:text-dark-on-tertiary' => $type == 'tertiary',
-            'bg-light-error dark:bg-dark-error text-light-on-error dark:text-dark-on-error' => $type == 'error',
+            'flex flex-row justify-between items-start p-2 rounded-md shadow pointer-events-auto',
+            'bg-button text-on-button' => $type != 'error',
+            'bg-destructive text-white' => $type == 'error',
         ])>
             <div class="flex flex-row items-start">
                 <div @class([
                     'p-2 rounded-lg',
-                    'bg-light-on-primary/8 dark:bg-dark-on-primary/8' => $type == 'primary',
-                    'bg-light-on-secondary/8 dark:bg-dark-on-secondary/8' => $type == 'secondary',
-                    'bg-light-on-tertiary/8 dark:bg-dark-on-tertiary/8' => $type == 'tertiary',
-                    'bg-light-on-error/8 dark:bg-dark-on-error/8' => $type == 'error',
+                    'bg-on-button/10' => $type != 'error',
+                    'bg-white/10' => $type == 'error',
                 ])>
-                    @switch($type)
-                        @case('tertiary')
-                            <x-icon::light-bulb type="mini" />
-                            @break
-                        @case('secondary')
-                            <x-icon::information-circle type="mini" />
-                            @break
-                        @case('primary')
-                            <x-icon::face-smile type="mini" />
-                            @break
-                        @case('error')
-                            <x-icon::face-frown type="mini" />
-                            @break
-                    @endswitch
+                    @if($type == 'error')
+                        <x-icon::face-frown type="mini" />
+                    @else
+                        <x-icon::face-smile type="mini" />
+                    @endif
                 </div>
                 <div class="self-center px-2 font-medium text-sm">{{ $message }}</div>
             </div>
-            <div
-                x-on:click="show = false" @class([
-                'p-2 rounded-lg cursor-pointer transition pointer-events-auto',
-                'hover:bg-light-on-primary/8 dark:hover:bg-dark-on-primary/8' => $type == 'primary',
-                'hover:bg-light-on-secondary/8 dark:hover:bg-dark-on-secondary/8' => $type == 'secondary',
-                'hover:bg-light-on-tertiary/8 dark:hover:bg-dark-on-tertiary/8' => $type == 'tertiary',
-                'hover:bg-light-on-error/8 dark:hover:bg-dark-on-error/8' => $type == 'error',
-            ])>
-                <x-icon::x-mark type="mini" />
-            </div>
+            <x-ui::circle x-on:click="show = false" icon="x-mark" />
         </div>
     </div>
 

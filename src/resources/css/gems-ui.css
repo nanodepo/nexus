@@ -54,9 +54,9 @@
 }
 
 .link {
-    @apply hover:text-accent hover:underline;
+    @apply hover:text-link hover:underline;
 }
 
 .input {
-    @apply m-0 px-3 py-2 bg-secondary rounded-md border border-secondary hover:border-section-separator outline-0 focus:border-section-separator focus:outline-0 focus:ring-2 focus:ring-accent/30 disabled:opacity-50 disabled:pointer-events-none;
+    @apply m-0 px-3 py-2 bg-secondary rounded-md border border-section-separator hover:border-hint outline-0 focus:border-accent focus:outline-0 focus:ring-2 focus:ring-accent/30 disabled:opacity-50 disabled:pointer-events-none;
 }

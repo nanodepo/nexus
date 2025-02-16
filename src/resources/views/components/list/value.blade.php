@@ -8,7 +8,7 @@
     @endif
 
     <x-slot name="after">
-        <div class="flex flex-row items-center justify-end {{ $accent ? 'link text-primary' : 'text-subtitle' }}">
+        <div class="flex flex-row items-center justify-end {{ $accent ? 'link text-accent' : 'text-subtitle' }}">
             {{ $slot }}
         </div>
     </x-slot>
