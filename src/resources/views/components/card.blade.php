@@ -1,6 +1,6 @@
 @props(['image' => null, 'title' => null, 'subtitle' => null, 'text' => null])
 
-<a {{ $attributes->merge(['class' => 'relative flex flex-col flex-auto pb-3 bg-secondary hover:shadow rounded-2xl transition overflow-hidden']) }}>
+<a {{ $attributes->merge(['class' => 'relative flex flex-col flex-auto pb-3 bg-section hover:shadow rounded-2xl transition overflow-hidden']) }}>
     @if(isset($label))
         {{ $label }}
     @endif

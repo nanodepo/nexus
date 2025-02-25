@@ -1,6 +1,6 @@
 @props(['label', 'hint' => null, 'max' => 0])
 
-<div x-data="{ field: '' }" {{ $attributes->merge(['class' => 'flex flex-col gap-1']) }}>
+<div x-data="{ field: '' }" x-modelable="field" {{ $attributes->merge(['class' => 'flex flex-col gap-1']) }}>
     <div class="text-xs font-medium tracking-wide text-subtitle">{{ $label }}</div>
 
     {{ $slot }}

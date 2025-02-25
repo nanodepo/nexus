@@ -13,7 +13,8 @@ class Button extends Component
         public ?string $before = null,
         public ?string $after = null,
         public ?string $href = null,
-        public bool $disabled = false
+        public bool $disabled = false,
+        public bool $destructive = false,
     ) {}
 
     public function render(): View
