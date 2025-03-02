@@ -6,7 +6,7 @@ export default {
     content: [
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
-        './packages/nanodepo/gems-ui/src/resources/views/**/*.blade.php'
+        './vendor/nanodepo/gems-ui/src/resources/views/**/*.blade.php'
     ],
 
     theme: {

@@ -9,7 +9,7 @@
         x-transition:leave="ease-in duration-200"
         x-transition:leave-start="opacity-100 translate-y-0"
         x-transition:leave-end="opacity-0 translate-y-44"
-        class="flex flex-col w-full {{ $width }} max-h-screen bg-secondary rounded-t-3xl overflow-hidden shadow-xl transform transition-all z-50"
+        class="flex flex-col w-full {{ $width }} max-h-screen bg-section rounded-t-3xl overflow-hidden shadow-xl transform transition-all z-50"
     >
 
         <div class="flex items-center justify-center pt-3">

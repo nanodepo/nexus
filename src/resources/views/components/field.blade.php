@@ -13,4 +13,10 @@
             @endif
         </div>
     @endif
+
+    @if($attributes->wire('model'))
+        @error($attributes->wire('model')->value)
+            <div class="px-3 text-xs tracking-wide text-destructive">{{ $message }}</div>
+        @enderror
+    @endif
 </div>

@@ -2,7 +2,7 @@
 
 #### 2. Добавить в файл tailwindcss путь к шаблонам пакета и определить цвета темы. 
 
-```
+```json
 export default {
     content: [
         ...
@@ -30,25 +30,16 @@ export default {
 php artisan vendor:publish --tag=gems-ui
 ```
 
-#### 5. Добавить gems-ui.css в сборку в базовом шабоне
-
-```bladehtml
-@vite([
-    'resources/css/app.css',
-    'resources/css/gems-ui.css',
-    'resources/js/app.js'
-])
-```
-
-#### 6. Добавить vite.config.js
-
-```bladehtml
-'resources/css/gems-ui.css',
-```
-
-#### 7. Для панелей навигации нужно добавить к body этот код:
+#### 5. Для панелей навигации нужно добавить к body этот код:
 
 ```html
 x-data="{ drawer: false }"
 ```
 Примеры базового шаблона и других компонентов можно найти в папке examples.
+
+#### 6. Добавьте в свой файл стилей:
+```css
+.link {
+    @apply hover:text-link hover:underline;
+}
+```

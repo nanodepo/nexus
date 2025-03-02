@@ -19,7 +19,6 @@ class UIServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/thumbnail.php' => config_path('thumbnail.php'),
             __DIR__.'/../config/theme.php' => config_path('theme.php'),
-            __DIR__.'/../resources/css/gems-ui.css' => resource_path('css/gems-ui.css'),
         ], 'gems-ui');
 
         $this->loadRoutesFrom(__DIR__.'/../routes.php');
