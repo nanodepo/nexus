@@ -6,7 +6,7 @@
         @class([
             'flex flex-row items-center justify-between flex-auto h-14 pl-4 pr-6 rounded-full transition cursor-pointer overflow-hidden',
             'text-on-section bg-secondary' => $active,
-            'text-subtitle hover:bg-secondary hover:text-on-section' => !$active
+            'text-on-section hover:bg-secondary hover:text-on-background' => !$active
         ])
     >
         <div class="flex flex-row items-center flex-auto overflow-hidden">

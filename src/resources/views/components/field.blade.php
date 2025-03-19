@@ -9,7 +9,7 @@
         <div class="flex flex-row justify-between gap-3 px-3">
             <div class="text-xs tracking-wide text-hint">{{ $hint }}</div>
             @if($max > 0)
-                <div class="text-xs tracking-wide text-hint" x-text="field.length + ' / {{ $max }}'"></div>
+                <div class="flex-none text-xs tracking-wide text-hint" x-text="field.length + ' / {{ $max }}'"></div>
             @endif
         </div>
     @endif

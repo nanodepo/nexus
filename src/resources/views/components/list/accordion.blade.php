@@ -7,10 +7,11 @@
 ])
 
 <div
-    x-data="{ opened: false }"
+    x-data="{ opened: @js($active) }"
     x-modelable="opened"
-    class="flex flex-col flex-auto transition overflow-hidden"
+    class="flex flex-col flex-auto transition overflow-hidden {{ $disabled ? 'opacity-50 pointer-events-none' : '' }}"
     x-bind:class="{ 'bg-secondary': opened, 'hover:bg-secondary': !opened }"
+    {{ $attributes }}
 >
     <x-ui::list.value
         :icon="$icon"

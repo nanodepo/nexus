@@ -1,7 +1,7 @@
 @props(['label', 'icon', 'href', 'active' => false, 'small' => false])
 
 <div x-data="{ opened: @js($active) }" x-bind:class="{ 'bg-section my-1': opened }" class="flex flex-col rounded-2xl transition-all">
-    <div x-bind:class="{ 'hover:bg-secondary': !opened }" class="flex flex-row items-center justify-between h-14 pr-4 rounded-full text-subtitle cursor-pointer transition">
+    <div x-bind:class="{ 'hover:bg-secondary': !opened }" class="flex flex-row items-center justify-between h-14 pr-4 rounded-full text-on-section hover:text-on-background cursor-pointer transition">
         <a href="{{ $href }}" class="flex flex-row items-center flex-auto h-14 pl-4" wire:navigate>
             <x-dynamic-component :component="str($icon)->prepend('icon::')->value()" />
             @if(!$small)
