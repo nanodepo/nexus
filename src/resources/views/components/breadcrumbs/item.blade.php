@@ -1,8 +1,8 @@
 @props(['active' => false])
 
-<a {{ $attributes->merge(['class' => 'p-1 text-xs tracking-wide'])->class([
-    'link text-subtitle transition' => !$active,
-    'font-medium' => $active
+<a {{ $attributes->merge(['class' => 'item'])->class([
+    'link' => !$active,
+    'active' => $active
 ]) }}>
     {{ $slot }}
 </a>

@@ -1,27 +1,18 @@
-@props([
-    'min' => 1,
-    'max' => 5,
-    'value' => null,
-    'disabled' => false,
-    'required' => false,
-])
+@props(['min' => 1, 'max' => 5, 'value' => 0, 'disabled' => false])
 
 <div
-    x-data="{ count: {{ $value ?? 0 }} }"
+    x-data="{ count: @js($value ?? $min) }"
     x-modelable="count"
     {{ $attributes }}
-    @class([
-        'flex flex-row flex-none space-x-2 py-1',
-        'pointer-events-none opacity-50' => $disabled
-    ])
+    @class(['stars', 'pointer-events-none opacity-50' => $disabled])
 >
     @for($i = $min; $i <= $max; $i++)
         <div x-on:click="count = {{ $i }}" class="cursor-pointer">
             <template x-if="count >= {{ $i }}">
-                <x-icon::star type="solid" class="w-6 h-6 text-accent" />
+                <x-icon::star type="solid" class="star active" />
             </template>
             <template x-if="count < {{ $i }}">
-                <x-icon::star class="w-6 h-6" />
+                <x-icon::star class="star" />
             </template>
         </div>
     @endfor
@@ -29,6 +20,6 @@
 
 @if($attributes->wire('model'))
     @error($attributes->wire('model')->value)
-        <div class="py-2 text-sm tracking-wide text-destructive">{{ $message }}</div>
+        <div class="validation-error">{{ $message }}</div>
     @enderror
 @endif

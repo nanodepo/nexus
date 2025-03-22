@@ -1,3 +1,3 @@
-<div {{ $attributes->merge(['class' => 'flex flex-row justify-center']) }}>
+<div {{ $attributes->merge(['class' => 'segmented']) }}>
     {{ $slot }}
 </div>

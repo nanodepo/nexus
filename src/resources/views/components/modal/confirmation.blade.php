@@ -6,7 +6,7 @@
             <x-icon::finger-print class="w-12 h-12" />
         </div>
 
-        <x-ui::header :title="$title" :subtitle="$subtitle" class="text-center" />
+        <x-ui::header :title="$title" :subtitle="$subtitle" />
     </div>
 
     @if(isset($slot) && $slot->isNotEmpty())

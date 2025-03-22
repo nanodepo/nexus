@@ -1,11 +1,7 @@
 @props(['image' => null, 'title' => null, 'subtitle' => null, 'text' => null])
 
-<a {{ $attributes->merge(['class' => 'relative flex flex-col flex-auto pb-3 bg-section hover:shadow rounded-2xl transition overflow-hidden']) }}>
-    @if(isset($label))
-        {{ $label }}
-    @endif
-
-    <div class="flex flex-col flex-auto gap-3 {{ (is_null($image) && !isset($header)) ? 'pt-3' : '' }} overflow-hidden">
+<a {{ $attributes->merge(['class' => 'card']) }}>
+    <div class="flex flex-col flex-auto gap-3 {{ (is_null($image) && !isset($header)) ? 'pt-3' : '' }}">
         @if(isset($header))
             <x-ui::card.header>{{ $header }}</x-ui::card.header>
         @endif

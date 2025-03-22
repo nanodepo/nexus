@@ -1,6 +1,6 @@
 @props(['icon', 'destructive' => false])
 
-<x-ui::list.item {{ $attributes->class(['text-button' => !$destructive, 'text-destructive' => $destructive]) }}>
+<x-ui::list.item {{ $attributes->class(['text-accent' => !$destructive, 'text-destructive' => $destructive]) }}>
     <x-slot name="before">
         <x-dynamic-component :component="str($icon)->prepend('icon::')->value()" />
     </x-slot>

@@ -14,7 +14,6 @@ class Button extends Component
         public ?string $after = null,
         public ?string $href = null,
         public bool $disabled = false,
-        public bool $destructive = false,
     ) {}
 
     public function render(): View

@@ -1,5 +1,5 @@
-<nav {{ $attributes->merge(['class' => 'flex flex-col justify-between w-full rounded-r-3xl overflow-x-hidden overflow-y-auto text-on-background']) }}>
-    <div class="flex flex-col gap-1 w-full">
+<nav {{ $attributes->merge(['class' => 'drawer']) }}>
+    <div class="nav-content">
         {{ $slot }}
     </div>
 </nav>

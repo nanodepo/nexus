@@ -1,4 +1,4 @@
-@props(['icon' => null, 'accent' => true])
+@props(['icon' => null, 'accent' => false])
 
 <x-ui::list.item {{ $attributes }}>
     @if($icon)

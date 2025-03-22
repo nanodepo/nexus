@@ -1,12 +1,8 @@
 @props(['title', 'subtitle' => null])
 
-<div {{ $attributes->merge(['class' => 'flex flex-col gap-1']) }}>
-    <div class="text-2xl font-bold tracking-wide text-center text-on-section">
-        {{ $title }}
-    </div>
+<div {{ $attributes->merge(['class' => 'header']) }}>
+    <div class="header-title">{{ $title }}</div>
     @if(!is_null($subtitle))
-        <div class="text-sm tracking-wide text-center text-balance text-subtitle">
-            {{ $subtitle }}
-        </div>
+        <div class="header-subtitle">{{ $subtitle }}</div>
     @endif
 </div>

@@ -1,21 +1,15 @@
 @props(['title' => null, 'subtitle' => null, 'text' => null])
 
-<div class="flex flex-col flex-auto gap-1 px-4">
+<div class="content">
     @if($slot->isEmpty())
         @if($title)
-            <div class="text-base font-medium truncate text-on-section">
-                {{ $title }}
-            </div>
+            <div class="title">{{ $title }}</div>
         @endif
         @if($subtitle)
-            <div class="line-clamp-3 text-sm text-subtitle">
-                {{ $subtitle }}
-            </div>
+            <div class="subtitle">{{ $subtitle }}</div>
         @endif
         @if($text)
-            <div class="line-clamp-3 text-xs text-subtitle">
-                {{ $text }}
-            </div>
+            <div class="text">{{ $text }}</div>
         @endif
     @else
         {{ $slot }}

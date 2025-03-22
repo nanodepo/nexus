@@ -1,3 +1,3 @@
-<div {{ $attributes->merge(['class' => 'flex flex-row flex-wrap items-center -m-1']) }}>
+<div {{ $attributes->merge(['class' => 'breadcrumbs']) }}>
     {{ $slot }}
 </div>

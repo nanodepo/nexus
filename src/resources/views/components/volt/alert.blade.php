@@ -63,15 +63,15 @@ new class extends Component
         class="fixed right-0 top-0 flex flex-col justify-end items-end w-full max-w-md p-4 z-50 pointer-events-none"
     >
         <div @class([
-            'flex flex-row justify-between items-start p-2 rounded-md shadow pointer-events-auto',
-            'bg-button text-on-button' => $type != 'error',
-            'bg-destructive text-white' => $type == 'error',
+            'flex flex-row justify-between items-start p-2 rounded-md shadow-sm pointer-events-auto',
+            'bg-primary text-on-primary' => $type != 'error',
+            'bg-destructive text-on-destructive' => $type == 'error',
         ])>
             <div class="flex flex-row items-start">
                 <div @class([
                     'p-2 rounded-lg',
-                    'bg-on-button/10' => $type != 'error',
-                    'bg-white/10' => $type == 'error',
+                    'bg-on-primary/10' => $type != 'error',
+                    'bg-on-destructive/10' => $type == 'error',
                 ])>
                     @if($type == 'error')
                         <x-icon::face-frown type="mini" />

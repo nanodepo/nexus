@@ -1,4 +1,1 @@
-<input
-    {{ $attributes->merge(['class' => 'w-full accent-accent']) }}
-    type="range"
-/>
+<input type="range" {{ $attributes->merge(['class' => 'range']) }} />

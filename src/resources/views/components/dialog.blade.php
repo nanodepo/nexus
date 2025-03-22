@@ -9,20 +9,20 @@
         x-transition:leave="ease-in duration-200"
         x-transition:leave-start="opacity-100 scale-100 translate-y-0"
         x-transition:leave-end="opacity-0 scale-75 -translate-y-20"
-        class="flex flex-col w-full {{ $width }} max-h-[90vh] gap-3 py-3 bg-section rounded-3xl overflow-hidden shadow-xl transform transition-all z-50"
+        class="dialog {{ $width }}"
     >
         @if(isset($header) && $header->isNotEmpty())
-            <div class="flex flex-row items-center justify-between flex-none w-full px-6">
+            <div class="modal-header">
                 {{ $header }}
             </div>
         @endif
 
-        <div class="flex flex-col flex-auto w-full px-6 overflow-y-auto overflow-x-hidden">
+        <div class="modal-content">
             {{ $content ?? $slot }}
         </div>
 
         @if(isset($footer) && $footer->isNotEmpty())
-            <div class="flex flex-row items-center justify-between flex-none w-full px-6">
+            <div class="modal-footer">
                 {{ $footer }}
             </div>
         @endif

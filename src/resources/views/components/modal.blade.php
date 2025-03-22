@@ -1,5 +1,5 @@
 <div
-    {{ $attributes->merge(['class' => 'fixed flex flex-row justify-center px-3 inset-0 z-10']) }}
+    {{ $attributes->merge(['class' => 'modal']) }}
     x-cloak
     x-data="{ modal: false, close: function () { this.modal = false } }"
     x-modelable="modal"

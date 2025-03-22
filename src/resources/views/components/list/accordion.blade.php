@@ -10,7 +10,7 @@
     x-data="{ opened: @js($active) }"
     x-modelable="opened"
     class="flex flex-col flex-auto transition overflow-hidden {{ $disabled ? 'opacity-50 pointer-events-none' : '' }}"
-    x-bind:class="{ 'bg-secondary': opened, 'hover:bg-secondary': !opened }"
+    x-bind:class="{ 'bg-front': opened, 'hover:bg-front': !opened }"
     {{ $attributes }}
 >
     <x-ui::list.value
@@ -18,6 +18,7 @@
         :title="$title"
         :description="$subtitle"
         x-on:click="opened = !opened"
+        accent
     >
         <x-icon::chevron-down type="mini" class="w-5 h-5 transition-all" x-bind:class="{ '-rotate-180': opened }" />
     </x-ui::list.value>

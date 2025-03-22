@@ -75,3 +75,284 @@ if (!function_exists('lerp')) {
         return $a + $divider * ($b - $a);
     }
 }
+
+if (!function_exists('hexToRgb')) {
+    /**
+     * Converts a hexadecimal color code to its RGB representation.
+     *
+     * @param string $hex The hexadecimal color code, with or without a leading '#'.
+     *
+     * @return array An array containing the RGB values as integers: [red, green, blue].
+     */
+    function hexToRgb(string $hex): array
+    {
+        $hex = str_replace('#', '', $hex);
+        $bigint = hexdec($hex);
+        $r = ($bigint >> 16) & 255;
+        $g = ($bigint >> 8) & 255;
+        $b = $bigint & 255;
+        return [$r, $g, $b];
+    }
+}
+
+if (!function_exists('rgbToHex')) {
+    /**
+     * Converts RGB color values to HSL (Hue, Saturation, Lightness).
+     *
+     * @param float|int $r The red color value, ranged from 0 to 255.
+     * @param float|int $g The green color value, ranged from 0 to 255.
+     * @param float|int $b The blue color value, ranged from 0 to 255.
+     *
+     * @return array An array containing the HSL values:
+     *               - float $h: The hue in degrees (0 to 360).
+     *               - float $s: The saturation percentage (0 to 100).
+     *               - float $l: The lightness percentage (0 to 100).
+     */
+    function rgbToHsl(float|int $r, float|int $g, float|int $b): array
+    {
+        $r /= 255;
+        $g /= 255;
+        $b /= 255;
+        $max = max($r, $g, $b);
+        $min = min($r, $g, $b);
+        $l = ($max + $min) / 2;
+
+        if ($max == $min) {
+            $h = $s = 0; // achromatic
+        } else {
+            $d = $max - $min;
+            $s = $l > 0.5 ? $d / (2 - $max - $min) : $d / ($max + $min);
+            switch ($max) {
+                case $r:
+                    $h = ($g - $b) / $d + ($g < $b ? 6 : 0);
+                    break;
+                case $g:
+                    $h = ($b - $r) / $d + 2;
+                    break;
+                case $b:
+                    $h = ($r - $g) / $d + 4;
+                    break;
+            }
+            $h *= 60;
+        }
+
+        return [$h, $s * 100, $l * 100];
+    }
+}
+
+if (!function_exists('hslToRgb')) {
+    /**
+     * Converts HSL (Hue, Saturation, Lightness) color representation to RGB (Red, Green, Blue).
+     *
+     * @param float|int $h The hue value, in degrees (0-360).
+     * @param float|int $s The saturation value, as a percentage (0-100).
+     * @param float|int $l The lightness value, as a percentage (0-100).
+     *
+     * @return array An array containing the RGB values as integers, with each component in the range 0-255.
+     */
+    function hslToRgb(float|int $h, float|int $s, float|int $l): array
+    {
+        $s /= 100;
+        $l /= 100;
+        $c = (1 - abs(2 * $l - 1)) * $s;
+        $x = $c * (1 - abs(fmod($h / 60, 2) - 1));
+        $m = $l - $c / 2;
+        $r = 0;
+        $g = 0;
+        $b = 0;
+
+        if ($h >= 0 && $h < 60) {
+            $r = $c;
+            $g = $x;
+            $b = 0;
+        } elseif ($h >= 60 && $h < 120) {
+            $r = $x;
+            $g = $c;
+            $b = 0;
+        } elseif ($h >= 120 && $h < 180) {
+            $r = 0;
+            $g = $c;
+            $b = $x;
+        } elseif ($h >= 180 && $h < 240) {
+            $r = 0;
+            $g = $x;
+            $b = $c;
+        } elseif ($h >= 240 && $h < 300) {
+            $r = $x;
+            $g = 0;
+            $b = $c;
+        } elseif ($h >= 300 && $h < 360) {
+            $r = $c;
+            $g = 0;
+            $b = $x;
+        }
+
+        $r = round(($r + $m) * 255);
+        $g = round(($g + $m) * 255);
+        $b = round(($b + $m) * 255);
+        return [$r, $g, $b];
+    }
+}
+
+if (!function_exists('rgbToHex')) {
+    /**
+     * Converts RGB color values to a hexadecimal color string.
+     *
+     * @param int $r The red component of the color (0-255).
+     * @param int $g The green component of the color (0-255).
+     * @param int $b The blue component of the color (0-255).
+     *
+     * @return string The hexadecimal color string in the format "#rrggbb".
+     */
+    function rgbToHex(int $r, int $g, int $b): string
+    {
+        $toHex = function ($value) {
+            $hex = dechex($value);
+            return strlen($hex) === 1 ? '0' . $hex : $hex;
+        };
+        return '#' . $toHex($r) . $toHex($g) . $toHex($b);
+    }
+}
+
+if (!function_exists('getTriadicColors')) {
+    /**
+     * Computes the triadic colors based on the given hue.
+     *
+     * @param float|int $h The hue value in degrees (0 to 360).
+     *
+     * @return array Returns an associative array containing:
+     * - 'primary': The primary color hue (input value).
+     * - 'secondary': The secondary color hue (input value + 120°).
+     * - 'tertiary': The tertiary color hue (input value + 240°).
+     */
+    function getTriadicColors(float|int $h): array
+    {
+        return [
+            'primary' => $h, // Основной цвет
+            'secondary' => fmod($h + 120, 360), // Второй цвет триады (+120°)
+            'tertiary' => fmod($h + 240, 360), // Третий цвет триады (+240°)
+        ];
+    }
+}
+
+if (!function_exists('getSplitComplementaryColors')) {
+    /**
+     * Calculates the split complementary colors based on the given hue.
+     *
+     * @param float|int $h The hue value in degrees (0 to 360).
+     *
+     * @return array Returns an associative array containing:
+     * - 'primary': The primary color hue (input value).
+     * - 'secondary': The secondary color hue (30° clockwise from the complementary color).
+     * - 'tertiary': The tertiary color hue (30° counterclockwise from the complementary color).
+     */
+    function getSplitComplementaryColors(float|int $h): array
+    {
+        // Вычисляем hue для комплементарного цвета (напротив на цветовом круге)
+        $complementaryHue = fmod($h + 180, 360);
+
+        // Вычисляем hue для двух цветов, отстоящих на 30 градусов от комплементарного
+        return [
+            'primary' => $h, // Основной цвет
+            'secondary' => fmod($complementaryHue + 30, 360),
+            'tertiary' => fmod($complementaryHue - 30 + 360, 360),
+        ];
+    }
+}
+
+if (!function_exists('generateTheme')) {
+    /**
+     * Generates a theme's color palette based on a primary hex color.
+     *
+     * @param string $primaryHex The primary color in hexadecimal format.
+     *
+     * @return stdClass An object containing 'light' and 'dark' theme color palettes,
+     *                  each of which has a structured set of colors for UI elements.
+     */
+    function generateTheme(string $primaryHex): stdClass
+    {
+        // Переводим HEX в RGB
+        list($r, $g, $b) = hexToRgb($primaryHex);
+
+        // Переводим RGB в HSL
+        list($h, $s, $l) = rgbToHsl($r, $g, $b);
+
+        // Определяем дополнительные оттенки
+        $hues = [
+            //...getTriadicColors($h),
+            ...getSplitComplementaryColors($h),
+            'red' => 0, // Красный для destructive
+            'gray' => $h // Для серых используем тот же оттенок, но с низкой насыщенностью
+        ];
+
+        // Определяем палитру в зависимости от темы и возвращаем
+        return literal(
+            light: literal(
+                // main
+                gray: rgbToHex(...hslToRgb($hues['gray'], 5, 50)),
+                primary: rgbToHex(...hslToRgb($hues['primary'], 55, 45)),
+                secondary: rgbToHex(...hslToRgb($hues['secondary'], 55, 45)),
+                tertiary: rgbToHex(...hslToRgb($hues['tertiary'], 55, 45)),
+                destructive: rgbToHex(...hslToRgb($hues['red'], 55, 45)),
+
+                // backgrounds
+                background: rgbToHex(...hslToRgb($hues['gray'], 8, 92)),
+                front: rgbToHex(...hslToRgb($hues['gray'], 8, 95)),
+                foreground: rgbToHex(...hslToRgb($hues['gray'], 10, 15)),
+
+                // text
+                text: rgbToHex(...hslToRgb($hues['gray'], 10, 10)),
+                section_text: rgbToHex(...hslToRgb($hues['gray'], 10, 15)),
+                primary_text: rgbToHex(...hslToRgb($hues['primary'], 30, 96)),
+                secondary_text: rgbToHex(...hslToRgb($hues['secondary'], 30, 96)),
+                tertiary_text: rgbToHex(...hslToRgb($hues['tertiary'], 30, 96)),
+                destructive_text: rgbToHex(...hslToRgb($hues['red'], 30, 96)),
+                subtitle: rgbToHex(...hslToRgb($hues['gray'], 10, 40)),
+                hint: rgbToHex(...hslToRgb($hues['gray'], 10, 55)),
+
+                // controls
+                accent: rgbToHex(...hslToRgb($hues['primary'], 50, 40)),
+                link: rgbToHex(...hslToRgb($hues['primary'], 60, 40)),
+                focus: rgbToHex(...hslToRgb($hues['primary'], 30, 80)),
+
+                // section
+                section: rgbToHex(...hslToRgb($hues['gray'], 8, 98)),
+                section_header: rgbToHex(...hslToRgb($hues['primary'], 30, 50)),
+                section_separator: rgbToHex(...hslToRgb($hues['gray'], 10, 90)),
+            ),
+            dark: literal(
+                // main
+                gray: rgbToHex(...hslToRgb($hues['gray'], 5, 50)),
+                primary: rgbToHex(...hslToRgb($hues['primary'], 55, 45)),
+                secondary: rgbToHex(...hslToRgb($hues['secondary'], 55, 45)),
+                tertiary: rgbToHex(...hslToRgb($hues['tertiary'], 55, 45)),
+                destructive: rgbToHex(...hslToRgb($hues['red'], 55, 45)),
+
+                // backgrounds
+                background: rgbToHex(...hslToRgb($hues['gray'], 8, 3)),
+                front: rgbToHex(...hslToRgb($hues['gray'], 8, 6)),
+                foreground: rgbToHex(...hslToRgb($hues['gray'], 10, 90)),
+
+                // text
+                text: rgbToHex(...hslToRgb($hues['gray'], 10, 95)),
+                section_text: rgbToHex(...hslToRgb($hues['gray'], 10, 85)),
+                primary_text: rgbToHex(...hslToRgb($hues['primary'], 30, 96)),
+                secondary_text: rgbToHex(...hslToRgb($hues['secondary'], 30, 96)),
+                tertiary_text: rgbToHex(...hslToRgb($hues['tertiary'], 30, 96)),
+                subtitle: rgbToHex(...hslToRgb($hues['gray'], 10, 70)),
+                hint: rgbToHex(...hslToRgb($hues['gray'], 10, 55)),
+
+                // controls
+                accent: rgbToHex(...hslToRgb($hues['primary'], 55, 65)),
+                link: rgbToHex(...hslToRgb($hues['primary'], 50, 70)),
+                focus: rgbToHex(...hslToRgb($hues['primary'], 20, 30)),
+
+
+                // section
+                section: rgbToHex(...hslToRgb($hues['gray'], 8, 8)),
+                section_header: rgbToHex(...hslToRgb($hues['primary'], 30, 50)),
+                section_separator: rgbToHex(...hslToRgb($hues['gray'], 10, 2)),
+            )
+        );
+    }
+}

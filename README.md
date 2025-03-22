@@ -43,3 +43,8 @@ x-data="{ drawer: false }"
     @apply hover:text-link hover:underline;
 }
 ```
+
+#### 7. Добавьте в свой базовый шаблон компонент определяющий глобальные CSS переменные с цветами:
+```html
+<x-ui::theme color="#0088cc" />
+```

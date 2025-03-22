@@ -1,13 +1,23 @@
-@props(['name', 'label', 'disabled' => false])
+@props(['name', 'label', 'icon' => null, 'badge' => null, 'disabled' => false])
 
 <a
     x-data="{ name: @js($name) }"
-    class="flex justify-center flex-none py-1.5 {{ $disabled ? 'opacity-50 pointer-events-none' : '' }}"
-    x-bind:class="{ 'border-b-2 border-accent text-accent font-medium': name == active, 'border-b-2 border-transparent hover:text-on-section cursor-pointer': name != active }"
+    class="item {{ $disabled ? 'opacity-50 pointer-events-none' : '' }}"
+    x-bind:class="{ 'active': name == active }"
     x-on:click="active = name"
     {{ $attributes }}
 >
-    <div class="py-1.5 px-4 hover:bg-accent/10 rounded-lg transition">
-        {{ $label }}
+    <div class="title">
+        @if($icon)
+            <div class="flex-none">
+                <x-dynamic-component :component="'icon::'.$icon" type="mini" />
+            </div>
+        @endif
+        <div class="">{{ $label }}</div>
+        @if($badge)
+            <div class="flex-none">
+                <x-ui::badge>{{ $badge }}</x-ui::badge>
+            </div>
+        @endif
     </div>
 </a>

@@ -11,7 +11,7 @@
     x-transition:leave="ease-in duration-200"
     x-transition:leave-start="opacity-100"
     x-transition:leave-end="opacity-0"
-    class="fixed inset-0 z-0 transform backdrop-blur-sm transition-all"
+    class="fixed inset-0 z-0 transform backdrop-blur-xs transition-all"
 >
     <div class="absolute inset-0 bg-hint/50"></div>
 </div>

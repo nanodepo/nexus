@@ -9,7 +9,7 @@
     'truncate' => true,
 ])
 
-<a {{ $attributes->merge(['class' => 'group flex flex-row flex-auto gap-6 px-6 py-3 hover:bg-secondary overflow-hidden transition cursor-pointer'])->class(['items-center' => $truncate, 'pointer-events-none opacity-50' => $disabled, 'bg-secondary' => $active]) }}>
+<a {{ $attributes->merge(['class' => 'group item'])->class(['items-center' => $truncate, 'pointer-events-none opacity-50' => $disabled, 'active' => $active]) }}>
 
     @if(isset($before) && $before->isNotEmpty())
         <div {{ $before->attributes->merge(['class' => 'flex-none']) }}>
@@ -19,22 +19,22 @@
 
     <div class="flex flex-col flex-auto overflow-hidden">
         @if($subhead)
-            <div class="tracking-wide leading-6 text-sm text-hint truncate">{{ $subhead }}</div>
+            <div class="subhead">{{ $subhead }}</div>
         @endif
 
         <div class="flex flex-row items-center">
-            <div class="leading-6 font-medium tracking-wide {{ $truncate ? 'truncate' : '' }} {{ $attributes->has('href') ? 'group-hover:text-link group-hover:underline' : '' }} transition">{{ $title }}</div>
+            <div @class(['title', 'truncate' => $truncate, 'link' => $attributes->has('href')])>{{ $title }}</div>
             @if($badge)
-                <div class="w-1.5 h-1.5 ml-2 rounded-full bg-accent"></div>
+                <div class="list-badge"></div>
             @endif
         </div>
 
         @if($subtitle)
-            <div class="inline-flex flex-row items-center space-x-2 tracking-wide leading-6 text-sm text-subtitle {{ $truncate ? 'truncate' : '' }}">{{ $subtitle }}</div>
+            <div @class(['subtitle', 'truncate' => $truncate])>{{ $subtitle }}</div>
         @endif
 
         @if($description)
-            <div class="tracking-wide leading-5 text-xs text-hint {{ $truncate ? 'truncate' : '' }}">{{ $description }}</div>
+            <div @class(['description', 'truncate' => $truncate])>{{ $description }}</div>
         @endif
     </div>
 

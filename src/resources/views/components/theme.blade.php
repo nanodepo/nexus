@@ -1,12 +1,18 @@
+@props(['color' => '#4095BF'])
+
 <style>
-    html {
-        @foreach(config('theme.light') as $name => $color)
-            {{ str('--tg-theme-:name-color: :color;')->replace(':name', $name)->replace(':color', $color)->value() }}
-        @endforeach
-    }
-    html.dark {
-        @foreach(config('theme.dark') as $name => $color)
-            {{ str('--tg-theme-:name-color: :color;')->replace(':name', $name)->replace(':color', $color)->value() }}
-        @endforeach
-    }
+@php
+$colors = generateTheme($color);
+@endphp
+
+html {
+@foreach($colors->light as $name => $color)
+    {{ str('--ndn-:name: :color;')->replace(':name', $name)->replace(':color', $color)->replace('_', '-')->value() }}
+@endforeach
+}
+html.dark {
+@foreach($colors->dark as $name => $color)
+    {{ str('--ndn-:name: :color;')->replace(':name', $name)->replace(':color', $color)->replace('_', '-')->value() }}
+@endforeach
+}
 </style>
