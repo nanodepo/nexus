@@ -13,5 +13,5 @@
     x-transition:leave-end="opacity-0"
     class="fixed inset-0 z-0 transform backdrop-blur-xs transition-all"
 >
-    <div class="absolute inset-0 bg-hint/50"></div>
+    <div class="absolute inset-0 bg-gray/50"></div>
 </div>

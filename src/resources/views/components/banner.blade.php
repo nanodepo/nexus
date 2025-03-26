@@ -1,9 +1,4 @@
-@props([
-    'title',
-    'subtitle' => null,
-    'icon' => null,
-    'color' => 'default',
-])
+@props(['title', 'subtitle' => null, 'icon' => null, 'color' => 'primary'])
 
 <div {{ $attributes->merge(['class' => 'flex flex-col']) }}>
     <div @class(['banner', $color])>

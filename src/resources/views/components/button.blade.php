@@ -7,7 +7,6 @@
         'px-2.5' => $slot->isEmpty(),
     ]) }}
     @disabled($disabled)
-    wire:loading.attr="disabled"
 >
     @if(isset($before))
         <div class="flex flex-none size-5">

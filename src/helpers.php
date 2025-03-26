@@ -214,6 +214,27 @@ if (!function_exists('rgbToHex')) {
     }
 }
 
+if (!function_exists('getAnalogousColors')) {
+    /**
+     * Computes the triadic colors based on the given hue.
+     *
+     * @param float|int $h The hue value in degrees (0 to 360).
+     *
+     * @return array Returns an associative array containing:
+     * - 'primary': The primary color hue (input value).
+     * - 'secondary': The secondary color hue (input value + 120°).
+     * - 'tertiary': The tertiary color hue (input value + 240°).
+     */
+    function getAnalogousColors(float|int $h): array
+    {
+        return [
+            'primary' => $h, // Основной цвет
+            'secondary' => fmod($h - 10 + 360, 360), // Второй цвет триады (+120°)
+            'tertiary' => fmod($h + 30, 360), // Третий цвет триады (+240°)
+        ];
+    }
+}
+
 if (!function_exists('getTriadicColors')) {
     /**
      * Computes the triadic colors based on the given hue.
@@ -254,8 +275,8 @@ if (!function_exists('getSplitComplementaryColors')) {
         // Вычисляем hue для двух цветов, отстоящих на 30 градусов от комплементарного
         return [
             'primary' => $h, // Основной цвет
-            'secondary' => fmod($complementaryHue + 30, 360),
-            'tertiary' => fmod($complementaryHue - 30 + 360, 360),
+            'secondary' => fmod($complementaryHue + 25, 360),
+            'tertiary' => fmod($complementaryHue - 25 + 360, 360),
         ];
     }
 }
@@ -279,7 +300,8 @@ if (!function_exists('generateTheme')) {
 
         // Определяем дополнительные оттенки
         $hues = [
-            //...getTriadicColors($h),
+//            ...getAnalogousColors($h),
+//            ...getTriadicColors($h),
             ...getSplitComplementaryColors($h),
             'red' => 0, // Красный для destructive
             'gray' => $h // Для серых используем тот же оттенок, но с низкой насыщенностью
@@ -290,10 +312,14 @@ if (!function_exists('generateTheme')) {
             light: literal(
                 // main
                 gray: rgbToHex(...hslToRgb($hues['gray'], 5, 50)),
-                primary: rgbToHex(...hslToRgb($hues['primary'], 55, 45)),
-                secondary: rgbToHex(...hslToRgb($hues['secondary'], 55, 45)),
-                tertiary: rgbToHex(...hslToRgb($hues['tertiary'], 55, 45)),
-                destructive: rgbToHex(...hslToRgb($hues['red'], 55, 45)),
+                primary: rgbToHex(...hslToRgb($hues['primary'], 45, 40)),
+                primary_container: rgbToHex(...hslToRgb($hues['primary'], 30, 80)),
+                secondary: rgbToHex(...hslToRgb($hues['secondary'], 45, 40)),
+                secondary_container: rgbToHex(...hslToRgb($hues['secondary'], 30, 80)),
+                tertiary: rgbToHex(...hslToRgb($hues['tertiary'], 45, 40)),
+                tertiary_container: rgbToHex(...hslToRgb($hues['tertiary'], 30, 80)),
+                destructive: rgbToHex(...hslToRgb($hues['red'], 45, 40)),
+                destructive_container: rgbToHex(...hslToRgb($hues['red'], 30, 80)),
 
                 // backgrounds
                 background: rgbToHex(...hslToRgb($hues['gray'], 8, 92)),
@@ -304,16 +330,20 @@ if (!function_exists('generateTheme')) {
                 text: rgbToHex(...hslToRgb($hues['gray'], 10, 10)),
                 section_text: rgbToHex(...hslToRgb($hues['gray'], 10, 15)),
                 primary_text: rgbToHex(...hslToRgb($hues['primary'], 30, 96)),
+                primary_container_text: rgbToHex(...hslToRgb($hues['primary'], 40, 15)),
                 secondary_text: rgbToHex(...hslToRgb($hues['secondary'], 30, 96)),
+                secondary_container_text: rgbToHex(...hslToRgb($hues['secondary'], 40, 15)),
                 tertiary_text: rgbToHex(...hslToRgb($hues['tertiary'], 30, 96)),
+                tertiary_container_text: rgbToHex(...hslToRgb($hues['tertiary'], 40, 15)),
                 destructive_text: rgbToHex(...hslToRgb($hues['red'], 30, 96)),
+                destructive_container_text: rgbToHex(...hslToRgb($hues['red'], 40, 15)),
                 subtitle: rgbToHex(...hslToRgb($hues['gray'], 10, 40)),
                 hint: rgbToHex(...hslToRgb($hues['gray'], 10, 55)),
 
                 // controls
                 accent: rgbToHex(...hslToRgb($hues['primary'], 50, 40)),
                 link: rgbToHex(...hslToRgb($hues['primary'], 60, 40)),
-                focus: rgbToHex(...hslToRgb($hues['primary'], 30, 80)),
+                //focus: rgbToHex(...hslToRgb($hues['primary'], 30, 80)),
 
                 // section
                 section: rgbToHex(...hslToRgb($hues['gray'], 8, 98)),
@@ -323,10 +353,14 @@ if (!function_exists('generateTheme')) {
             dark: literal(
                 // main
                 gray: rgbToHex(...hslToRgb($hues['gray'], 5, 50)),
-                primary: rgbToHex(...hslToRgb($hues['primary'], 55, 45)),
-                secondary: rgbToHex(...hslToRgb($hues['secondary'], 55, 45)),
-                tertiary: rgbToHex(...hslToRgb($hues['tertiary'], 55, 45)),
-                destructive: rgbToHex(...hslToRgb($hues['red'], 55, 45)),
+                primary: rgbToHex(...hslToRgb($hues['primary'], 45, 60)),
+                primary_container: rgbToHex(...hslToRgb($hues['primary'], 30, 20)),
+                secondary: rgbToHex(...hslToRgb($hues['secondary'], 45, 60)),
+                secondary_container: rgbToHex(...hslToRgb($hues['secondary'], 30, 20)),
+                tertiary: rgbToHex(...hslToRgb($hues['tertiary'], 45, 60)),
+                tertiary_container: rgbToHex(...hslToRgb($hues['tertiary'], 30, 20)),
+                destructive: rgbToHex(...hslToRgb($hues['red'], 45, 60)),
+                destructive_container: rgbToHex(...hslToRgb($hues['red'], 30, 20)),
 
                 // backgrounds
                 background: rgbToHex(...hslToRgb($hues['gray'], 8, 3)),
@@ -336,17 +370,21 @@ if (!function_exists('generateTheme')) {
                 // text
                 text: rgbToHex(...hslToRgb($hues['gray'], 10, 95)),
                 section_text: rgbToHex(...hslToRgb($hues['gray'], 10, 85)),
-                primary_text: rgbToHex(...hslToRgb($hues['primary'], 30, 96)),
-                secondary_text: rgbToHex(...hslToRgb($hues['secondary'], 30, 96)),
-                tertiary_text: rgbToHex(...hslToRgb($hues['tertiary'], 30, 96)),
+                primary_text: rgbToHex(...hslToRgb($hues['primary'], 30, 4)),
+                primary_container_text: rgbToHex(...hslToRgb($hues['primary'], 40, 85)),
+                secondary_text: rgbToHex(...hslToRgb($hues['secondary'], 30, 4)),
+                secondary_container_text: rgbToHex(...hslToRgb($hues['secondary'], 40, 85)),
+                tertiary_text: rgbToHex(...hslToRgb($hues['tertiary'], 30, 4)),
+                tertiary_container_text: rgbToHex(...hslToRgb($hues['tertiary'], 40, 85)),
+                destructive_text: rgbToHex(...hslToRgb($hues['red'], 30, 4)),
+                destructive_container_text: rgbToHex(...hslToRgb($hues['red'], 40, 85)),
                 subtitle: rgbToHex(...hslToRgb($hues['gray'], 10, 70)),
                 hint: rgbToHex(...hslToRgb($hues['gray'], 10, 55)),
 
                 // controls
                 accent: rgbToHex(...hslToRgb($hues['primary'], 55, 65)),
                 link: rgbToHex(...hslToRgb($hues['primary'], 50, 70)),
-                focus: rgbToHex(...hslToRgb($hues['primary'], 20, 30)),
-
+                // focus: rgbToHex(...hslToRgb($hues['primary'], 20, 30)),
 
                 // section
                 section: rgbToHex(...hslToRgb($hues['gray'], 8, 8)),

@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@source "../../packages/nanodepo/gems-ui/src/resources/";
 
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
@@ -25,8 +26,13 @@
 @theme inline {
     --color-gray: var(--ndn-gray);
     --color-primary: var(--ndn-primary);
+    --color-primary-container: var(--ndn-primary-container);
     --color-secondary: var(--ndn-secondary);
+    --color-secondary-container: var(--ndn-secondary-container);
     --color-tertiary: var(--ndn-tertiary);
+    --color-tertiary-container: var(--ndn-tertiary-container);
+    --color-destructive: var(--ndn-destructive);
+    --color-destructive-container: var(--ndn-destructive-container);
 
     --color-background: var(--ndn-background);
     --color-front: var(--ndn-front);
@@ -35,16 +41,19 @@
     --color-on-background: var(--ndn-text);
     --color-on-section: var(--ndn-section-text);
     --color-on-primary: var(--ndn-primary-text);
+    --color-on-primary-container: var(--ndn-primary-container-text);
     --color-on-secondary: var(--ndn-secondary-text);
+    --color-on-secondary-container: var(--ndn-secondary-container-text);
     --color-on-tertiary: var(--ndn-tertiary-text);
+    --color-on-tertiary-container: var(--ndn-tertiary-container-text);
     --color-on-destructive: var(--ndn-destructive-text);
+    --color-on-destructive-container: var(--ndn-destructive-container-text);
     --color-subtitle: var(--ndn-subtitle);
     --color-hint: var(--ndn-hint);
 
     --color-accent: var(--ndn-accent);
     --color-link: var(--ndn-link);
     --color-focus: var(--ndn-focus);
-    --color-destructive: var(--ndn-destructive);
 
     --color-section: var(--ndn-section);
     --color-section-header: var(--ndn-section-header);
@@ -88,14 +97,16 @@
     @apply bg-hint;
 }
 
-.progress-ring {
-    stroke-dasharray: 400, 400;
-    transition: stroke-dashoffset 0.35s;
-    transform: rotate(-90deg);
-    transform-origin: 50% 50%;
+
+
+/* --------------------------
+ *       Base Content
+ * --------------------------
+*/
+
+body {
+    @apply relative flex flex-col min-h-screen select-none text-on-background bg-background selection:bg-primary-container selection:text-on-background font-sans antialiased overflow-y-auto overflow-x-hidden;
 }
-
-
 
 
 
@@ -105,7 +116,7 @@
 */
 
 .avatar {
-    @apply relative flex items-center justify-center flex-none text-subtitle bg-focus rounded-full bg-center;
+    @apply relative flex items-center justify-center flex-none text-subtitle bg-primary-container rounded-full bg-center;
 }
 .online {
     @apply absolute bottom-0 right-0 w-3 h-3 border-2 border-background rounded-full bg-accent;
@@ -144,20 +155,17 @@
 .banner {
     @apply flex flex-row justify-between items-center gap-3 -mx-6 py-2 px-3;
 }
-.banner.default {
-    @apply bg-focus text-on-background;
-}
 .banner.primary {
-    @apply bg-primary text-on-primary;
+    @apply bg-primary-container text-on-primary-container;
 }
 .banner.secondary {
-    @apply bg-secondary text-on-secondary;
+    @apply bg-secondary-container text-on-secondary-container;
 }
 .banner.tertiary {
-    @apply bg-tertiary text-on-tertiary;
+    @apply bg-tertiary-container text-on-tertiary-container;
 }
 .banner.destructive {
-    @apply bg-destructive text-on-destructive;
+    @apply bg-destructive-container text-on-destructive-container;
 }
 
 
@@ -195,10 +203,10 @@
     @apply bg-primary text-on-primary;
 }
 .button.primary.outlined {
-    @apply text-primary border border-hint hover:border-primary focus:border-primary active:border-primary hover:bg-primary/10 focus:bg-primary/10 active:bg-primary/10;
+    @apply text-on-primary-container border border-hint hover:border-primary focus:border-primary active:border-primary hover:bg-primary/10 focus:bg-primary/10 active:bg-primary/10;
 }
 .button.primary.text {
-    @apply hover:bg-primary focus:bg-primary active:bg-primary text-on-section hover:text-on-primary focus:text-on-primary active:text-on-primary;
+    @apply hover:bg-primary-container focus:bg-primary-container active:bg-primary-container text-on-primary-container;
 }
 
 .button.secondary {
@@ -208,10 +216,10 @@
     @apply bg-secondary text-on-secondary;
 }
 .button.secondary.outlined {
-    @apply text-secondary border border-hint hover:border-secondary focus:border-secondary active:border-secondary hover:bg-secondary/10 focus:bg-secondary/10 active:bg-secondary/10;
+    @apply text-on-secondary-container border border-hint hover:border-secondary focus:border-secondary active:border-secondary hover:bg-secondary/10 focus:bg-secondary/10 active:bg-secondary/10;
 }
 .button.secondary.text {
-    @apply hover:bg-secondary focus:bg-secondary active:bg-secondary text-on-section hover:text-on-secondary focus:text-on-secondary active:text-on-secondary;
+    @apply hover:bg-secondary-container focus:bg-secondary-container active:bg-secondary-container text-on-secondary-container;
 }
 
 .button.tertiary {
@@ -221,10 +229,10 @@
     @apply bg-tertiary text-on-tertiary;
 }
 .button.tertiary.outlined {
-    @apply text-tertiary border border-hint hover:border-tertiary focus:border-tertiary active:border-tertiary hover:bg-tertiary/10 focus:bg-tertiary/10 active:bg-tertiary/10;
+    @apply text-on-tertiary-container border border-hint hover:border-tertiary focus:border-tertiary active:border-tertiary hover:bg-tertiary/10 focus:bg-tertiary/10 active:bg-tertiary/10;
 }
 .button.tertiary.text {
-    @apply hover:bg-tertiary focus:bg-tertiary active:bg-tertiary text-on-section hover:text-on-tertiary focus:text-on-tertiary active:text-on-tertiary;
+    @apply hover:bg-tertiary-container focus:bg-tertiary-container active:bg-tertiary-container text-on-tertiary-container;
 }
 
 .button.destructive {
@@ -234,10 +242,10 @@
     @apply bg-destructive text-on-destructive;
 }
 .button.destructive.outlined {
-    @apply text-destructive border border-hint hover:border-destructive focus:border-destructive active:border-destructive hover:bg-destructive/10 focus:bg-destructive/10 active:bg-destructive/10;
+    @apply text-on-destructive-container border border-hint hover:border-destructive focus:border-destructive active:border-destructive hover:bg-destructive/10 focus:bg-destructive/10 active:bg-destructive/10;
 }
 .button.destructive.text {
-    @apply hover:bg-destructive focus:bg-destructive active:bg-destructive text-on-section hover:text-on-destructive focus:text-on-destructive active:text-on-destructive;
+    @apply hover:bg-destructive-container focus:bg-destructive-container active:bg-destructive-container text-on-destructive-container;
 }
 
 
@@ -350,10 +358,10 @@
     @apply bg-primary text-on-primary;
 }
 .circle.primary.outlined {
-    @apply text-primary border border-hint hover:border-primary focus:border-primary active:border-primary;
+    @apply text-on-primary-container border border-hint hover:border-primary focus:border-primary active:border-primary hover:bg-primary/10 focus:bg-primary/10 active:bg-primary/10;
 }
 .circle.primary.text {
-    @apply text-primary hover:bg-primary focus:bg-primary active:bg-primary hover:text-on-primary focus:text-on-primary;
+    @apply text-on-primary-container hover:bg-primary-container focus:bg-primary-container active:bg-primary-container;
 }
 
 .circle.secondary {
@@ -366,10 +374,10 @@
     @apply bg-secondary text-on-secondary;
 }
 .circle.secondary.outlined {
-    @apply text-secondary border border-hint hover:border-secondary focus:border-secondary active:border-secondary;
+    @apply text-on-secondary-container border border-hint hover:border-secondary focus:border-secondary active:border-secondary hover:bg-secondary/10 focus:bg-secondary/10 active:bg-secondary/10;
 }
 .circle.secondary.text {
-    @apply text-secondary hover:bg-secondary focus:bg-secondary active:bg-secondary hover:text-on-secondary focus:text-on-secondary;
+    @apply text-on-secondary-container hover:bg-secondary-container focus:bg-secondary-container active:bg-secondary-container;
 }
 
 .circle.tertiary {
@@ -382,10 +390,10 @@
     @apply bg-tertiary text-on-tertiary;
 }
 .circle.tertiary.outlined {
-    @apply text-tertiary border border-hint hover:border-tertiary focus:border-tertiary active:border-tertiary;
+    @apply text-on-tertiary-container border border-hint hover:border-tertiary focus:border-tertiary active:border-tertiary hover:bg-tertiary/10 focus:bg-tertiary/10 active:bg-tertiary/10;
 }
 .circle.tertiary.text {
-    @apply text-tertiary hover:bg-tertiary focus:bg-tertiary active:bg-tertiary hover:text-on-tertiary focus:text-on-tertiary;
+    @apply text-on-tertiary-container hover:bg-tertiary-container focus:bg-tertiary-container active:bg-tertiary-container;
 }
 
 .circle.destructive {
@@ -398,10 +406,10 @@
     @apply bg-destructive text-on-destructive;
 }
 .circle.destructive.outlined {
-    @apply text-destructive border border-hint hover:border-destructive focus:border-destructive active:border-destructive;
+    @apply text-on-destructive-container border border-hint hover:border-destructive focus:border-destructive active:border-destructive hover:bg-destructive/10 focus:bg-destructive/10 active:bg-destructive/10;
 }
 .circle.destructive.text {
-    @apply text-destructive hover:bg-destructive focus:bg-destructive active:bg-destructive hover:text-on-destructive focus:text-on-destructive;
+    @apply text-on-destructive-container hover:bg-destructive-container focus:bg-destructive-container active:bg-destructive-container;
 }
 
 
@@ -492,7 +500,10 @@
 */
 
 .input {
-    @apply m-0 px-3 py-2 bg-front rounded-md border border-section-separator hover:border-hint outline-0 focus:border-accent focus:outline-0 focus:ring-2 focus:ring-focus placeholder:text-hint disabled:opacity-50 disabled:pointer-events-none transition;
+    @apply m-0 px-3 py-2 bg-front rounded-md border border-section-separator hover:border-hint outline-0 focus:border-accent focus:outline-0 focus:ring-2 focus:ring-primary-container placeholder:text-hint disabled:opacity-50 disabled:pointer-events-none transition;
+}
+.input.round {
+    @apply px-4.5 rounded-full;
 }
 
 .checkbox {
@@ -503,7 +514,7 @@
 }
 .checkbox,
 .radio {
-    @apply size-5 text-primary border-hint focus:outline-hidden checked:border-primary focus:border-primary focus:ring-2 focus:ring-focus ring-offset-2 focus:ring-offset-section disabled:opacity-50 disabled:pointer-events-none transition;
+    @apply size-5 bg-background text-on-primary border-section-separator hover:border-hint focus:outline-hidden checked:bg-primary checked:border-primary focus:border-primary focus:ring-2 focus:ring-primary-container ring-offset-2 focus:ring-offset-section disabled:opacity-50 disabled:pointer-events-none transition;
 }
 
 .counter {
@@ -538,7 +549,7 @@
 }
 
 .switch {
-    @apply w-11 h-6 bg-hint peer-focus:outline-hidden peer-focus:ring-2 peer-focus:ring-focus rounded-full peer-checked:after:translate-x-full peer-checked:after:border-section after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-section after:border-hint after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary;
+    @apply w-11 h-6 bg-hint peer-focus:outline-hidden peer-focus:ring-2 peer-focus:ring-primary-container rounded-full peer-checked:after:translate-x-full peer-checked:after:border-section after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-section after:border-hint after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary;
 }
 
 
@@ -615,7 +626,7 @@
     @apply flex flex-row items-center justify-between flex-none h-11 px-3 rounded-full transition cursor-pointer overflow-hidden;
 }
 .drawer .item.active {
-    @apply text-on-section bg-focus;
+    @apply text-on-section bg-primary-container;
 }
 .drawer .item:not(.active) {
     @apply text-subtitle hover:text-on-section hover:bg-front;
@@ -673,7 +684,7 @@
     @apply flex items-center justify-center flex-none w-16 h-8 rounded-full transition;
 }
 .rail .item.active .icon {
-    @apply text-on-section bg-focus;
+    @apply text-on-section bg-primary-container;
 }
 .rail .item:not(.active) .icon {
     @apply text-subtitle group-hover:bg-front;
@@ -698,7 +709,7 @@
     @apply flex items-center justify-center flex-none w-16 h-8 rounded-full transition;
 }
 .bar .item.active .icon {
-    @apply text-on-section bg-focus;
+    @apply text-on-section bg-primary-container;
 }
 .bar .item:not(.active) .icon {
     @apply text-subtitle group-hover:bg-front;
@@ -716,6 +727,36 @@
 
 
 /* --------------------------
+ *         Section
+ * --------------------------
+*/
+
+.section {
+    @apply flex flex-col gap-1;
+}
+.section .content {
+    @apply relative flex flex-col w-full flex-auto gap-3 px-6 py-3 overflow-hidden sm:rounded-xl shadow-sm;
+}
+.section .content.default {
+    @apply bg-section text-on-section;
+}
+.section .content.primary {
+    @apply bg-primary-container text-on-primary-container;
+}
+.section .content.secondary {
+    @apply bg-secondary-container text-on-secondary-container;
+}
+.section .content.tertiary {
+    @apply bg-tertiary-container text-on-tertiary-container;
+}
+.section .content.destructive {
+    @apply bg-destructive-container text-on-destructive-container;
+}
+
+
+
+
+/* --------------------------
  *         Segmented
  * --------------------------
 */
@@ -727,7 +768,7 @@
     @apply flex flex-row items-center justify-center flex-auto w-16 gap-2 p-2.5 font-medium leading-4 text-sm tracking-wide border-y first:border-l border-r first:rounded-l-full last:rounded-r-full transition overflow-hidden;
 }
 .segmented .item.active {
-    @apply -ml-px bg-focus border-hint border-l;
+    @apply -ml-px bg-primary-container border-hint border-l;
 }
 .segmented .item:not(.active) {
     @apply hover:bg-front border-hint cursor-pointer;
@@ -799,6 +840,12 @@
     @apply text-sm text-balance tracking-wide text-subtitle;
 }
 
+.progress-ring {
+    stroke-dasharray: 400, 400;
+    transition: stroke-dashoffset 0.35s;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+}
 
 
 /* --------------------------
