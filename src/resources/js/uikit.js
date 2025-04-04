@@ -70,8 +70,8 @@ class Grain {
         this.patternSize = 150;
         this.patternScaleX = 1;
         this.patternScaleY = 1;
-        this.patternRefreshInterval = 3; // 8
-        this.patternAlpha = 15; // int between 0 and 255,
+        this.patternRefreshInterval = 5; // 8
+        this.patternAlpha = 7; // int between 0 and 255,
 
         /**
          * Create canvas
