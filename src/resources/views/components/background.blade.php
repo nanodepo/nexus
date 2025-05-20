@@ -1,4 +1,4 @@
-<div class="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden -z-100 pointer-events-none">
+<div class="absolute top-0 right-0 bottom-0 left-0 w-full h-full opacity-50 overflow-hidden -z-100 pointer-events-none">
     <svg class="absolute -top-[20vw] -right-[25vw] h-[80vw] w-[80vw] opacity-40" xmlns="http://www.w3.org/2000/svg">
         <defs>
             <radialGradient id="gradient" cx="50%" cy="50%" r="35%">

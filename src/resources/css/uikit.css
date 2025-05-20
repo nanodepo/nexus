@@ -36,6 +36,7 @@
 
     --color-background: var(--ndn-background);
     --color-front: var(--ndn-front);
+    --color-surface: var(--ndn-surface);
     --color-foreground: var(--ndn-foreground);
 
     --color-on-background: var(--ndn-text);
@@ -50,6 +51,7 @@
     --color-on-destructive-container: var(--ndn-destructive-container-text);
     --color-subtitle: var(--ndn-subtitle);
     --color-hint: var(--ndn-hint);
+    --color-outline: var(--ndn-outline);
 
     --color-accent: var(--ndn-accent);
     --color-link: var(--ndn-link);
@@ -500,7 +502,7 @@ body {
 */
 
 .input {
-    @apply m-0 px-3 py-2 bg-front rounded-md border border-section-separator hover:border-hint outline-0 focus:border-accent focus:outline-0 focus:ring-2 focus:ring-primary-container placeholder:text-hint disabled:opacity-50 disabled:pointer-events-none transition;
+    @apply m-0 px-3 py-2 bg-surface rounded-md border border-outline hover:border-hint outline-0 focus:border-accent focus:outline-0 focus:ring-2 focus:ring-primary-container placeholder:text-hint disabled:opacity-50 disabled:pointer-events-none transition;
 }
 .input.round {
     @apply px-4.5 rounded-full;
@@ -514,15 +516,15 @@ body {
 }
 .checkbox,
 .radio {
-    @apply size-5 bg-background text-on-primary border-section-separator hover:border-hint focus:outline-hidden checked:bg-primary checked:border-primary focus:border-primary focus:ring-2 focus:ring-primary-container ring-offset-2 focus:ring-offset-section disabled:opacity-50 disabled:pointer-events-none transition;
+    @apply size-5 bg-surface text-on-primary border-outline hover:border-hint focus:outline-hidden checked:bg-primary checked:border-primary focus:border-primary focus:ring-2 focus:ring-primary-container ring-offset-2 focus:ring-offset-section disabled:opacity-50 disabled:pointer-events-none transition;
 }
 
 .counter {
-    @apply flex flex-row flex-none w-32 h-9 bg-front rounded-lg;
+    @apply flex flex-row flex-none w-32 h-9 bg-surface rounded-lg;
 }
 .counter .minus,
 .counter .plus {
-    @apply flex items-center justify-center size-9 border-y border-section-separator group-hover:border-hint cursor-pointer transition;
+    @apply flex items-center justify-center size-9 border-y border-outline group-hover:border-hint cursor-pointer transition;
 }
 .counter .minus {
     @apply border-l rounded-l-lg text-destructive;
@@ -531,7 +533,7 @@ body {
     @apply border-r rounded-r-lg text-primary;
 }
 .counter .counter-input {
-    @apply flex items-center justify-center w-14 h-9 text-sm text-center border border-section-separator group-hover:border-hint outline-hidden bg-transparent outline-0 focus:border-1 focus:border-hint focus:outline-0 focus:ring-0 transition;
+    @apply flex items-center justify-center w-14 h-9 text-sm text-center border border-outline group-hover:border-hint outline-hidden bg-transparent outline-0 focus:border-1 focus:border-hint focus:outline-0 focus:ring-0 transition;
 }
 
 .stars {
