@@ -15,7 +15,7 @@
         "laravel/framework": "^v12.0",
         "livewire/livewire": "^3.0",
         "livewire/volt": "^v1.6.0",
-        "nanodepo/heroicons": "^v2.1.4",
+        "nanodepo/apex": "^v2.2",
         "intervention/image": "^3.7",
         "intervention/image-laravel": "^1.2"
     },
