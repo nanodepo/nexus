@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\File;
-use NanoDepo\GemsUI\Alert\Flash;
+use NanoDepo\Nexus\Alert\Flash;
 
 if (!function_exists('alert')) {
     /**

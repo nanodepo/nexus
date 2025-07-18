@@ -1,6 +1,6 @@
 <?php
 
-namespace NanoDepo\GemsUI\Providers;
+namespace NanoDepo\Nexus\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -19,12 +19,12 @@ class UIServiceProvider extends ServiceProvider
             __DIR__.'/../config/thumbnail.php' => config_path('thumbnail.php'),
             __DIR__.'/../resources/css/uikit.css' => resource_path('css/uikit.css'),
             __DIR__.'/../resources/js/uikit.js' => resource_path('js/uikit.js'),
-        ], 'gems-ui');
+        ], 'nexus');
 
         $this->loadRoutesFrom(__DIR__.'/../routes.php');
 
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'ui');
-        Blade::componentNamespace('NanoDepo\\GemsUI\\Views\\Components', 'ui');
+        Blade::componentNamespace('NanoDepo\\Nexus\\Views\\Components', 'ui');
         Volt::mount([
             __DIR__.'/../resources/views/components/volt'
         ]);

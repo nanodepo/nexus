@@ -1,6 +1,6 @@
 <?php
 
-namespace NanoDepo\GemsUI\Alert;
+namespace NanoDepo\Nexus\Alert;
 
 final class FlashMessage
 {

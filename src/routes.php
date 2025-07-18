@@ -2,7 +2,7 @@
 
 
 use Illuminate\Support\Facades\Route;
-use NanoDepo\GemsUI\Controllers\ThumbnailController;
+use NanoDepo\Nexus\Controllers\ThumbnailController;
 
 Route::get('/storage/images/{dir}/{method}/{size}/{file}', ThumbnailController::class)
     ->where('method', 'resize|crop|fit')

@@ -1,6 +1,6 @@
 {
-    "name": "nanodepo/gems-ui",
-    "description": "Gems Blue UI Kit",
+    "name": "nanodepo/nexus",
+    "description": "Nexus - Laravel Blade UI Kit",
     "minimum-stability": "stable",
     "license": "MIT",
     "authors": [
@@ -21,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "NanoDepo\\GemsUI\\": "src"
+            "NanoDepo\\Nexus\\": "src"
         },
         "files": [
             "src/helpers.php"
@@ -30,7 +30,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "NanoDepo\\GemsUI\\Providers\\UIServiceProvider"
+                "NanoDepo\\Nexus\\Providers\\UIServiceProvider"
             ]
         }
     }

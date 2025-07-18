@@ -1,6 +1,6 @@
 <?php
 
-namespace NanoDepo\GemsUI\Views\Components;
+namespace NanoDepo\Nexus\Views\Components;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;

@@ -1,6 +1,6 @@
 <?php
 
-namespace NanoDepo\GemsUI\Controllers;
+namespace NanoDepo\Nexus\Controllers;
 
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Laravel\Facades\Image;
