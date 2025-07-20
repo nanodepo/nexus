@@ -410,9 +410,11 @@ if (!function_exists('settings')) {
     function settings(): stdClass
     {
         return literal(
-            color: auth()->check() ? auth()->user()->settings?->color : config('app.color'),
-            drawer: auth()->check() ? auth()->user()->settings?->drawer : true,
-            dark: auth()->check() ? auth()->user()->settings?->dark : false,
+            color: auth()->check()
+                ? (auth()->user()->settings?->color ?? config('nexus.color'))
+                : config('nexus.color'),
+            drawer: auth()->check() ? (auth()->user()->settings?->drawer ?? true) : true,
+            dark: auth()->check() ? (auth()->user()->settings?->dark ?? false) : false,
         );
     }
 }
