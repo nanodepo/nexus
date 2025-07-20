@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@source "../../packages/nanodepo/gems-ui/src/resources/";
+@source "../views/";
 
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
@@ -11,7 +11,7 @@
     --color-white: #ffffff;
     --color-black: #000000;
 
-    --font-sans: Roboto, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: Ubuntu, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
     --spacing-4_5: 18px;
 

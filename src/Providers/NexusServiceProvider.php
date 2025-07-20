@@ -6,19 +6,17 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Volt\Volt;
 
-class UIServiceProvider extends ServiceProvider
+class NexusServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/thumbnail.php', 'thumbnail');
+        $this->mergeConfigFrom(__DIR__.'/../config/nexus.php', 'nexus');
     }
 
     public function boot(): void
     {
         $this->publishes([
-            __DIR__.'/../config/thumbnail.php' => config_path('thumbnail.php'),
-            __DIR__.'/../resources/css/uikit.css' => resource_path('css/uikit.css'),
-            __DIR__.'/../resources/js/uikit.js' => resource_path('js/uikit.js'),
+            __DIR__.'/../config/nexus.php' => config_path('nexus.php'),
         ], 'nexus');
 
         $this->loadRoutesFrom(__DIR__.'/../routes.php');

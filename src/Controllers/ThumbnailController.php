@@ -11,7 +11,7 @@ final class ThumbnailController
     public function __invoke(string $dir, string $method, string $size, string $file): BinaryFileResponse
     {
         abort_if(
-            boolean: !in_array($size, config('thumbnail.allowed_sizes', [])),
+            boolean: !in_array($size, config('nexus.allowed_sizes', [])),
             code: 403,
             message: 'Size Not Allowed'
         );

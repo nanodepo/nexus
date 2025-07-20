@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\File;
 use NanoDepo\Nexus\Alert\Flash;
+use NanoDepo\Nexus\ValueObjects\Price;
 
 if (!function_exists('alert')) {
     /**
@@ -20,35 +21,31 @@ if (!function_exists('thumbnail')) {
      * Generate a thumbnail URL for a given item.
      *
      * @param null|iterable|string $item The item to generate thumbnail for. Can be null, iterable or string.
-     * @param string $size The desired size of the thumbnail. Default is '500x500'.
-     * @param string $dir The directory of the item. Default is 'other'.
+     * @param null|string $size The desired size of the thumbnail. Default is '500x500'.
+     * @param null|string $dir The directory of the item. Default is 'other'.
      *
      * @return null|iterable|string The generated thumbnail URL. It could be null, iterable or string, depending on the type of $item.
      */
     function thumbnail(
         null|iterable|string $item,
-        string $size = '500x500',
-        string $dir = 'other'
+        ?string $size = null,
+        ?string $dir = null
     ): null|iterable|string
     {
+        $params = [
+            'size' => $size ?? config('nexus.default_size'),
+            'dir' => $dir ?? config('nexus.default_folder'),
+            'method' => 'resize',
+        ];
+
         if (is_iterable($item)) {
             $arr = [];
             foreach ($item as $image) {
-                $arr[] = route('thumbnail', [
-                    'size' => $size,
-                    'dir' => $dir,
-                    'method' => 'resize',
-                    'file' => File::basename($image)
-                ]);
+                $arr[] = route('thumbnail', [...$params, 'file' => File::basename($image)]);
             }
             return $arr;
         } elseif (is_string($item)) {
-            return route('thumbnail', [
-                'size' => $size,
-                'dir' => $dir,
-                'method' => 'resize',
-                'file' => File::basename($item)
-            ]);
+            return route('thumbnail', [...$params, 'file' => File::basename($item)]);
         }
         return null;
     }
@@ -300,9 +297,11 @@ if (!function_exists('generateTheme')) {
 
         // Определяем дополнительные оттенки
         $hues = [
-//            ...getAnalogousColors($h),
-//            ...getTriadicColors($h),
-            ...getSplitComplementaryColors($h),
+            ...match (config('nexus.scheme')) {
+                'analogous' => getAnalogousColors($h),
+                'triadic' => getTriadicColors($h),
+                default => getSplitComplementaryColors($h),
+            },
             'red' => 0, // Красный для destructive
             'gray' => $h // Для серых используем тот же оттенок, но с низкой насыщенностью
         ];
@@ -398,3 +397,37 @@ if (!function_exists('generateTheme')) {
         );
     }
 }
+
+if (!function_exists('settings')) {
+    /**
+     * Retrieves the application settings for the authenticated user or defaults.
+     *
+     * @return stdClass Returns an object containing:
+     * - 'color': The user's preferred color setting, or the default application color if not set.
+     * - 'drawer': A boolean indicating whether the drawer is enabled, defaulting to true.
+     * - 'dark': A boolean indicating the dark mode preference, defaulting to false.
+     */
+    function settings(): stdClass
+    {
+        return literal(
+            color: auth()->check() ? auth()->user()->settings?->color : config('app.color'),
+            drawer: auth()->check() ? auth()->user()->settings?->drawer : true,
+            dark: auth()->check() ? auth()->user()->settings?->dark : false,
+        );
+    }
+}
+
+if (!function_exists('price')) {
+    /**
+     *  Возвращает объект класса цены.
+     *
+     * @param int|float $val
+     * @param null|string $currency
+     * @return Price
+     */
+    function price(int|float $val, ?string $currency = null): Price
+    {
+        return new Price(value: $val, currency: $currency);
+    }
+}
+
