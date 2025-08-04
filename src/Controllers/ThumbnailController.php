@@ -3,6 +3,7 @@
 namespace NanoDepo\Nexus\Controllers;
 
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Encoders\WebpEncoder;
 use Intervention\Image\Laravel\Facades\Image;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
@@ -38,7 +39,7 @@ final class ThumbnailController
             [$w, $h] = explode('x', $size);
 
             $image->cover($w, $h);
-
+            $image->encode(new WebpEncoder(quality: 75));
             $image->save($storage->path($resultPath));
         }
 

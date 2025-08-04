@@ -99,6 +99,19 @@
     @apply bg-hint;
 }
 
+.scrollbar-none::-webkit-scrollbar {
+    @apply w-0 h-0 cursor-default bg-background;
+}
+.scrollbar-none::-webkit-scrollbar-track {
+    @apply cursor-default bg-transparent;
+}
+.scrollbar-none::-webkit-scrollbar-thumb {
+    @apply bg-transparent cursor-default rounded-sm;
+}
+.scrollbar-none:hover::-webkit-scrollbar-thumb {
+    @apply bg-transparent;
+}
+
 
 
 /* --------------------------
@@ -293,10 +306,10 @@ body {
 */
 
 .chip {
-    @apply inline-flex flex-none justify-center items-center h-8 px-2 rounded-lg border text-on-background focus:outline-hidden focus:ring-2 transition disabled:opacity-50 disabled:pointer-events-none;
+    @apply inline-flex flex-none justify-center items-center h-8 px-2 rounded-lg border text-on-background focus:outline-hidden focus:ring-2 cursor-pointer transition disabled:opacity-50 disabled:pointer-events-none;
 }
 .chip .title {
-    @apply mx-2 leading-4 text-sm font-medium tracking-wide;
+    @apply mx-2 leading-4 text-sm font-medium tracking-wide truncate;
 }
 
 .chip.primary {
@@ -412,6 +425,23 @@ body {
 }
 .circle.destructive.text {
     @apply text-on-destructive-container hover:bg-destructive-container focus:bg-destructive-container active:bg-destructive-container;
+}
+
+
+
+/* --------------------------
+ *          Markdown
+ * --------------------------
+*/
+
+.markdown {
+    @apply prose prose-p:leading-5 max-w-3xl text-lg text-on-section;
+}
+.markdown * {
+    @apply m-0 text-on-section;
+}
+.markdown a {
+    @apply text-link hover:underline;
 }
 
 
@@ -619,13 +649,13 @@ body {
 */
 
 .drawer {
-    @apply flex flex-col justify-between w-full rounded-r-3xl overflow-hidden;
+    @apply flex flex-col justify-between w-full rounded-r-3xl;
 }
 .drawer .nav-content {
     @apply flex flex-col flex-auto gap-1;
 }
 .drawer .item {
-    @apply flex flex-row items-center justify-between flex-none h-11 px-3 rounded-full transition cursor-pointer overflow-hidden;
+    @apply flex flex-row items-center justify-between flex-none h-11 px-3 rounded-r-full sm:rounded-full transition cursor-pointer overflow-hidden;
 }
 .drawer .item.active {
     @apply text-on-section bg-primary-container;

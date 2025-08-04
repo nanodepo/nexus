@@ -1,6 +1,5 @@
 <?php
 
-
 use Illuminate\Support\Facades\Route;
 use NanoDepo\Nexus\Controllers\ThumbnailController;
 

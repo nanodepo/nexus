@@ -21,8 +21,8 @@ trait HasImageWriter
     private function writeImage(
         UploadedFile $image,
         string $dir = 'other',
-        int $width = 950,
-        int $height = 950,
+        int $width = 1000,
+        int $height = 1000,
         ?string $name = null,
         bool $original = false
     ): string
@@ -39,15 +39,10 @@ trait HasImageWriter
 
         if ($original) {
             Image::read($image)
-                ->encode(new WebpEncoder(quality: 75))
                 ->save($storage->path("$dir/$filename"));
         } else {
-            $photo = Image::read($image)->scale($width, $height);
-
-            Image::create(1000, 1000)
-                ->fill('eeeeee')
-                ->place($photo, 'center')
-                ->encode(new WebpEncoder(quality: 75))
+            Image::read($image)
+                ->scale($width, $height)
                 ->save($storage->path("$dir/$filename"));
         }
 
