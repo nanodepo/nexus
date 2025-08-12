@@ -277,7 +277,7 @@ body {
     @apply flex flex-row flex-none items-center justify-between w-full px-3 pt-3 gap-1;
 }
 .card .image {
-    @apply flex justify-center items-center flex-none bg-center rounded-xl;
+    @apply flex justify-center items-center flex-none bg-surface bg-center bg-cover rounded-xl;
 }
 .card .content {
     @apply flex flex-col flex-auto gap-1 px-3;
