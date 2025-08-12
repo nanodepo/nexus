@@ -1,4 +1,4 @@
-<div x-data="{ size: 664 }" class="flex flex-col flex-auto gap-3 overflow-hidden">
+<div x-data="{ size: 664 }" {{ $attributes->merge(['class' => 'flex flex-col flex-auto gap-3 overflow-hidden']) }}>
     @if(isset($breadcrumbs) && $breadcrumbs->isNotEmpty())
         <div class="flex flex-col px-3 overflow-hidden">
             {{ $breadcrumbs }}

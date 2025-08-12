@@ -10,7 +10,7 @@
 
 <label @class(['item', 'items-center' => $truncate, 'pointer-events-none opacity-50' => $disabled])>
 
-    <div class="flex-none">
+    <div class="flex flex-col items-center justify-center flex-none w-6 h-6">
         <x-ui::input.checkbox {{ $attributes }} />
     </div>
 
