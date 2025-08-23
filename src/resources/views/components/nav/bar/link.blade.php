@@ -1,6 +1,6 @@
-@props(['label', 'icon', 'active' => false, 'badge' => false])
+@props(['label', 'icon', 'active' => false, 'badge' => false, 'disabled' => false])
 
-<a {{ $attributes->merge(['class' => 'group item'])->class(['active' => $active]) }}>
+<a {{ $attributes->merge(['class' => 'group item'])->class(['active' => $active, 'opacity-50 pointer-events-none cursor-default' => $disabled]) }}>
     <div class="icon">
         <x-dynamic-component :component="'icon::'.$icon" :type="$active ? 'solid' : 'outline'" />
     </div>
