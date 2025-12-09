@@ -456,11 +456,11 @@ body {
 */
 
 .modal {
-    @apply fixed flex flex-row justify-center px-3 inset-0 z-10;
+    @apply fixed flex flex-row justify-center px-3 inset-0 z-20;
 }
 .modal .dialog,
 .modal .sheet {
-    @apply flex flex-col w-full max-h-[90vh] gap-3 py-3 bg-section overflow-hidden shadow-xl transform transition-all z-50;
+    @apply flex flex-col w-full max-h-[80vh] gap-3 py-3 bg-section overflow-hidden shadow-xl transform transition-all z-50;
 }
 .modal .dialog {
     @apply rounded-3xl;
@@ -484,7 +484,7 @@ body {
 */
 
 .dropdown {
-    @apply py-1 bg-section text-on-section divide-y divide-section-separator rounded-md shadow-dropdown overflow-hidden;
+    @apply py-1 bg-surface text-on-section divide-y divide-section-separator rounded-md shadow-dropdown overflow-hidden;
 }
 .dropdown .item {
     @apply flex flex-row items-center flex-none truncate px-4 py-2 text-on-section hover:bg-front cursor-pointer transition;
@@ -536,7 +536,7 @@ body {
 */
 
 .input {
-    @apply m-0 px-3 py-2 bg-surface rounded-md border border-outline hover:border-hint outline-0 focus:border-accent focus:outline-0 focus:ring-2 focus:ring-primary-container placeholder:text-hint disabled:opacity-50 disabled:pointer-events-none transition;
+    @apply m-0 px-3 py-2 bg-surface rounded-md border border-outline hover:border-hint outline-0 focus:border-accent focus:outline-0 focus:ring-2 focus:ring-focus placeholder:text-hint disabled:opacity-50 disabled:pointer-events-none transition;
 }
 .input.round {
     @apply px-4.5 rounded-full;
@@ -550,7 +550,7 @@ body {
 }
 .checkbox,
 .radio {
-    @apply size-5 bg-surface text-on-primary border-outline hover:border-hint focus:outline-hidden checked:bg-primary checked:border-primary focus:border-primary focus:ring-2 focus:ring-primary-container ring-offset-2 focus:ring-offset-section disabled:opacity-50 disabled:pointer-events-none transition;
+    @apply size-5 bg-surface text-on-primary border-outline hover:border-hint focus:outline-hidden checked:bg-primary checked:border-primary focus:border-primary focus:ring-2 focus:ring-focus ring-offset-2 focus:ring-offset-section disabled:opacity-50 disabled:pointer-events-none transition;
 }
 
 .counter {
@@ -585,7 +585,7 @@ body {
 }
 
 .switch {
-    @apply w-11 h-6 bg-hint peer-focus:outline-hidden peer-focus:ring-2 peer-focus:ring-primary-container rounded-full peer-checked:after:translate-x-full peer-checked:after:border-section after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-section after:border-hint after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary;
+    @apply w-11 h-6 bg-hint peer-focus:outline-hidden peer-focus:ring-2 peer-focus:ring-focus rounded-full peer-checked:after:translate-x-full peer-checked:after:border-section after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-section after:border-hint after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary;
 }
 
 .input.file {
@@ -615,10 +615,10 @@ body {
     @apply flex flex-col -mx-6 divide-y divide-section-separator;
 }
 .list .item {
-    @apply flex flex-row flex-auto gap-6 px-6 py-3 hover:bg-front overflow-hidden transition cursor-pointer;
+    @apply flex flex-row flex-auto gap-6 px-6 py-3 hover:bg-surface overflow-hidden transition cursor-pointer;
 }
 .list .item.active {
-    @apply bg-front;
+    @apply bg-surface;
 }
 .list .subhead {
     @apply tracking-wide leading-6 text-sm text-hint truncate;
