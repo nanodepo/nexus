@@ -7,13 +7,19 @@
 
     <div class="flex flex-col sm:flex-row flex-auto sm:px-1.5 overflow-hidden">
         @if(isset($left) && $left->isNotEmpty())
-            <div class="flex flex-col flex-auto sm:basis-1/2 sm:grow-0 gap-3 sm:px-1.5 pb-3 overflow-hidden">
+            <div class="flex flex-col sm:basis-76 gap-3 sm:px-1.5 pb-3 overflow-hidden">
                 {{ $left }}
             </div>
         @endif
 
+        @if(isset($content) && $content->isNotEmpty())
+            <div class="flex flex-col flex-auto gap-3 sm:px-1.5 pb-3 overflow-hidden">
+                {{ $content }}
+            </div>
+        @endif
+
         @if(isset($right) && $right->isNotEmpty())
-            <div class="flex flex-col flex-auto sm:basis-1/2 sm:grow-0 gap-3 sm:px-1.5 pb-3 overflow-hidden">
+            <div class="flex flex-col sm:basis-76 gap-3 sm:px-1.5 pb-3 overflow-hidden">
                 {{ $right }}
             </div>
         @endif

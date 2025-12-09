@@ -341,11 +341,12 @@ if (!function_exists('generateTheme')) {
                 subtitle: rgbToHex(...hslToRgb($hues['gray'], 10, 40)),
                 hint: rgbToHex(...hslToRgb($hues['gray'], 10, 55)),
                 outline: rgbToHex(...hslToRgb($hues['gray'], 10, 75)),
+                backline: rgbToHex(...hslToRgb($hues['gray'], 8, 85)),
 
                 // controls
                 accent: rgbToHex(...hslToRgb($hues['primary'], 50, 40)),
                 link: rgbToHex(...hslToRgb($hues['primary'], 60, 40)),
-                //focus: rgbToHex(...hslToRgb($hues['primary'], 30, 80)),
+                focus: rgbToHex(...hslToRgb($hues['primary'], 30, 80)),
 
                 // section
                 section_header: rgbToHex(...hslToRgb($hues['primary'], 30, 50)),
@@ -384,11 +385,12 @@ if (!function_exists('generateTheme')) {
                 subtitle: rgbToHex(...hslToRgb($hues['gray'], 10, 70)),
                 hint: rgbToHex(...hslToRgb($hues['gray'], 10, 55)),
                 outline: rgbToHex(...hslToRgb($hues['gray'], 10, 25)),
+                backline: rgbToHex(...hslToRgb($hues['gray'], 8, 12)),
 
                 // controls
                 accent: rgbToHex(...hslToRgb($hues['primary'], 55, 65)),
                 link: rgbToHex(...hslToRgb($hues['primary'], 50, 70)),
-                // focus: rgbToHex(...hslToRgb($hues['primary'], 20, 30)),
+                focus: rgbToHex(...hslToRgb($hues['primary'], 20, 20)),
 
                 // section
                 section_header: rgbToHex(...hslToRgb($hues['primary'], 30, 50)),

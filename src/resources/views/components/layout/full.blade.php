@@ -6,7 +6,7 @@
     @endif
 
     <div class="flex flex-col flex-auto items-center overflow-hidden">
-        <div class="flex flex-col flex-auto w-full max-w-2xl gap-3 sm:px-3 pb-3 overflow-hidden">
+        <div class="flex flex-col flex-auto w-full gap-3 sm:px-3 pb-3 overflow-hidden">
             {{ $content }}
         </div>
     </div>

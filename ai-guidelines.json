@@ -1,0 +1,32 @@
+{
+  "components": {
+    "x-ui::button": {
+      "description": "Reusable button",
+      "attributes": {
+        "color": {
+          "description": "Button color",
+          "type": "string",
+          "required": false,
+          "default": "primary",
+          "variants": ["primary", "secondary", "tertiary", "destructive"]
+        },
+        "variant": {
+          "type": "string",
+          "required": false,
+          "default": "filled",
+          "variants": ["filled", "outlined", "tonal", "text"]
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "default": false
+        },
+        "before": {
+          "description": "Left Icon",
+          "type": "string",
+          "required": false
+        }
+      }
+    }
+  }
+}

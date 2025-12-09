@@ -21,39 +21,6 @@ Alpine.data('dropdown', () => ({
     },
 }));
 
-
-
-Alpine.data('container', () => ({
-    width: 0,
-    init() {
-        const observer = new ResizeObserver(entries => {
-            this.width = entries[0].contentRect.width;
-        });
-        observer.observe(this.$refs.container);
-    }
-}));
-
-Alpine.store('helper', {
-    on: false,
-    opened: [],
-    status: function() {
-        this.on = this.opened.length > 0;
-    },
-    attach: function(val) {
-        this.opened.push(val);
-        this.status();
-    },
-    detach: function(val) {
-        let id = this.opened.indexOf(val);
-        this.opened.splice(id, 1);
-        this.status();
-    },
-    init() {
-        this.status();
-    },
-});
-
-
 Alpine.store('drawer', window.drawer);
 
 Livewire.start();
