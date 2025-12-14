@@ -7,7 +7,7 @@ new class extends Component {
 
     public function mount(): void
     {
-        $this->mode = settings()->dark;
+        $this->mode = ui()->dark;
     }
 
     public function updatedMode($value): void

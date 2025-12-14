@@ -400,7 +400,7 @@ if (!function_exists('generateTheme')) {
     }
 }
 
-if (!function_exists('settings')) {
+if (!function_exists('ui')) {
     /**
      * Retrieves the application settings for the authenticated user or defaults.
      *
@@ -409,7 +409,7 @@ if (!function_exists('settings')) {
      * - 'drawer': A boolean indicating whether the drawer is enabled, defaulting to true.
      * - 'dark': A boolean indicating the dark mode preference, defaulting to false.
      */
-    function settings(): stdClass
+    function ui(): stdClass
     {
         return literal(
             color: auth()->check()
