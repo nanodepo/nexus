@@ -16,8 +16,6 @@
     --animate-loading: spin 1.6s linear infinite;
     --animate-heart: heart 3s cubic-bezier(0.15,0.45,0.45,1) infinite;
 
-    --shadow-dropdown: 0 4px 16px -4px rgba(0, 0, 0, 0.4), 0 0 6px -2px rgb(0, 0, 0, 0.2);
-
     --breakpoint-sm: 28rem;
     --breakpoint-md: 36rem;
     --breakpoint-lg: 48rem;
@@ -484,7 +482,7 @@ body {
 */
 
 .dropdown {
-    @apply py-1 bg-surface text-on-section divide-y divide-section-separator rounded-md shadow-dropdown overflow-hidden;
+    @apply py-1 bg-surface text-on-section divide-y divide-section-separator rounded-md shadow overflow-hidden;
 }
 .dropdown .item {
     @apply flex flex-row items-center flex-none truncate px-4 py-2 text-on-section hover:bg-front cursor-pointer transition;
