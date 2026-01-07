@@ -287,114 +287,225 @@ if (!function_exists('generateTheme')) {
      * @return stdClass An object containing 'light' and 'dark' theme color palettes,
      *                  each of which has a structured set of colors for UI elements.
      */
+    /**
+     * Generates a theme's color palette based on a primary hex color.
+     *
+     * @param string $primaryHex The primary color in hexadecimal format.
+     *
+     * @return stdClass An object containing 'light' and 'dark' theme color palettes.
+     */
     function generateTheme(string $primaryHex): stdClass
     {
-        // Переводим HEX в RGB
+        // Internal helper: Convert tonal value (0-100) to Lightness (0-100)
+        // Material 3 uses Tones where 0 is Black, 100 is White.
+        // HSL Lightness is similar but not 1:1 linear with perceived brightness,
+        // but for this implementation we map Tone to Lightness directly as a good approximation.
+        // Tone 40 = Lightness 40%.
+        $getTone = function ($h, $s, $tone) {
+            return rgbToHex(...hslToRgb($h, $s, $tone));
+        };
+
+        // Internal helper: Smart Harmony
+        // Shifts target Hue towards Primary Hue to make them feel related.
+        $harmonize = function ($targetHue, $primaryHue) {
+            $diff = $targetHue - $primaryHue;
+            // Shortest path around the circle
+            if ($diff > 180) $diff -= 360;
+            if ($diff < -180) $diff += 360;
+
+            // Shift by 10% of the difference towards primary
+            // But only if they are within 120 degrees (don't mix complementary too much)
+            if (abs($diff) < 120) {
+                 return fmod($targetHue - ($diff * 0.15) + 360, 360);
+            }
+            return $targetHue;
+        };
+
         list($r, $g, $b) = hexToRgb($primaryHex);
+        list($hPrimary, $sPrimary, $lPrimary) = rgbToHsl($r, $g, $b);
 
-        // Переводим RGB в HSL
-        list($h, $s, $l) = rgbToHsl($r, $g, $b);
+        // --- Determine Hues ---
 
-        // Определяем дополнительные оттенки
-        $hues = [
-            ...match (config('nexus.scheme')) {
-                'analogous' => getAnalogousColors($h),
-                'triadic' => getTriadicColors($h),
-                default => getSplitComplementaryColors($h),
-            },
-            'red' => 0, // Красный для destructive
-            'gray' => $h // Для серых используем тот же оттенок, но с низкой насыщенностью
-        ];
+        // Secondary & Tertiary: Smart Generation vs Classic geometry
+        $scheme = config('nexus.scheme', 'smart'); // Default to smart if not set
 
-        // Определяем палитру в зависимости от темы и возвращаем
+        if ($scheme === 'smart') {
+            // Smart: Secondary is close to Primary but distinct (Analougus-ish or lighter chroma)
+            // Let's try: Secondary = Primary + 15deg, Less Saturation?
+            // Or stick to Material 3 "Secondary" which is often less chromatic.
+            // Let's use a subtle hue shift for Secondary.
+
+            // Secondary: +15 deg
+            $hSecondary = fmod($hPrimary + 15 + 360, 360);
+
+            // Tertiary: +120 deg (Triadic) or +60 (Analogous extended)
+            // Material 3 suggests Tertiary is a temperature shift.
+            // If Primary is Cool, Tertiary could be Warm.
+            // Let's go with +60 degrees for a balanced accent.
+            $hTertiary = fmod($hPrimary + 60, 360);
+        } else {
+             // Fallback to legacy geometric schemes
+             $schemes = match ($scheme) {
+                'analogous' => getAnalogousColors($hPrimary),
+                'triadic' => getTriadicColors($hPrimary),
+                default => getSplitComplementaryColors($hPrimary),
+            };
+            $hSecondary = $schemes['secondary'];
+            $hTertiary = $schemes['tertiary'];
+        }
+
+        // Functional Colors
+        $hError = 0;   // Red
+        $hSuccess = 140; // Green (140 is a good robust green, 120 is pure green)
+
+        // Harmonize Functional Colors with Primary
+        // If the primary color is Blue (240), moving Red (0) slightly to Purple makes it fit better.
+        // If Primary is Green (120), Red might stay Red.
+        $hError = $harmonize($hError, $hPrimary);
+        $hSuccess = $harmonize($hSuccess, $hPrimary);
+
+        $hNeutral = $hPrimary; // Neutrals tinted with Primary hue
+
+        // --- Define Tones ---
+        // We capture Closure for easy generation
+        // Param structure: [$h, $s]
+
+        // Primary
+        $p = [$hPrimary, $sPrimary];
+
+        // Secondary: Lower saturation usually? Let's keep input Saturation but cap it if too high?
+        // For now, use primary saturation for harmony, or slightly reduced.
+        // Let's simply use the calculated Hues and Primary's Saturation (maybe -10 for Secondary/Tertiary to distinguish)
+        $sSecondary = max(0, $sPrimary - 10);
+        $sec = [$hSecondary, $sSecondary];
+
+        $sTertiary = $sPrimary; // Accent can be vibrant
+        $ter = [$hTertiary, $sTertiary];
+
+        $err = [$hError, 90]; // Destructive usually high saturation
+        $suc = [$hSuccess, 80]; // Success also vibrant
+
+        // Neutrals: Very low saturation primary
+        $neu = [$hNeutral, 4]; // Surface/Backgrounds
+        // Neutral Variant: Slightly higher saturation for outlines/text
+        $neuV = [$hNeutral, 8];
+
         return literal(
             light: literal(
-                // main
-                gray: rgbToHex(...hslToRgb($hues['gray'], 5, 50)),
-                primary: rgbToHex(...hslToRgb($hues['primary'], 45, 40)),
-                primary_container: rgbToHex(...hslToRgb($hues['primary'], 30, 80)),
-                secondary: rgbToHex(...hslToRgb($hues['secondary'], 45, 40)),
-                secondary_container: rgbToHex(...hslToRgb($hues['secondary'], 30, 80)),
-                tertiary: rgbToHex(...hslToRgb($hues['tertiary'], 45, 40)),
-                tertiary_container: rgbToHex(...hslToRgb($hues['tertiary'], 30, 80)),
-                destructive: rgbToHex(...hslToRgb($hues['red'], 45, 40)),
-                destructive_container: rgbToHex(...hslToRgb($hues['red'], 30, 80)),
+                // Usage: $getTone($h, $s, $tone)
 
-                // backgrounds
-                background: rgbToHex(...hslToRgb($hues['gray'], 8, 90)),
-                front: rgbToHex(...hslToRgb($hues['gray'], 8, 93)),
-                surface: rgbToHex(...hslToRgb($hues['gray'], 8, 96)),
-                section: rgbToHex(...hslToRgb($hues['gray'], 8, 99)),
-                foreground: rgbToHex(...hslToRgb($hues['gray'], 10, 15)),
+                // Key Colors
+                primary:           $getTone(...$p, tone: 40),
+                primary_container: $getTone(...$p, tone: 90),
+                secondary:           $getTone(...$sec, tone: 40),
+                secondary_container: $getTone(...$sec, tone: 90),
+                tertiary:           $getTone(...$ter, tone: 40),
+                tertiary_container: $getTone(...$ter, tone: 90),
+                destructive:           $getTone(...$err, tone: 40),
+                destructive_container: $getTone(...$err, tone: 90),
+                success:               $getTone(...$suc, tone: 40),
+                success_container:     $getTone(...$suc, tone: 90),
 
-                // text
-                text: rgbToHex(...hslToRgb($hues['gray'], 10, 10)),
-                section_text: rgbToHex(...hslToRgb($hues['gray'], 10, 15)),
-                primary_text: rgbToHex(...hslToRgb($hues['primary'], 30, 96)),
-                primary_container_text: rgbToHex(...hslToRgb($hues['primary'], 40, 15)),
-                secondary_text: rgbToHex(...hslToRgb($hues['secondary'], 30, 96)),
-                secondary_container_text: rgbToHex(...hslToRgb($hues['secondary'], 40, 15)),
-                tertiary_text: rgbToHex(...hslToRgb($hues['tertiary'], 30, 96)),
-                tertiary_container_text: rgbToHex(...hslToRgb($hues['tertiary'], 40, 15)),
-                destructive_text: rgbToHex(...hslToRgb($hues['red'], 30, 96)),
-                destructive_container_text: rgbToHex(...hslToRgb($hues['red'], 40, 15)),
-                subtitle: rgbToHex(...hslToRgb($hues['gray'], 10, 40)),
-                hint: rgbToHex(...hslToRgb($hues['gray'], 10, 55)),
-                outline: rgbToHex(...hslToRgb($hues['gray'], 10, 75)),
-                backline: rgbToHex(...hslToRgb($hues['gray'], 8, 85)),
+                // Backgrounds (Neutral)
+                // Surface is Tone 98 in MD3, Background Tone 98/99.
+                background: $getTone(...$neu, tone: 90),
+                front:      $getTone(...$neu, tone: 93), // Slightly darker surface (if needed) or same.
+                surface:    $getTone(...$neu, tone: 96), // Cards/Surfaces
+                section:    $getTone(...$neu, tone: 99), // Distinct sections
 
-                // controls
-                accent: rgbToHex(...hslToRgb($hues['primary'], 50, 40)),
-                link: rgbToHex(...hslToRgb($hues['primary'], 60, 40)),
-                focus: rgbToHex(...hslToRgb($hues['primary'], 30, 80)),
+                // Text & Icons (On Colors)
+                // On Primary is Tone 100 (White) or 10
+                primary_text:           $getTone(...$p, tone: 100),
+                primary_container_text: $getTone(...$p, tone: 10),
+                secondary_text:           $getTone(...$sec, tone: 100),
+                secondary_container_text: $getTone(...$sec, tone: 10),
+                tertiary_text:           $getTone(...$ter, tone: 100),
+                tertiary_container_text: $getTone(...$ter, tone: 10),
+                destructive_text:           $getTone(...$err, tone: 100),
+                destructive_container_text: $getTone(...$err, tone: 10),
+                success_text:               $getTone(...$suc, tone: 100),
+                success_container_text:     $getTone(...$suc, tone: 10),
 
-                // section
-                section_header: rgbToHex(...hslToRgb($hues['primary'], 30, 50)),
-                section_separator: rgbToHex(...hslToRgb($hues['gray'], 10, 90)),
+                // General Text (On Surface)
+                text:         $getTone(...$neu, tone: 10), // Almost black
+                section_text: $getTone(...$neu, tone: 10),
+                subtitle:     $getTone(...$neuV, tone: 40),
+                hint:         $getTone(...$neuV, tone: 50),
+
+                // Outlines / Separators
+                outline:  $getTone(...$neuV, tone: 75), // Inputs etc
+                backline: $getTone(...$neuV, tone: 85), // Borders
+
+                // Extras / Legacy mapping
+                accent: $getTone(...$p, tone: 40),
+                link:   $getTone(...$p, tone: 40),
+                focus:  $getTone(...$p, tone: 80), // Highlight ring
+
+                section_header:    $getTone(...$p, tone: 40),
+                section_separator: $getTone(...$neuV, tone: 90),
+
+                // Add gray for compatibility if needed, though we use neutrals now
+                gray: $getTone(...$neu, tone: 50),
+                foreground: $getTone(...$neu, tone: 10),
             ),
             dark: literal(
-                // main
-                gray: rgbToHex(...hslToRgb($hues['gray'], 5, 50)),
-                primary: rgbToHex(...hslToRgb($hues['primary'], 45, 60)),
-                primary_container: rgbToHex(...hslToRgb($hues['primary'], 30, 20)),
-                secondary: rgbToHex(...hslToRgb($hues['secondary'], 45, 60)),
-                secondary_container: rgbToHex(...hslToRgb($hues['secondary'], 30, 20)),
-                tertiary: rgbToHex(...hslToRgb($hues['tertiary'], 45, 60)),
-                tertiary_container: rgbToHex(...hslToRgb($hues['tertiary'], 30, 20)),
-                destructive: rgbToHex(...hslToRgb($hues['red'], 45, 60)),
-                destructive_container: rgbToHex(...hslToRgb($hues['red'], 30, 20)),
+                 // Dark Mode Tones:
+                 // Primary: 80
+                 // OnPrimary: 20
+                 // Container: 30
+                 // OnContainer: 90
 
-                // backgrounds
-                background: rgbToHex(...hslToRgb($hues['gray'], 8, 1)),
-                front: rgbToHex(...hslToRgb($hues['gray'], 8, 4)),
-                surface: rgbToHex(...hslToRgb($hues['gray'], 8, 7)),
-                section: rgbToHex(...hslToRgb($hues['gray'], 8, 10)),
-                foreground: rgbToHex(...hslToRgb($hues['gray'], 10, 90)),
+                primary:           $getTone(...$p, tone: 80),
+                primary_container: $getTone(...$p, tone: 30),
+                secondary:           $getTone(...$sec, tone: 80),
+                secondary_container: $getTone(...$sec, tone: 30),
+                tertiary:           $getTone(...$ter, tone: 80),
+                tertiary_container: $getTone(...$ter, tone: 30),
+                destructive:           $getTone(...$err, tone: 80),
+                destructive_container: $getTone(...$err, tone: 30),
+                success:               $getTone(...$suc, tone: 80),
+                success_container:     $getTone(...$suc, tone: 30),
 
-                // text
-                text: rgbToHex(...hslToRgb($hues['gray'], 10, 95)),
-                section_text: rgbToHex(...hslToRgb($hues['gray'], 10, 85)),
-                primary_text: rgbToHex(...hslToRgb($hues['primary'], 30, 4)),
-                primary_container_text: rgbToHex(...hslToRgb($hues['primary'], 40, 85)),
-                secondary_text: rgbToHex(...hslToRgb($hues['secondary'], 30, 4)),
-                secondary_container_text: rgbToHex(...hslToRgb($hues['secondary'], 40, 85)),
-                tertiary_text: rgbToHex(...hslToRgb($hues['tertiary'], 30, 4)),
-                tertiary_container_text: rgbToHex(...hslToRgb($hues['tertiary'], 40, 85)),
-                destructive_text: rgbToHex(...hslToRgb($hues['red'], 30, 4)),
-                destructive_container_text: rgbToHex(...hslToRgb($hues['red'], 40, 85)),
-                subtitle: rgbToHex(...hslToRgb($hues['gray'], 10, 70)),
-                hint: rgbToHex(...hslToRgb($hues['gray'], 10, 55)),
-                outline: rgbToHex(...hslToRgb($hues['gray'], 10, 25)),
-                backline: rgbToHex(...hslToRgb($hues['gray'], 8, 12)),
+                // Dark Backgrounds
+                // Background: Tone 6
+                // Surface: Tone 12
+                background: $getTone(...$neu, tone: 1),
+                front:      $getTone(...$neu, tone: 4), // Slightly lighter
+                surface:    $getTone(...$neu, tone: 7),
+                section:    $getTone(...$neu, tone: 10),
 
-                // controls
-                accent: rgbToHex(...hslToRgb($hues['primary'], 55, 65)),
-                link: rgbToHex(...hslToRgb($hues['primary'], 50, 70)),
-                focus: rgbToHex(...hslToRgb($hues['primary'], 20, 20)),
+                // Dark Text
+                primary_text:           $getTone(...$p, tone: 20),
+                primary_container_text: $getTone(...$p, tone: 90),
+                secondary_text:           $getTone(...$sec, tone: 20),
+                secondary_container_text: $getTone(...$sec, tone: 90),
+                tertiary_text:           $getTone(...$ter, tone: 20),
+                tertiary_container_text: $getTone(...$ter, tone: 90),
+                destructive_text:           $getTone(...$err, tone: 20),
+                destructive_container_text: $getTone(...$err, tone: 90),
+                success_text:               $getTone(...$suc, tone: 20),
+                success_container_text:     $getTone(...$suc, tone: 90),
 
-                // section
-                section_header: rgbToHex(...hslToRgb($hues['primary'], 30, 50)),
-                section_separator: rgbToHex(...hslToRgb($hues['gray'], 10, 2)),
+                // General Text
+                text:         $getTone(...$neu, tone: 90),
+                section_text: $getTone(...$neu, tone: 90),
+                subtitle:     $getTone(...$neuV, tone: 70),
+                hint:         $getTone(...$neuV, tone: 60),
+
+                // Outlines
+                outline:  $getTone(...$neuV, tone: 25),
+                backline: $getTone(...$neuV, tone: 12),
+
+                // Extras
+                accent: $getTone(...$p, tone: 80),
+                link:   $getTone(...$p, tone: 80),
+                focus:  $getTone(...$p, tone: 30),
+
+                section_header:    $getTone(...$p, tone: 80),
+                section_separator: $getTone(...$neuV, tone: 20),
+
+                gray: $getTone(...$neu, tone: 50),
+                foreground: $getTone(...$neu, tone: 90),
             )
         );
     }

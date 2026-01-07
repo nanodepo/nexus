@@ -2,7 +2,7 @@
 
 <style>
 @php
-$colors = generateTheme($color);
+    $colors = generateTheme($color);
 @endphp
 
 html {

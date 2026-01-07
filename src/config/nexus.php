@@ -11,7 +11,7 @@ return [
     */
 
     'color' => env('APP_COLOR', '4095BF'),
-    'scheme' => 'split', // split, analogous or triadic
+    'scheme' => 'smart', // smart split, analogous or triadic
 
     /*
     |--------------------------------------------------------------------------
