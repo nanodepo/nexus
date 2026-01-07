@@ -511,6 +511,64 @@ if (!function_exists('generateTheme')) {
     }
 }
 
+if (!function_exists('gradient')) {
+    /**
+     * Generates an array of hex colors creating a gradient between two theme colors.
+     *
+     * @param int $count Number of steps (colors) to generate.
+     * @param string $from The name of the starting color (e.g., 'destructive', 'primary').
+     * @param string $to The name of the ending color (e.g., 'success', 'primary').
+     * @param bool $isDark Theme mode: true for dark theme, false for light theme.
+     * @param bool $isContainer Whether to use the container variant of the specified colors.
+     *
+     * @return array Array of hex color strings.
+     */
+    function gradient(int $count, string $from = 'destructive', string $to = 'success', bool $isDark = false, bool $isContainer = false): array
+    {
+        if ($count <= 0) {
+            return [];
+        }
+
+        // Get the current theme based on user settings or config
+        $theme = generateTheme(ui()->color);
+        $palette = $isDark ? $theme->dark : $theme->light;
+
+        // Resolve keys (append '_container' if requested)
+        $resolveKey = function ($key) use ($isContainer) {
+            if ($isContainer && !str_ends_with($key, '_container')) {
+                return $key . '_container';
+            }
+            return $key;
+        };
+
+        $keyFrom = $resolveKey($from);
+        $keyTo = $resolveKey($to);
+
+        // Retrieve hex colors (fallback to black/white)
+        $hexFrom = $palette->{$keyFrom} ?? '#000000';
+        $hexTo = $palette->{$keyTo} ?? '#ffffff';
+
+        // Convert to HSL
+        $hslFrom = rgbToHsl(...hexToRgb($hexFrom));
+        $hslTo = rgbToHsl(...hexToRgb($hexTo));
+
+        $colors = [];
+
+        for ($i = 0; $i < $count; $i++) {
+            $t = $count > 1 ? $i / ($count - 1) : 0;
+
+            // Interpolate HSL
+            $h = lerp($hslFrom[0], $hslTo[0], $t);
+            $s = lerp($hslFrom[1], $hslTo[1], $t);
+            $l = lerp($hslFrom[2], $hslTo[2], $t);
+
+            $colors[] = rgbToHex(...hslToRgb($h, $s, $l));
+        }
+
+        return $colors;
+    }
+}
+
 if (!function_exists('ui')) {
     /**
      * Retrieves the application settings for the authenticated user or defaults.
