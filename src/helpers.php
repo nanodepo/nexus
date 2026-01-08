@@ -389,6 +389,7 @@ if (!function_exists('generateTheme')) {
         $neu = [$hNeutral, 4]; // Surface/Backgrounds
         // Neutral Variant: Slightly higher saturation for outlines/text
         $neuV = [$hNeutral, 8];
+        $neuP = [$hPrimary, 30];
 
         return literal(
             light: literal(
@@ -439,9 +440,9 @@ if (!function_exists('generateTheme')) {
                 // Extras / Legacy mapping
                 accent: $getTone(...$p, tone: 40),
                 link:   $getTone(...$p, tone: 40),
-                focus:  $getTone(...$p, tone: 80), // Highlight ring
+                focus:  $getTone(...$neuP, tone: 75), // Highlight ring
 
-                section_header:    $getTone(...$p, tone: 40),
+                section_header:    $getTone(...$neuP, tone: 40),
                 section_separator: $getTone(...$neuV, tone: 90),
 
                 // Add gray for compatibility if needed, though we use neutrals now
@@ -499,9 +500,9 @@ if (!function_exists('generateTheme')) {
                 // Extras
                 accent: $getTone(...$p, tone: 80),
                 link:   $getTone(...$p, tone: 80),
-                focus:  $getTone(...$p, tone: 30),
+                focus:  $getTone(...$neuP, tone: 25),
 
-                section_header:    $getTone(...$p, tone: 80),
+                section_header:    $getTone(...$neuP, tone: 60),
                 section_separator: $getTone(...$neuV, tone: 20),
 
                 gray: $getTone(...$neu, tone: 50),
