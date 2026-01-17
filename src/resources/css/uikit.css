@@ -34,6 +34,8 @@
     --color-tertiary-container: var(--ndn-tertiary-container);
     --color-destructive: var(--ndn-destructive);
     --color-destructive-container: var(--ndn-destructive-container);
+    --color-success: var(--ndn-success);
+    --color-success-container: var(--ndn-success-container);
 
     --color-background: var(--ndn-background);
     --color-front: var(--ndn-front);
@@ -50,6 +52,8 @@
     --color-on-tertiary-container: var(--ndn-tertiary-container-text);
     --color-on-destructive: var(--ndn-destructive-text);
     --color-on-destructive-container: var(--ndn-destructive-container-text);
+    --color-on-success: var(--ndn-success-text);
+    --color-on-success-container: var(--ndn-success-container-text);
     --color-subtitle: var(--ndn-subtitle);
     --color-hint: var(--ndn-hint);
     --color-outline: var(--ndn-outline);
@@ -89,13 +93,13 @@
 [x-cloak] { display: none !important; }
 
 ::-webkit-scrollbar {
-    @apply w-1.5 h-1.5 cursor-default bg-background;
+    @apply w-2 h-2 cursor-default bg-background;
 }
 ::-webkit-scrollbar-track {
     @apply cursor-default bg-background;
 }
 ::-webkit-scrollbar-thumb {
-    @apply bg-foreground cursor-default rounded-sm;
+    @apply bg-subtitle cursor-default rounded-sm;
 }
 :hover::-webkit-scrollbar-thumb {
     @apply bg-hint;
@@ -219,6 +223,9 @@ body {
 .button.primary.filled {
     @apply bg-primary text-on-primary;
 }
+.button.primary.tonal {
+    @apply bg-primary-container text-on-primary-container;
+}
 .button.primary.outlined {
     @apply text-on-primary-container border border-hint hover:border-primary focus:border-primary active:border-primary hover:bg-primary/10 focus:bg-primary/10 active:bg-primary/10;
 }
@@ -231,6 +238,9 @@ body {
 }
 .button.secondary.filled {
     @apply bg-secondary text-on-secondary;
+}
+.button.secondary.tonal {
+    @apply bg-secondary-container text-on-secondary-container;
 }
 .button.secondary.outlined {
     @apply text-on-secondary-container border border-hint hover:border-secondary focus:border-secondary active:border-secondary hover:bg-secondary/10 focus:bg-secondary/10 active:bg-secondary/10;
@@ -245,6 +255,9 @@ body {
 .button.tertiary.filled {
     @apply bg-tertiary text-on-tertiary;
 }
+.button.tertiary.tonal {
+    @apply bg-tertiary-container text-on-tertiary-container;
+}
 .button.tertiary.outlined {
     @apply text-on-tertiary-container border border-hint hover:border-tertiary focus:border-tertiary active:border-tertiary hover:bg-tertiary/10 focus:bg-tertiary/10 active:bg-tertiary/10;
 }
@@ -258,11 +271,30 @@ body {
 .button.destructive.filled {
     @apply bg-destructive text-on-destructive;
 }
+.button.destructive.tonal {
+    @apply bg-destructive-container text-on-destructive-container;
+}
 .button.destructive.outlined {
     @apply text-on-destructive-container border border-hint hover:border-destructive focus:border-destructive active:border-destructive hover:bg-destructive/10 focus:bg-destructive/10 active:bg-destructive/10;
 }
 .button.destructive.text {
     @apply hover:bg-destructive-container focus:bg-destructive-container active:bg-destructive-container text-on-destructive-container;
+}
+
+.button.success {
+    @apply focus:ring-success/20;
+}
+.button.success.filled {
+    @apply bg-success text-on-success;
+}
+.button.success.tonal {
+    @apply bg-success-container text-on-success-container;
+}
+.button.success.outlined {
+    @apply text-on-success-container border border-hint hover:border-success focus:border-success active:border-success hover:bg-success/10 focus:bg-success/10 active:bg-success/10;
+}
+.button.success.text {
+    @apply hover:bg-success-container focus:bg-success-container active:bg-success-container text-on-success-container;
 }
 
 
@@ -273,7 +305,7 @@ body {
 */
 
 .card {
-    @apply relative flex flex-col flex-auto pb-3 bg-section shadow-sm hover:shadow-md rounded-xl transition overflow-hidden;
+    @apply relative flex flex-col flex-auto pb-3 bg-section border border-backline rounded-xl transition overflow-hidden;
 }
 .card .header {
     @apply flex flex-row flex-none items-center justify-between w-full px-3 pt-3 gap-1;
@@ -354,6 +386,16 @@ body {
     @apply border-hint hover:bg-destructive/10 focus:bg-destructive/10 active:bg-destructive/10 hover:border-destructive focus:border-destructive active:border-destructive;
 }
 
+.chip.success {
+    @apply focus:ring-success/20;
+}
+.chip.success.active {
+    @apply bg-success border-success text-on-success;
+}
+.chip.success:not(.active) {
+    @apply border-hint hover:bg-success/10 focus:bg-success/10 active:bg-success/10 hover:border-success focus:border-success active:border-success;
+}
+
 
 
 /* --------------------------
@@ -362,71 +404,88 @@ body {
 */
 
 .circle {
-    @apply flex justify-center items-center flex-none size-9 focus:outline-hidden focus:ring-2 rounded-full cursor-pointer transition;
+    @apply flex justify-center items-center flex-none size-9 focus:outline-hidden hover:ring-2 focus:ring-2 rounded-full cursor-pointer transition;
 }
 
 .circle.primary {
-    @apply focus:ring-primary/20;
+    @apply hover:ring-primary/20 focus:ring-primary/40;
 }
-.circle.primary.default {
-    @apply hover:bg-primary/10 focus:bg-primary/10 active:bg-primary/10;
+.circle.primary.text {
+    @apply text-on-primary-container hover:bg-primary-container focus:bg-primary-container active:bg-primary-container;
 }
 .circle.primary.filled {
     @apply bg-primary text-on-primary;
 }
 .circle.primary.outlined {
-    @apply text-on-primary-container border border-hint hover:border-primary focus:border-primary active:border-primary hover:bg-primary/10 focus:bg-primary/10 active:bg-primary/10;
+    @apply text-on-primary-container border border-hint hover:border-on-primary-container focus:border-on-primary-container active:border-on-primary-container hover:bg-primary-container focus:bg-primary-container active:bg-primary-container;
 }
-.circle.primary.text {
-    @apply text-on-primary-container hover:bg-primary-container focus:bg-primary-container active:bg-primary-container;
+.circle.primary.tonal {
+    @apply bg-primary-container text-on-primary-container;
 }
 
+
 .circle.secondary {
-    @apply focus:ring-secondary/20;
+    @apply hover:ring-secondary/20 focus:ring-secondary/40;
 }
-.circle.secondary.default {
-    @apply hover:bg-secondary/10 focus:bg-secondary/10 active:bg-secondary/10;
+.circle.secondary.text {
+    @apply text-on-secondary-container hover:bg-secondary-container focus:bg-secondary-container active:bg-secondary-container;
 }
 .circle.secondary.filled {
     @apply bg-secondary text-on-secondary;
 }
 .circle.secondary.outlined {
-    @apply text-on-secondary-container border border-hint hover:border-secondary focus:border-secondary active:border-secondary hover:bg-secondary/10 focus:bg-secondary/10 active:bg-secondary/10;
+    @apply text-on-secondary-container border border-hint hover:border-on-secondary-container focus:border-on-secondary-container active:border-on-secondary-container hover:bg-secondary-container focus:bg-secondary-container active:bg-secondary-container;
 }
-.circle.secondary.text {
-    @apply text-on-secondary-container hover:bg-secondary-container focus:bg-secondary-container active:bg-secondary-container;
+.circle.secondary.tonal {
+    @apply bg-secondary-container text-on-secondary-container;
 }
 
 .circle.tertiary {
-    @apply focus:ring-tertiary/20;
+    @apply hover:ring-tertiary/20 focus:ring-tertiary/40;
 }
-.circle.tertiary.default {
-    @apply hover:bg-tertiary/10 focus:bg-tertiary/10 active:bg-tertiary/10;
+.circle.tertiary.text {
+    @apply text-on-tertiary-container hover:bg-tertiary-container focus:bg-tertiary-container active:bg-tertiary-container;
 }
 .circle.tertiary.filled {
     @apply bg-tertiary text-on-tertiary;
 }
 .circle.tertiary.outlined {
-    @apply text-on-tertiary-container border border-hint hover:border-tertiary focus:border-tertiary active:border-tertiary hover:bg-tertiary/10 focus:bg-tertiary/10 active:bg-tertiary/10;
+    @apply text-on-tertiary-container border border-hint hover:border-on-tertiary-container focus:border-on-tertiary-container active:border-on-tertiary-container hover:bg-tertiary-container focus:bg-tertiary-container active:bg-tertiary-container;
 }
-.circle.tertiary.text {
-    @apply text-on-tertiary-container hover:bg-tertiary-container focus:bg-tertiary-container active:bg-tertiary-container;
+.circle.tertiary.tonal {
+    @apply bg-tertiary-container text-on-tertiary-container;
 }
 
 .circle.destructive {
-    @apply focus:ring-destructive/20;
+    @apply hover:ring-destructive/20 focus:ring-destructive/40;
 }
-.circle.destructive.default {
-    @apply hover:bg-destructive/10 focus:bg-destructive/10 active:bg-destructive/10;
+.circle.destructive.text {
+    @apply text-on-destructive-container hover:bg-destructive-container focus:bg-destructive-container active:bg-destructive-container;
 }
 .circle.destructive.filled {
     @apply bg-destructive text-on-destructive;
 }
 .circle.destructive.outlined {
-    @apply text-on-destructive-container border border-hint hover:border-destructive focus:border-destructive active:border-destructive hover:bg-destructive/10 focus:bg-destructive/10 active:bg-destructive/10;
+    @apply text-on-destructive-container border border-hint hover:border-on-destructive-container focus:border-on-destructive-container active:border-on-destructive-container hover:bg-destructive-container focus:bg-destructive-container active:bg-destructive-container;
 }
-.circle.destructive.text {
-    @apply text-on-destructive-container hover:bg-destructive-container focus:bg-destructive-container active:bg-destructive-container;
+.circle.destructive.tonal {
+    @apply bg-destructive-container text-on-destructive-container;
+}
+
+.circle.success {
+    @apply hover:ring-success/20 focus:ring-success/40;
+}
+.circle.success.text {
+    @apply text-on-success-container hover:bg-success-container focus:bg-success-container active:bg-success-container;
+}
+.circle.success.filled {
+    @apply bg-success text-on-success;
+}
+.circle.success.outlined {
+    @apply text-on-success-container border border-hint hover:border-on-success-container focus:border-on-success-container active:border-on-success-container hover:bg-success-container focus:bg-success-container active:bg-success-container;
+}
+.circle.success.tonal {
+    @apply bg-success-container text-on-success-container;
 }
 
 
@@ -482,7 +541,7 @@ body {
 */
 
 .dropdown {
-    @apply py-1 bg-surface text-on-section divide-y divide-section-separator rounded-md shadow overflow-hidden;
+    @apply py-1 bg-surface text-on-section divide-y divide-section-separator border border-backline rounded-md shadow overflow-hidden;
 }
 .dropdown .item {
     @apply flex flex-row items-center flex-none truncate px-4 py-2 text-on-section hover:bg-front cursor-pointer transition;
@@ -774,7 +833,7 @@ body {
     @apply flex flex-col gap-1;
 }
 .section .content {
-    @apply relative flex flex-col w-full flex-auto gap-3 px-6 py-3 overflow-hidden sm:rounded-xl shadow-sm;
+    @apply relative flex flex-col w-full flex-auto gap-3 px-6 py-3 border border-backline shadow-lg sm:rounded-2xl overflow-hidden;
 }
 .section .content.default {
     @apply bg-section text-on-section;
@@ -791,7 +850,9 @@ body {
 .section .content.destructive {
     @apply bg-destructive-container text-on-destructive-container;
 }
-
+.section .content.success {
+    @apply bg-success-container text-on-success-container;
+}
 
 
 

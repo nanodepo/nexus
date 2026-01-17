@@ -1,4 +1,4 @@
-@props(['icon', 'color' => 'primary', 'variant' => 'default', 'disabled' => false])
+@props(['icon', 'color' => 'primary', 'variant' => 'text', 'disabled' => false])
 
 @if($attributes->has('href'))
     <a {{ $attributes->merge(['class' => 'circle'])->class([$variant, $color, 'opacity-50 pointer-events-none' => $disabled]) }}>

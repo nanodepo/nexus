@@ -503,7 +503,7 @@ if (!function_exists('generateTheme')) {
                 focus:  $getTone(...$neuP, tone: 25),
 
                 section_header:    $getTone(...$neuP, tone: 60),
-                section_separator: $getTone(...$neuV, tone: 20),
+                section_separator: $getTone(...$neuV, tone: 3),
 
                 gray: $getTone(...$neu, tone: 50),
                 foreground: $getTone(...$neu, tone: 90),
