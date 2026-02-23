@@ -5,7 +5,7 @@ use Livewire\Volt\Component;
 
 new class extends Component
 {
-    public string $type = 'primary';
+    public string $type = 'secondary';
     public ?string $message = null;
     public bool $show = false;
 
@@ -22,7 +22,11 @@ new class extends Component
     #[On('makeAlert')]
     public function make(string $type, string $message): void
     {
-        $this->type = $type;
+        if ($type == 'error') {
+            $this->type = 'destructive';
+        } else {
+            $this->type = $type;
+        }
         $this->message = $message;
         $this->show = true;
         $this->dispatch('alert');
@@ -55,33 +59,20 @@ new class extends Component
         x-show="show"
         style="display: none;"
         x-transition:enter="transition ease-out duration-300"
-        x-transition:enter-start="opacity-0 transform translate-x-48 scale-80"
-        x-transition:enter-end="opacity-100 transform translate-x-0 scale-100"
+        x-transition:enter-start="opacity-0 transform -translate-y-24 scale-80"
+        x-transition:enter-end="opacity-100 transform translate-y-0 scale-100"
         x-transition:leave="transition ease-in duration-200"
         x-transition:leave-start="opacity-100 transform scale-100 translate-y-0"
         x-transition:leave-end="opacity-0 transform scale-80 -translate-y-24"
-        class="fixed right-0 top-0 flex flex-col justify-end items-end w-full max-w-md p-4 z-50 pointer-events-none"
+        class="fixed left-1/2 top-0 -translate-x-1/2 flex flex-col justify-center items-center w-full max-w-md p-4 z-50 pointer-events-none"
     >
-        <div @class([
-            'flex flex-row justify-between items-start p-2 rounded-md shadow-sm pointer-events-auto',
-            'bg-primary text-on-primary' => $type != 'error',
-            'bg-destructive text-on-destructive' => $type == 'error',
-        ])>
-            <div class="flex flex-row items-start">
-                <div @class([
-                    'p-2 rounded-lg',
-                    'bg-on-primary/10' => $type != 'error',
-                    'bg-on-destructive/10' => $type == 'error',
-                ])>
-                    @if($type == 'error')
-                        <x-icon::face-frown type="mini" />
-                    @else
-                        <x-icon::face-smile type="mini" />
-                    @endif
-                </div>
-                <div class="self-center px-2 font-medium text-sm">{{ $message }}</div>
+        <!-- bg-primary-container bg-secondary-container bg-tertiary-container bg-success-container bg-destructive-container -->
+        <!-- text-on-primary-container text-on-secondary-container text-on-tertiary-container text-on-success-container text-on-destructive-container -->
+        <div x-on:click="show = false" class="flex flex-row justify-between items-center gap-3 py-1 pr-2 pl-3 rounded-lg shadow-sm pointer-events-auto bg-{{ $type }}-container text-on-{{ $type }}-container">
+            <div class="self-center  font-medium text-sm">{{ $message }}</div>
+            <div class="flex flex-row justify-between items-center flex-none size-5 rounded-full cursor-pointer">
+                <x-icon::x-mark type="micro" />
             </div>
-            <x-ui::circle x-on:click="show = false" icon="x-mark" />
         </div>
     </div>
 

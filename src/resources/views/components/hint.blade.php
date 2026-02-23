@@ -25,7 +25,7 @@
             x-transition:leave-start="transform opacity-100 scale-100"
             x-transition:leave-end="transform opacity-0 scale-75"
             x-cloak
-            {{ $attributes->merge(['class' => 'flex flex-col z-50 my-1 px-4 py-2 text-xs bg-foreground text-section rounded-sm shadow-dropdown overflow-hidden']) }}
+            {{ $attributes->merge(['class' => 'flex flex-col z-50 my-1 px-4 py-2 text-xs bg-foreground text-background rounded-sm shadow-dropdown overflow-hidden']) }}
         >
             {{ $hint }}
         </div>

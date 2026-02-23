@@ -356,7 +356,7 @@ if (!function_exists('generateTheme')) {
 
         // Functional Colors
         $hError = 0;   // Red
-        $hSuccess = 140; // Green (140 is a good robust green, 120 is pure green)
+        $hSuccess = 130; // Green (140 is a good robust green, 120 is pure green)
 
         // Harmonize Functional Colors with Primary
         // If the primary color is Blue (240), moving Red (0) slightly to Purple makes it fit better.
@@ -397,15 +397,15 @@ if (!function_exists('generateTheme')) {
 
                 // Key Colors
                 primary:           $getTone(...$p, tone: 40),
-                primary_container: $getTone(...$p, tone: 90),
+                primary_container: $getTone(...$p, tone: 82),
                 secondary:           $getTone(...$sec, tone: 40),
-                secondary_container: $getTone(...$sec, tone: 90),
+                secondary_container: $getTone(...$sec, tone: 82),
                 tertiary:           $getTone(...$ter, tone: 40),
-                tertiary_container: $getTone(...$ter, tone: 90),
+                tertiary_container: $getTone(...$ter, tone: 82),
                 destructive:           $getTone(...$err, tone: 40),
-                destructive_container: $getTone(...$err, tone: 90),
+                destructive_container: $getTone(...$err, tone: 82),
                 success:               $getTone(...$suc, tone: 40),
-                success_container:     $getTone(...$suc, tone: 90),
+                success_container:     $getTone(...$suc, tone: 82),
 
                 // Backgrounds (Neutral)
                 // Surface is Tone 98 in MD3, Background Tone 98/99.
@@ -451,21 +451,21 @@ if (!function_exists('generateTheme')) {
             ),
             dark: literal(
                  // Dark Mode Tones:
-                 // Primary: 80
+                 // Primary: 70
                  // OnPrimary: 20
-                 // Container: 30
+                 // Container: 24
                  // OnContainer: 90
 
-                primary:           $getTone(...$p, tone: 80),
-                primary_container: $getTone(...$p, tone: 30),
-                secondary:           $getTone(...$sec, tone: 80),
-                secondary_container: $getTone(...$sec, tone: 30),
-                tertiary:           $getTone(...$ter, tone: 80),
-                tertiary_container: $getTone(...$ter, tone: 30),
-                destructive:           $getTone(...$err, tone: 80),
-                destructive_container: $getTone(...$err, tone: 30),
-                success:               $getTone(...$suc, tone: 80),
-                success_container:     $getTone(...$suc, tone: 30),
+                primary:               $getTone(...$p, tone: 70),
+                primary_container:     $getTone(...$p, tone: 24),
+                secondary:             $getTone(...$sec, tone: 70),
+                secondary_container:   $getTone(...$sec, tone: 24),
+                tertiary:              $getTone(...$ter, tone: 70),
+                tertiary_container:    $getTone(...$ter, tone: 24),
+                destructive:           $getTone(...$err, tone: 70),
+                destructive_container: $getTone(...$err, tone: 24),
+                success:               $getTone(...$suc, tone: 70),
+                success_container:     $getTone(...$suc, tone: 24),
 
                 // Dark Backgrounds
                 // Background: Tone 6
@@ -476,15 +476,15 @@ if (!function_exists('generateTheme')) {
                 section:    $getTone(...$neu, tone: 10),
 
                 // Dark Text
-                primary_text:           $getTone(...$p, tone: 20),
+                primary_text:           $getTone(...$p, tone: 10),
                 primary_container_text: $getTone(...$p, tone: 90),
-                secondary_text:           $getTone(...$sec, tone: 20),
+                secondary_text:           $getTone(...$sec, tone: 10),
                 secondary_container_text: $getTone(...$sec, tone: 90),
-                tertiary_text:           $getTone(...$ter, tone: 20),
+                tertiary_text:           $getTone(...$ter, tone: 10),
                 tertiary_container_text: $getTone(...$ter, tone: 90),
-                destructive_text:           $getTone(...$err, tone: 20),
+                destructive_text:           $getTone(...$err, tone: 10),
                 destructive_container_text: $getTone(...$err, tone: 90),
-                success_text:               $getTone(...$suc, tone: 20),
+                success_text:               $getTone(...$suc, tone: 10),
                 success_container_text:     $getTone(...$suc, tone: 90),
 
                 // General Text
