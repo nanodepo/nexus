@@ -92,7 +92,7 @@ if (!function_exists('hexToRgb')) {
     }
 }
 
-if (!function_exists('rgbToHex')) {
+if (!function_exists('rgbToHsl')) {
     /**
      * Converts RGB color values to HSL (Hue, Saturation, Lightness).
      *
@@ -213,14 +213,14 @@ if (!function_exists('rgbToHex')) {
 
 if (!function_exists('getAnalogousColors')) {
     /**
-     * Computes the triadic colors based on the given hue.
+     * Computes analogous colors based on the given hue.
      *
      * @param float|int $h The hue value in degrees (0 to 360).
      *
      * @return array Returns an associative array containing:
      * - 'primary': The primary color hue (input value).
-     * - 'secondary': The secondary color hue (input value + 120°).
-     * - 'tertiary': The tertiary color hue (input value + 240°).
+     * - 'secondary': The secondary color hue (input value - 10°).
+     * - 'tertiary': The tertiary color hue (input value + 30°).
      */
     function getAnalogousColors(float|int $h): array
     {
@@ -514,40 +514,54 @@ if (!function_exists('generateTheme')) {
 
 if (!function_exists('gradient')) {
     /**
-     * Generates an array of hex colors creating a gradient between two theme colors.
+     * Generates an array of hex colors creating a gradient between two colors.
+     * Supports palette names (from config) or direct hex values.
      *
      * @param int $count Number of steps (colors) to generate.
-     * @param string $from The name of the starting color (e.g., 'destructive', 'primary').
-     * @param string $to The name of the ending color (e.g., 'success', 'primary').
-     * @param bool $isDark Theme mode: true for dark theme, false for light theme.
-     * @param bool $isContainer Whether to use the container variant of the specified colors.
+     * @param string|null $from The name of the starting color (palette name or hex).
+     * @param string|null $to The name of the ending color (palette name or hex).
      *
      * @return array Array of hex color strings.
      */
-    function gradient(int $count, string $from = 'destructive', string $to = 'success', bool $isDark = false, bool $isContainer = false): array
+    function gradient(int $count, ?string $from = null, ?string $to = null): array
     {
         if ($count <= 0) {
             return [];
         }
 
-        // Get the current theme based on user settings or config
-        $theme = generateTheme(ui()->color);
-        $palette = $isDark ? $theme->dark : $theme->light;
+        $from = $from ?? config('nexus.gradient.from', 'red');
+        $to = $to ?? config('nexus.gradient.to', 'purple');
 
-        // Resolve keys (append '_container' if requested)
-        $resolveKey = function ($key) use ($isContainer) {
-            if ($isContainer && !str_ends_with($key, '_container')) {
-                return $key . '_container';
+        $palette = config('nexus.palette', []);
+
+        $resolvePaletteColor = function (string $name) use ($palette) {
+            $value = trim($name);
+
+            if (preg_match('/^#?[0-9a-fA-F]{6}$/', $value)) {
+                return '#' . ltrim($value, '#');
             }
-            return $key;
+
+            $key = trim($value);
+
+            if (!isset($palette[$key])) {
+                return null;
+            }
+
+            $entry = $palette[$key];
+            if (is_array($entry)) {
+                $first = reset($entry);
+                return is_string($first) ? $first : null;
+            }
+
+            return is_string($entry) ? $entry : null;
         };
 
-        $keyFrom = $resolveKey($from);
-        $keyTo = $resolveKey($to);
+        $hexFrom = $resolvePaletteColor($from);
+        $hexTo = $resolvePaletteColor($to);
 
-        // Retrieve hex colors (fallback to black/white)
-        $hexFrom = $palette->{$keyFrom} ?? '#000000';
-        $hexTo = $palette->{$keyTo} ?? '#ffffff';
+        if ($hexFrom === null || $hexTo === null) {
+            throw new InvalidArgumentException('Gradient colors must be palette names or hex values.');
+        }
 
         // Convert to HSL
         $hslFrom = rgbToHsl(...hexToRgb($hexFrom));
@@ -604,4 +618,3 @@ if (!function_exists('price')) {
         return new Price(value: $val, currency: $currency);
     }
 }
-

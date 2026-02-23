@@ -10,8 +10,39 @@ return [
     |
     */
 
-    'color' => env('APP_COLOR', '4095BF'),
+    'color' => env('NEXUS_APP_COLOR', '4095BF'),
     'scheme' => 'smart', // smart split, analogous or triadic
+
+    /*
+    |--------------------------------------------------------------------------
+    | Palettes & Gradients
+    |--------------------------------------------------------------------------
+    |
+    | Named color palettes and gradient defaults.
+    |
+    */
+
+    // Ordered palette: base Gruvbox colors + 7 intermediates
+    'palette' => [
+        'red' => '#cc241d',
+        'red-orange' => '#d24416',
+        'orange' => '#d65d0e',
+        'orange-yellow' => '#d77d10',
+        'yellow' => '#d79921',
+        'yellow-green' => '#b79917',
+        'green' => '#98971a',
+        'green-aqua' => '#7b9c41',
+        'aqua' => '#689d62',
+        'aqua-blue' => '#47937b',
+        'blue' => '#458588',
+        'blue-purple' => '#6a7bad',
+        'purple' => '#b16286',
+        'purple-red' => '#c9405e',
+    ],
+    'gradient' => [
+        'from' => env('NEXUS_GRADIENT_FROM', 'red'),
+        'to' => env('NEXUS_GRADIENT_TO', 'purple-red'),
+    ],
 
     /*
     |--------------------------------------------------------------------------

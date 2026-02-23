@@ -1,16 +1,27 @@
+@php
+    $paletteRaw = config('nexus.palette', []);
+    $palette = [];
+    if (is_array($paletteRaw)) {
+        foreach ($paletteRaw as $name => $value) {
+            if (is_array($value)) {
+                $hex = $value['light'] ?? $value['dark'] ?? (is_string(reset($value)) ? reset($value) : null);
+            } else {
+                $hex = $value;
+            }
+            if (is_string($hex)) {
+                $palette[$name] = $hex;
+            }
+        }
+    }
+    $first = is_array($palette) ? reset($palette) : null;
+    $defaultColor = is_string($first) ? $first : '#9a9a9a';
+@endphp
+
 <div
     {{ $attributes }}
     x-data="{
-        color: '#9a9a9a',
-        colors: {
-            red: { light: '#cc241d', dark: '#d24416' },
-            orange: { light: '#d65d0e', dark: '#d77d10' },
-            yellow: { light: '#d79921', dark: '#b79917' },
-            green: { light: '#98971a', dark: '#7b9c41' },
-            aqua: { light: '#689d62', dark: '#47937b' },
-            blue: { light: '#458588', dark: '#6a7bad' },
-            purple: { light: '#b16286', dark: '#c9405e' }
-        },
+        color: @js($defaultColor),
+        colors: @js($palette),
         setColor(color) {
             this.color = color;
         }
@@ -26,12 +37,14 @@
        </div>
     </label>
 
-    <div class="flex flex-row gap-2">
-        <template x-for="c in colors">
-            <div class="flex flex-col gap-2">
-                <div class="w-7 h-7 rounded-sm cursor-pointer" x-on:click="setColor(c.light)" x-bind:style="{ backgroundColor: c.light }"></div>
-                <div class="w-7 h-7 rounded-sm cursor-pointer" x-on:click="setColor(c.dark)" x-bind:style="{ backgroundColor: c.dark }"></div>
-            </div>
+    <div class="grid grid-cols-7 gap-2">
+        <template x-for="(value, name) in colors" :key="name">
+            <div
+                class="w-7 h-7 rounded-sm cursor-pointer"
+                x-on:click="setColor(value)"
+                x-bind:title="name"
+                x-bind:style="{ backgroundColor: value }"
+            ></div>
         </template>
     </div>
 </div>

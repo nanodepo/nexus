@@ -10,7 +10,7 @@ use Intervention\Image\Laravel\Facades\Image;
 trait HasImageWriter
 {
     /**
-     * A function that displays a notification in the lower right corner of the screen.
+     * Save an uploaded image to the `images` disk as WebP.
      * @param UploadedFile $image uploaded image
      * @param string $dir uploaded file dir, default "other"
      * @param int $width width scale

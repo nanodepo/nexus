@@ -52,17 +52,16 @@ final readonly class Price implements Stringable, Jsonable, Arrayable
 
     public function __toString(): string
     {
-        return $this->value();
+        return (string) $this->value();
     }
 
     public function toJson($options = 0): string
     {
-        return $this->value();
+        return (string) $this->value();
     }
 
     public function toArray(): string
     {
-        return $this->value();
+        return (string) $this->value();
     }
 }
-
