@@ -9,7 +9,10 @@
         'opacity-50 pointer-events-none' => $disabled,
     ]) }}
     href="{{ $href }}"
-    @disabled($disabled)
+    @if($disabled)
+        aria-disabled="true"
+        tabindex="-1"
+    @endif
 >
     @if(isset($before))
         <div class="flex flex-none size-5">
@@ -27,4 +30,3 @@
         </div>
     @endif
 </a>
-

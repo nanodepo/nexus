@@ -6,6 +6,7 @@
     </a>
 @else
     <button
+        type="{{ $attributes->get('type', 'button') }}"
         {{ $attributes->merge(['class' => 'circle'])->class([$variant, $color, 'disabled:opacity-50 disabled:pointer-events-none']) }}
         @disabled($disabled)
         wire:loading.attr="disabled"

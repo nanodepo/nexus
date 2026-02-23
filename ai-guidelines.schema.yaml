@@ -1,0 +1,137 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: ai-guidelines.schema.yaml
+
+# Schema for ai-guidelines.yaml (YAML serialization of JSON Schema)
+
+type: object
+required:
+  - components
+properties:
+  components:
+    type: object
+    additionalProperties:
+      $ref: '#/$defs/component'
+  layouts:
+    type: object
+    additionalProperties:
+      $ref: '#/$defs/layout'
+
+$defs:
+  component:
+    type: object
+    required:
+      - description
+      - source
+    properties:
+      description:
+        type: string
+      source:
+        type: object
+        required:
+          - view
+        properties:
+          view:
+            type: string
+          link_view:
+            type: string
+          class:
+            type: string
+          styles:
+            type: string
+        additionalProperties: true
+      props:
+        type: object
+        additionalProperties:
+          $ref: '#/$defs/prop'
+      slots:
+        type: object
+        additionalProperties:
+          $ref: '#/$defs/slot'
+      attributes:
+        type: object
+        properties:
+          passthrough:
+            type: boolean
+        additionalProperties: true
+      events:
+        type: array
+        items:
+          type: string
+      accessibility:
+        type: object
+        properties:
+          notes:
+            type: array
+            items:
+              type: string
+        additionalProperties: true
+      dependencies:
+        type: object
+        additionalProperties: true
+      usage:
+        type: array
+        items:
+          type: object
+          required:
+            - name
+            - code
+          properties:
+            name:
+              type: string
+            code:
+              type: string
+          additionalProperties: true
+    additionalProperties: true
+
+  prop:
+    type: object
+    properties:
+      type:
+        type: string
+      required:
+        type: boolean
+      default: {}
+      variants:
+        type: array
+        items:
+          type: string
+      description:
+        type: string
+    additionalProperties: true
+
+  slot:
+    type: object
+    properties:
+      description:
+        type: string
+    additionalProperties: true
+
+  layout:
+    type: object
+    required:
+      - description
+      - source
+    properties:
+      description:
+        type: string
+      source:
+        type: object
+        required:
+          - view
+        properties:
+          view:
+            type: string
+        additionalProperties: true
+      slots:
+        type: object
+        additionalProperties:
+          $ref: '#/$defs/slot'
+      sections:
+        type: object
+        additionalProperties:
+          $ref: '#/$defs/slot'
+      components:
+        type: array
+        items:
+          type: string
+    additionalProperties: true

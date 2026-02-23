@@ -1,0 +1,1528 @@
+components:
+  x-ui::avatar:
+    attributes:
+      passthrough: true
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'Blade UI component: avatar.'
+    props:
+      icon:
+        default: user
+        required: false
+        type: string
+      is_online:
+        default: false
+        required: false
+        type: boolean
+      url:
+        default: null
+        required: false
+        type: string
+      user:
+        required: false
+        type: string
+    source:
+      view: src/resources/views/components/avatar.blade.php
+  x-ui::background:
+    description: 'Blade UI component: background.'
+    source:
+      view: src/resources/views/components/background.blade.php
+  x-ui::badge:
+    attributes:
+      passthrough: true
+    description: 'Blade UI component: badge.'
+    props:
+      color:
+        default: primary
+        required: false
+        type: string
+      primary:
+        required: false
+        type: string
+    slots:
+      default:
+        description: Default slot content.
+    source:
+      view: src/resources/views/components/badge.blade.php
+  x-ui::badge.small:
+    attributes:
+      passthrough: true
+    description: 'Blade UI component: small.'
+    source:
+      view: src/resources/views/components/badge/small.blade.php
+  x-ui::banner:
+    attributes:
+      passthrough: true
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'Blade UI component: banner.'
+    props:
+      color:
+        default: primary
+        required: false
+        type: string
+      icon:
+        default: null
+        required: false
+        type: string
+      primary:
+        required: false
+        type: string
+      subtitle:
+        default: null
+        required: false
+        type: string
+      title:
+        required: false
+        type: string
+    slots:
+      default:
+        description: Default slot content.
+    source:
+      view: src/resources/views/components/banner.blade.php
+  x-ui::breadcrumbs:
+    attributes:
+      passthrough: true
+    description: 'Blade UI component: breadcrumbs.'
+    slots:
+      default:
+        description: Default slot content.
+    source:
+      view: src/resources/views/components/breadcrumbs.blade.php
+  x-ui::breadcrumbs.divider:
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'Blade UI component: divider.'
+    source:
+      view: src/resources/views/components/breadcrumbs/divider.blade.php
+  x-ui::breadcrumbs.item:
+    attributes:
+      passthrough: true
+    description: 'Blade UI component: item.'
+    props:
+      active:
+        default: false
+        required: false
+        type: boolean
+    slots:
+      default:
+        description: Default slot content.
+    source:
+      view: src/resources/views/components/breadcrumbs/item.blade.php
+  x-ui::button:
+    accessibility:
+      notes:
+      - When disabled, ensure aria-disabled is present if needed by consumers.
+      - When rendered as <a>, disabled state is simulated with opacity/pointer-events.
+    attributes:
+      passthrough: true
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: Reusable button component that renders <button> or <a> depending
+      on href.
+    events:
+    - click
+    props:
+      after:
+        description: Icon name rendered after label (component name is prefixed with
+          icon::).
+        required: false
+        type: string
+      before:
+        description: Icon name rendered before label (component name is prefixed with
+          icon::).
+        required: false
+        type: string
+      color:
+        default: primary
+        required: false
+        type: string
+        variants:
+        - primary
+        - secondary
+        - tertiary
+        - destructive
+        - success
+      disabled:
+        default: false
+        required: false
+        type: boolean
+      href:
+        description: When set, component renders an <a> tag.
+        required: false
+        type: string
+      variant:
+        default: filled
+        required: false
+        type: string
+        variants:
+        - filled
+        - outlined
+        - tonal
+        - text
+    slots:
+      default:
+        description: Button label/content.
+    source:
+      class: src/Views/Components/Button.php
+      link_view: src/resources/views/components/link.blade.php
+      styles: src/resources/css/uikit.css
+      view: src/resources/views/components/button.blade.php
+    usage:
+    - code: <x-ui::button>Save</x-ui::button>
+      name: Basic
+    - code: <x-ui::button before="plus" variant="outlined">Add</x-ui::button>
+      name: With icon
+    - code: <x-ui::button href="/settings" color="secondary">Settings</x-ui::button>
+      name: Link
+  x-ui::card:
+    attributes:
+      passthrough: true
+    description: 'Blade UI component: card.'
+    props:
+      image:
+        default: null
+        required: false
+        type: string
+      subtitle:
+        default: null
+        required: false
+        type: string
+      text:
+        default: null
+        required: false
+        type: string
+      title:
+        default: null
+        required: false
+        type: string
+    slots:
+      content:
+        description: Named slot content.
+      default:
+        description: Default slot content.
+      footer:
+        description: Named slot content.
+      header:
+        description: Named slot content.
+    source:
+      view: src/resources/views/components/card.blade.php
+  x-ui::card.content:
+    description: 'Blade UI component: content.'
+    props:
+      subtitle:
+        default: null
+        required: false
+        type: string
+      text:
+        default: null
+        required: false
+        type: string
+      title:
+        default: null
+        required: false
+        type: string
+    slots:
+      default:
+        description: Default slot content.
+    source:
+      view: src/resources/views/components/card/content.blade.php
+  x-ui::card.footer:
+    description: 'Blade UI component: footer.'
+    slots:
+      default:
+        description: Default slot content.
+    source:
+      view: src/resources/views/components/card/footer.blade.php
+  x-ui::card.header:
+    description: 'Blade UI component: header.'
+    slots:
+      default:
+        description: Default slot content.
+    source:
+      view: src/resources/views/components/card/header.blade.php
+  x-ui::card.image:
+    description: 'Blade UI component: image.'
+    props:
+      aspect:
+        default: aspect-video
+        required: false
+        type: string
+      aspect-video:
+        required: false
+        type: string
+      images/500.svg:
+        required: false
+        type: string
+      url:
+        default: asset('images/500.svg')
+        required: false
+        type: mixed
+    source:
+      view: src/resources/views/components/card/image.blade.php
+  x-ui::card.label:
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'Blade UI component: label.'
+    props:
+      color:
+        default: primary
+        required: false
+        type: string
+      icon:
+        default: null
+        required: false
+        type: string
+      primary:
+        required: false
+        type: string
+    slots:
+      default:
+        description: Default slot content.
+    source:
+      view: src/resources/views/components/card/label.blade.php
+  x-ui::chip:
+    attributes:
+      passthrough: true
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'Blade UI component: chip.'
+    props:
+      active:
+        default: false
+        required: false
+        type: boolean
+      after:
+        default: null
+        required: false
+        type: string
+      before:
+        default: null
+        required: false
+        type: string
+      color:
+        default: primary
+        required: false
+        type: string
+      primary:
+        required: false
+        type: string
+      title:
+        default: null
+        required: false
+        type: string
+    source:
+      view: src/resources/views/components/chip.blade.php
+  x-ui::circle:
+    attributes:
+      passthrough: true
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'Blade UI component: circle.'
+    props:
+      color:
+        default: primary
+        required: false
+        type: string
+      disabled:
+        default: false
+        required: false
+        type: boolean
+      icon:
+        required: false
+        type: string
+      primary:
+        required: false
+        type: string
+      text:
+        required: false
+        type: string
+      variant:
+        default: text
+        required: false
+        type: string
+    source:
+      view: src/resources/views/components/circle.blade.php
+  x-ui::dialog:
+    attributes:
+      passthrough: true
+    description: 'Blade UI component: dialog.'
+    props:
+      max-w-lg:
+        required: false
+        type: string
+      width:
+        default: max-w-lg
+        required: false
+        type: string
+    slots:
+      default:
+        description: Default slot content.
+      footer:
+        description: Named slot content.
+      header:
+        description: Named slot content.
+    source:
+      view: src/resources/views/components/dialog.blade.php
+  x-ui::divider:
+    attributes:
+      passthrough: true
+    description: 'Blade UI component: divider.'
+    source:
+      view: src/resources/views/components/divider.blade.php
+  x-ui::dropdown:
+    attributes:
+      passthrough: true
+    description: 'Blade UI component: dropdown.'
+    source:
+      view: src/resources/views/components/dropdown.blade.php
+  x-ui::dropdown.item:
+    attributes:
+      passthrough: true
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'Blade UI component: item.'
+    props:
+      disabled:
+        default: false
+        required: false
+        type: boolean
+      hidden:
+        default: false
+        required: false
+        type: boolean
+      icon:
+        default: null
+        required: false
+        type: string
+    slots:
+      default:
+        description: Default slot content.
+    source:
+      view: src/resources/views/components/dropdown/item.blade.php
+  x-ui::empty:
+    description: 'Blade UI component: empty.'
+    props:
+      Whoops... Looks like there\:
+        required: false
+        type: string
+      text:
+        default: Whoops... Looks like there\'s nothing here yet.
+        required: false
+        type: string
+    source:
+      view: src/resources/views/components/empty.blade.php
+  x-ui::field:
+    attributes:
+      passthrough: true
+    description: 'Blade UI component: field.'
+    props:
+      hint:
+        default: null
+        required: false
+        type: string
+      label:
+        required: false
+        type: string
+      max:
+        default: 0
+        required: false
+        type: number
+    slots:
+      default:
+        description: Default slot content.
+    source:
+      view: src/resources/views/components/field.blade.php
+  x-ui::header:
+    attributes:
+      passthrough: true
+    description: 'Blade UI component: header.'
+    props:
+      subtitle:
+        default: null
+        required: false
+        type: string
+      title:
+        required: false
+        type: string
+    source:
+      view: src/resources/views/components/header.blade.php
+  x-ui::hint:
+    attributes:
+      passthrough: true
+    description: 'Blade UI component: hint.'
+    props:
+      hint:
+        default: ''
+        required: false
+        type: string
+    slots:
+      default:
+        description: Default slot content.
+    source:
+      view: src/resources/views/components/hint.blade.php
+  x-ui::input:
+    attributes:
+      passthrough: true
+    description: 'Blade UI component: input.'
+    props:
+      text:
+        required: false
+        type: string
+      type:
+        default: text
+        required: false
+        type: string
+    source:
+      view: src/resources/views/components/input.blade.php
+  x-ui::input.checkbox:
+    attributes:
+      passthrough: true
+    description: 'Input component: checkbox.'
+    source:
+      view: src/resources/views/components/input/checkbox.blade.php
+  x-ui::input.color-picker:
+    attributes:
+      passthrough: true
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'Input component: color picker.'
+    source:
+      view: src/resources/views/components/input/color-picker.blade.php
+  x-ui::input.counter:
+    attributes:
+      passthrough: true
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'Input component: counter.'
+    props:
+      disabled:
+        default: false
+        required: false
+        type: boolean
+      max:
+        default: 100
+        required: false
+        type: number
+      min:
+        default: 0
+        required: false
+        type: number
+      value:
+        default: null
+        required: false
+        type: string
+    source:
+      view: src/resources/views/components/input/counter.blade.php
+  x-ui::input.date-picker:
+    attributes:
+      passthrough: true
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'Input component: date picker.'
+    props:
+      ',':
+        required: false
+        type: string
+      =>:
+        required: false
+        type: string
+      => false,:
+        required: false
+        type: string
+      => null,:
+        required: false
+        type: string
+      disabled:
+        default: false
+        required: false
+        type: boolean
+      label:
+        default: "\u0412\u044B\u0431\u0440\u0430\u0442\u044C \u0434\u0430\u0442\u0443"
+        required: false
+        type: string
+      name:
+        default: ''
+        required: false
+        type: string
+      value:
+        default: null
+        required: false
+        type: string
+      with_label:
+        default: true
+        required: false
+        type: boolean
+    source:
+      view: src/resources/views/components/input/date-picker.blade.php
+  x-ui::input.icon-picker:
+    attributes:
+      passthrough: true
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'Input component: icon picker.'
+    slots:
+      default:
+        description: Default slot content.
+    source:
+      view: src/resources/views/components/input/icon-picker.blade.php
+  x-ui::input.radio:
+    attributes:
+      passthrough: true
+    description: 'Input component: radio.'
+    source:
+      view: src/resources/views/components/input/radio.blade.php
+  x-ui::input.range:
+    attributes:
+      passthrough: true
+    description: 'Input component: range.'
+    source:
+      view: src/resources/views/components/input/range.blade.php
+  x-ui::input.select:
+    attributes:
+      passthrough: true
+    description: 'Input component: select.'
+    slots:
+      default:
+        description: Default slot content.
+    source:
+      view: src/resources/views/components/input/select.blade.php
+  x-ui::input.select.item:
+    attributes:
+      passthrough: true
+    description: 'Input component: select.'
+    slots:
+      default:
+        description: Default slot content.
+    source:
+      view: src/resources/views/components/input/select/item.blade.php
+  x-ui::input.stars:
+    attributes:
+      passthrough: true
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'Input component: stars.'
+    props:
+      disabled:
+        default: false
+        required: false
+        type: boolean
+      max:
+        default: 5
+        required: false
+        type: number
+      min:
+        default: 1
+        required: false
+        type: number
+      value:
+        default: 0
+        required: false
+        type: number
+    source:
+      view: src/resources/views/components/input/stars.blade.php
+  x-ui::input.switch:
+    attributes:
+      passthrough: true
+    description: 'Input component: switch.'
+    props:
+      checkbox:
+        required: false
+        type: string
+      checked:
+        default: false
+        required: false
+        type: boolean
+      disabled:
+        default: false
+        required: false
+        type: boolean
+      type:
+        default: checkbox
+        required: false
+        type: string
+      value:
+        default: 1
+        required: false
+        type: number
+    source:
+      view: src/resources/views/components/input/switch.blade.php
+  x-ui::input.textarea:
+    attributes:
+      passthrough: true
+    description: 'Input component: textarea.'
+    slots:
+      default:
+        description: Default slot content.
+    source:
+      view: src/resources/views/components/input/textarea.blade.php
+  x-ui::label:
+    attributes:
+      passthrough: true
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'Blade UI component: label.'
+    props:
+      color:
+        required: false
+        type: string
+      icon:
+        default: null
+        required: false
+        type: string
+      title:
+        required: false
+        type: string
+    source:
+      view: src/resources/views/components/label.blade.php
+  x-ui::label.small:
+    attributes:
+      passthrough: true
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'Blade UI component: small.'
+    props:
+      color:
+        required: false
+        type: string
+      description:
+        default: null
+        required: false
+        type: string
+      icon:
+        required: false
+        type: string
+      title:
+        required: false
+        type: string
+    source:
+      view: src/resources/views/components/label/small.blade.php
+  x-ui::layout:
+    description: 'Blade UI component: layout.'
+    slots:
+      breadcrumbs:
+        description: Named slot content.
+    source:
+      view: src/resources/views/components/layout.blade.php
+  x-ui::layout.double:
+    attributes:
+      passthrough: true
+    description: 'Layout component: double.'
+    slots:
+      breadcrumbs:
+        description: Named slot content.
+      left:
+        description: Named slot content.
+      right:
+        description: Named slot content.
+    source:
+      view: src/resources/views/components/layout/double.blade.php
+  x-ui::layout.full:
+    attributes:
+      passthrough: true
+    description: 'Layout component: full.'
+    slots:
+      breadcrumbs:
+        description: Named slot content.
+    source:
+      view: src/resources/views/components/layout/full.blade.php
+  x-ui::layout.side:
+    attributes:
+      passthrough: true
+    description: 'Layout component: side.'
+    slots:
+      breadcrumbs:
+        description: Named slot content.
+      content:
+        description: Named slot content.
+      left:
+        description: Named slot content.
+      right:
+        description: Named slot content.
+    source:
+      view: src/resources/views/components/layout/side.blade.php
+  x-ui::layout.single:
+    attributes:
+      passthrough: true
+    description: 'Layout component: single.'
+    slots:
+      breadcrumbs:
+        description: Named slot content.
+    source:
+      view: src/resources/views/components/layout/single.blade.php
+  x-ui::link:
+    attributes:
+      passthrough: true
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'Blade UI component: link.'
+    slots:
+      after:
+        description: Named slot content.
+      before:
+        description: Named slot content.
+      default:
+        description: Default slot content.
+    source:
+      view: src/resources/views/components/link.blade.php
+  x-ui::list:
+    attributes:
+      passthrough: true
+    description: 'Blade UI component: list.'
+    slots:
+      default:
+        description: Default slot content.
+    source:
+      view: src/resources/views/components/list.blade.php
+  x-ui::list.accordion:
+    attributes:
+      passthrough: true
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'List component: accordion.'
+    props:
+      active:
+        default: false
+        required: false
+        type: boolean
+      disabled:
+        default: false
+        required: false
+        type: boolean
+      icon:
+        default: null
+        required: false
+        type: string
+      subtitle:
+        default: null
+        required: false
+        type: string
+      title:
+        required: false
+        type: string
+    slots:
+      default:
+        description: Default slot content.
+    source:
+      view: src/resources/views/components/list/accordion.blade.php
+  x-ui::list.button:
+    attributes:
+      passthrough: true
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'List component: button.'
+    props:
+      destructive:
+        default: false
+        required: false
+        type: boolean
+      icon:
+        required: false
+        type: string
+    slots:
+      after:
+        description: Named slot content.
+    source:
+      view: src/resources/views/components/list/button.blade.php
+  x-ui::list.checkbox:
+    attributes:
+      passthrough: true
+    description: 'List component: checkbox.'
+    props:
+      badge:
+        default: false
+        required: false
+        type: boolean
+      description:
+        default: null
+        required: false
+        type: string
+      disabled:
+        default: false
+        required: false
+        type: boolean
+      subhead:
+        default: null
+        required: false
+        type: string
+      subtitle:
+        default: null
+        required: false
+        type: string
+      title:
+        required: false
+        type: string
+      truncate:
+        default: true
+        required: false
+        type: boolean
+    slots:
+      after:
+        description: Named slot content.
+    source:
+      view: src/resources/views/components/list/checkbox.blade.php
+  x-ui::list.double:
+    attributes:
+      passthrough: true
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'List component: double.'
+    props:
+      after:
+        required: false
+        type: string
+      before:
+        required: false
+        type: string
+    source:
+      view: src/resources/views/components/list/double.blade.php
+  x-ui::list.icon:
+    attributes:
+      passthrough: true
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'List component: icon.'
+    props:
+      icon:
+        required: false
+        type: string
+    slots:
+      after:
+        description: Named slot content.
+    source:
+      view: src/resources/views/components/list/icon.blade.php
+  x-ui::list.info:
+    attributes:
+      passthrough: true
+    description: 'List component: info.'
+    slots:
+      after:
+        description: Named slot content.
+      before:
+        description: Named slot content.
+    source:
+      view: src/resources/views/components/list/info.blade.php
+  x-ui::list.item:
+    attributes:
+      passthrough: true
+    description: 'List component: item.'
+    props:
+      active:
+        default: false
+        required: false
+        type: boolean
+      badge:
+        default: false
+        required: false
+        type: boolean
+      description:
+        default: null
+        required: false
+        type: string
+      disabled:
+        default: false
+        required: false
+        type: boolean
+      subhead:
+        default: null
+        required: false
+        type: string
+      subtitle:
+        default: null
+        required: false
+        type: string
+      title:
+        required: false
+        type: string
+      truncate:
+        default: true
+        required: false
+        type: boolean
+    slots:
+      after:
+        description: Named slot content.
+      before:
+        description: Named slot content.
+    source:
+      view: src/resources/views/components/list/item.blade.php
+  x-ui::list.radio:
+    attributes:
+      passthrough: true
+    description: 'List component: radio.'
+    props:
+      badge:
+        default: false
+        required: false
+        type: boolean
+      description:
+        default: null
+        required: false
+        type: string
+      disabled:
+        default: false
+        required: false
+        type: boolean
+      subhead:
+        default: null
+        required: false
+        type: string
+      subtitle:
+        default: null
+        required: false
+        type: string
+      title:
+        required: false
+        type: string
+      truncate:
+        default: true
+        required: false
+        type: boolean
+    slots:
+      after:
+        description: Named slot content.
+    source:
+      view: src/resources/views/components/list/radio.blade.php
+  x-ui::list.value:
+    attributes:
+      passthrough: true
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'List component: value.'
+    props:
+      accent:
+        default: false
+        required: false
+        type: boolean
+      icon:
+        default: null
+        required: false
+        type: string
+    slots:
+      default:
+        description: Default slot content.
+    source:
+      view: src/resources/views/components/list/value.blade.php
+  x-ui::meta:
+    attributes:
+      passthrough: true
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'Blade UI component: meta.'
+    props:
+      destructive:
+        default: false
+        required: false
+        type: boolean
+      icon:
+        required: false
+        type: string
+      text:
+        default: null
+        required: false
+        type: string
+    source:
+      view: src/resources/views/components/meta.blade.php
+  x-ui::modal:
+    attributes:
+      passthrough: true
+    description: 'Blade UI component: modal.'
+    slots:
+      default:
+        description: Default slot content.
+    source:
+      view: src/resources/views/components/modal.blade.php
+  x-ui::modal.confirmation:
+    attributes:
+      passthrough: true
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'Modal component: confirmation.'
+    props:
+      subtitle:
+        default: null
+        required: false
+        type: string
+      title:
+        default: null
+        required: false
+        type: string
+    slots:
+      default:
+        description: Default slot content.
+      footer:
+        description: Named slot content.
+    source:
+      view: src/resources/views/components/modal/confirmation.blade.php
+  x-ui::nav.bar:
+    attributes:
+      passthrough: true
+    description: 'Navigation component: bar.'
+    slots:
+      default:
+        description: Default slot content.
+    source:
+      view: src/resources/views/components/nav/bar.blade.php
+  x-ui::nav.bar.link:
+    attributes:
+      passthrough: true
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'Navigation component: link.'
+    props:
+      active:
+        default: false
+        required: false
+        type: boolean
+      badge:
+        default: false
+        required: false
+        type: boolean
+      disabled:
+        default: false
+        required: false
+        type: boolean
+      icon:
+        required: false
+        type: string
+      label:
+        required: false
+        type: string
+    source:
+      view: src/resources/views/components/nav/bar/link.blade.php
+  x-ui::nav.drawer:
+    attributes:
+      passthrough: true
+    description: 'Navigation component: drawer.'
+    slots:
+      default:
+        description: Default slot content.
+    source:
+      view: src/resources/views/components/nav/drawer.blade.php
+  x-ui::nav.drawer.divider:
+    description: 'Navigation component: divider.'
+    source:
+      view: src/resources/views/components/nav/drawer/divider.blade.php
+  x-ui::nav.drawer.dropdown:
+    attributes:
+      passthrough: true
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'Navigation component: dropdown.'
+    props:
+      active:
+        default: false
+        required: false
+        type: boolean
+      icon:
+        required: false
+        type: string
+      label:
+        required: false
+        type: string
+    slots:
+      default:
+        description: Default slot content.
+    source:
+      view: src/resources/views/components/nav/drawer/dropdown.blade.php
+  x-ui::nav.drawer.header:
+    attributes:
+      passthrough: true
+    description: 'Navigation component: header.'
+    source:
+      view: src/resources/views/components/nav/drawer/header.blade.php
+  x-ui::nav.drawer.link:
+    attributes:
+      passthrough: true
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'Navigation component: link.'
+    props:
+      active:
+        default: false
+        required: false
+        type: boolean
+      icon:
+        required: false
+        type: string
+      label:
+        required: false
+        type: string
+    slots:
+      badge:
+        description: Named slot content.
+    source:
+      view: src/resources/views/components/nav/drawer/link.blade.php
+  x-ui::nav.panel:
+    attributes:
+      passthrough: true
+    description: 'Navigation component: panel.'
+    slots:
+      center:
+        description: Named slot content.
+      left:
+        description: Named slot content.
+      right:
+        description: Named slot content.
+    source:
+      view: src/resources/views/components/nav/panel.blade.php
+  x-ui::nav.panel.burger:
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'Navigation component: burger.'
+    props:
+      flexible:
+        default: false
+        required: false
+        type: boolean
+    source:
+      view: src/resources/views/components/nav/panel/burger.blade.php
+  x-ui::nav.rail:
+    attributes:
+      passthrough: true
+    description: 'Navigation component: rail.'
+    slots:
+      default:
+        description: Default slot content.
+    source:
+      view: src/resources/views/components/nav/rail.blade.php
+  x-ui::nav.rail.link:
+    attributes:
+      passthrough: true
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'Navigation component: link.'
+    props:
+      active:
+        default: false
+        required: false
+        type: boolean
+      icon:
+        required: false
+        type: string
+      label:
+        required: false
+        type: string
+    source:
+      view: src/resources/views/components/nav/rail/link.blade.php
+  x-ui::progress.radial:
+    attributes:
+      passthrough: true
+    description: 'Blade UI component: radial.'
+    props:
+      progress:
+        default: 0
+        required: false
+        type: number
+      text:
+        default: true
+        required: false
+        type: boolean
+    source:
+      view: src/resources/views/components/progress/radial.blade.php
+  x-ui::question-helper:
+    attributes:
+      passthrough: true
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'Blade UI component: question helper.'
+    source:
+      view: src/resources/views/components/question-helper.blade.php
+  x-ui::scrim:
+    attributes:
+      passthrough: true
+    description: 'Blade UI component: scrim.'
+    source:
+      view: src/resources/views/components/scrim.blade.php
+  x-ui::section:
+    attributes:
+      passthrough: true
+    description: 'Blade UI component: section.'
+    props:
+      color:
+        default: default
+        required: false
+        type: string
+      default:
+        required: false
+        type: string
+      destructive:
+        default: false
+        required: false
+        type: boolean
+      disabled:
+        default: false
+        required: false
+        type: boolean
+      header:
+        default: null
+        required: false
+        type: string
+      hint:
+        default: null
+        required: false
+        type: string
+      title:
+        default: null
+        required: false
+        type: string
+    slots:
+      default:
+        description: Default slot content.
+    source:
+      view: src/resources/views/components/section.blade.php
+  x-ui::section.helper:
+    attributes:
+      passthrough: true
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'Blade UI component: helper.'
+    props:
+      name:
+        required: false
+        type: string
+    slots:
+      default:
+        description: Default slot content.
+    source:
+      view: src/resources/views/components/section/helper.blade.php
+  x-ui::segmented:
+    attributes:
+      passthrough: true
+    description: 'Blade UI component: segmented.'
+    slots:
+      default:
+        description: Default slot content.
+    source:
+      view: src/resources/views/components/segmented.blade.php
+  x-ui::segmented.item:
+    attributes:
+      passthrough: true
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'Blade UI component: item.'
+    props:
+      active:
+        default: false
+        required: false
+        type: boolean
+      disabled:
+        default: false
+        required: false
+        type: boolean
+      icon:
+        default: null
+        required: false
+        type: string
+      text:
+        default: null
+        required: false
+        type: string
+    source:
+      view: src/resources/views/components/segmented/item.blade.php
+  x-ui::sheet:
+    attributes:
+      passthrough: true
+    description: 'Blade UI component: sheet.'
+    props:
+      bottom:
+        default: true
+        required: false
+        type: boolean
+      max-w-lg:
+        required: false
+        type: string
+      width:
+        default: max-w-lg
+        required: false
+        type: string
+    slots:
+      default:
+        description: Default slot content.
+      footer:
+        description: Named slot content.
+      header:
+        description: Named slot content.
+    source:
+      view: src/resources/views/components/sheet.blade.php
+  x-ui::steps:
+    description: 'Blade UI component: steps.'
+    slots:
+      default:
+        description: Default slot content.
+    source:
+      view: src/resources/views/components/steps.blade.php
+  x-ui::steps.item:
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'Blade UI component: item.'
+    props:
+      active:
+        default: false
+        required: false
+        type: boolean
+      completed:
+        default: false
+        required: false
+        type: boolean
+      first:
+        default: false
+        required: false
+        type: boolean
+      last:
+        default: false
+        required: false
+        type: boolean
+      title:
+        default: null
+        required: false
+        type: string
+    source:
+      view: src/resources/views/components/steps/item.blade.php
+  x-ui::tab:
+    attributes:
+      passthrough: true
+    description: 'Blade UI component: tab.'
+    slots:
+      default:
+        description: Default slot content.
+    source:
+      view: src/resources/views/components/tab.blade.php
+  x-ui::tab.item:
+    attributes:
+      passthrough: true
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'Blade UI component: item.'
+    props:
+      badge:
+        default: null
+        required: false
+        type: string
+      disabled:
+        default: false
+        required: false
+        type: boolean
+      icon:
+        default: null
+        required: false
+        type: string
+      label:
+        required: false
+        type: string
+      name:
+        required: false
+        type: string
+    source:
+      view: src/resources/views/components/tab/item.blade.php
+  x-ui::theme:
+    description: 'Blade UI component: theme.'
+    props:
+      '#4095BF':
+        required: false
+        type: string
+      color:
+        default: '#4095BF'
+        required: false
+        type: string
+    source:
+      view: src/resources/views/components/theme.blade.php
+  x-ui::title:
+    attributes:
+      passthrough: true
+    description: 'Blade UI component: title.'
+    props:
+      destructive:
+        default: false
+        required: false
+        type: boolean
+      subtitle:
+        default: null
+        required: false
+        type: string
+      title:
+        required: false
+        type: string
+    source:
+      view: src/resources/views/components/title.blade.php
+  x-ui::volt.alert:
+    dependencies:
+      icons:
+        package: nanodepo/apex
+        usage: Icon components are referenced as icon::<name> via x-dynamic-component.
+    description: 'Blade UI component: alert.'
+    source:
+      view: src/resources/views/components/volt/alert.blade.php
+  x-ui::volt.drawer-switcher:
+    description: 'Blade UI component: drawer switcher.'
+    source:
+      view: src/resources/views/components/volt/drawer-switcher.blade.php
+  x-ui::volt.switch-mode:
+    description: 'Blade UI component: switch mode.'
+    source:
+      view: src/resources/views/components/volt/switch-mode.blade.php

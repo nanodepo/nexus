@@ -1,4 +1,5 @@
 <button
+    type="{{ $attributes->get('type', 'button') }}"
     {{ $attributes->class([
         'button disabled:opacity-50 disabled:pointer-events-none',
         $color,
@@ -24,4 +25,3 @@
         </div>
     @endif
 </button>
-
