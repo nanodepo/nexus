@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\File;
 use NanoDepo\Nexus\Alert\Flash;
+use NanoDepo\Nexus\Theme\ColorMath;
+use NanoDepo\Nexus\Theme\ThemeFactory;
+use NanoDepo\Nexus\Theme\ThemeRegistry;
 use NanoDepo\Nexus\ValueObjects\Price;
 
 if (!function_exists('alert')) {
@@ -296,226 +299,14 @@ if (!function_exists('generateTheme')) {
      */
     function generateTheme(string $primaryHex): stdClass
     {
-        // Internal helper: Convert tonal value (0-100) to Lightness (0-100)
-        // Material 3 uses Tones where 0 is Black, 100 is White.
-        // HSL Lightness is similar but not 1:1 linear with perceived brightness,
-        // but for this implementation we map Tone to Lightness directly as a good approximation.
-        // Tone 40 = Lightness 40%.
-        $getTone = function ($h, $s, $tone) {
-            return rgbToHex(...hslToRgb($h, $s, $tone));
-        };
-
-        // Internal helper: Smart Harmony
-        // Shifts target Hue towards Primary Hue to make them feel related.
-        $harmonize = function ($targetHue, $primaryHue) {
-            $diff = $targetHue - $primaryHue;
-            // Shortest path around the circle
-            if ($diff > 180) $diff -= 360;
-            if ($diff < -180) $diff += 360;
-
-            // Shift by 10% of the difference towards primary
-            // But only if they are within 120 degrees (don't mix complementary too much)
-            if (abs($diff) < 120) {
-                 return fmod($targetHue - ($diff * 0.15) + 360, 360);
-            }
-            return $targetHue;
-        };
-
-        list($r, $g, $b) = hexToRgb($primaryHex);
-        list($hPrimary, $sPrimary, $lPrimary) = rgbToHsl($r, $g, $b);
-
-        // --- Determine Hues ---
-
-        // Secondary & Tertiary: Smart Generation vs Classic geometry
-        $scheme = config('nexus.scheme', 'smart'); // Default to smart if not set
-
-        if ($scheme === 'smart') {
-            // Smart: Secondary is close to Primary but distinct (Analougus-ish or lighter chroma)
-            // Let's try: Secondary = Primary + 15deg, Less Saturation?
-            // Or stick to Material 3 "Secondary" which is often less chromatic.
-            // Let's use a subtle hue shift for Secondary.
-
-            // Secondary: +15 deg
-            $hSecondary = fmod($hPrimary + 15 + 360, 360);
-
-            // Tertiary: +120 deg (Triadic) or +60 (Analogous extended)
-            // Material 3 suggests Tertiary is a temperature shift.
-            // If Primary is Cool, Tertiary could be Warm.
-            // Let's go with +60 degrees for a balanced accent.
-            $hTertiary = fmod($hPrimary + 60, 360);
-        } else {
-             // Fallback to legacy geometric schemes
-             $schemes = match ($scheme) {
-                'analogous' => getAnalogousColors($hPrimary),
-                'triadic' => getTriadicColors($hPrimary),
-                default => getSplitComplementaryColors($hPrimary),
-            };
-            $hSecondary = $schemes['secondary'];
-            $hTertiary = $schemes['tertiary'];
-        }
-
-        // Functional Colors
-        $hError = 0;   // Red
-        $hSuccess = 130; // Green (140 is a good robust green, 120 is pure green)
-
-        // Harmonize Functional Colors with Primary
-        // If the primary color is Blue (240), moving Red (0) slightly to Purple makes it fit better.
-        // If Primary is Green (120), Red might stay Red.
-        $hError = $harmonize($hError, $hPrimary);
-        $hSuccess = $harmonize($hSuccess, $hPrimary);
-
-        $hNeutral = $hPrimary; // Neutrals tinted with Primary hue
-
-        // --- Define Tones ---
-        // We capture Closure for easy generation
-        // Param structure: [$h, $s]
-
-        // Primary
-        $p = [$hPrimary, $sPrimary];
-
-        // Secondary: Lower saturation usually? Let's keep input Saturation but cap it if too high?
-        // For now, use primary saturation for harmony, or slightly reduced.
-        // Let's simply use the calculated Hues and Primary's Saturation (maybe -10 for Secondary/Tertiary to distinguish)
-        $sSecondary = max(0, $sPrimary - 10);
-        $sec = [$hSecondary, $sSecondary];
-
-        $sTertiary = $sPrimary; // Accent can be vibrant
-        $ter = [$hTertiary, $sTertiary];
-
-        $err = [$hError, 90]; // Destructive usually high saturation
-        $suc = [$hSuccess, 80]; // Success also vibrant
-
-        // Neutrals: Very low saturation primary
-        $neu = [$hNeutral, 4]; // Surface/Backgrounds
-        // Neutral Variant: Slightly higher saturation for outlines/text
-        $neuV = [$hNeutral, 8];
-        $neuP = [$hPrimary, 30];
-
-        return literal(
-            light: literal(
-                // Usage: $getTone($h, $s, $tone)
-
-                // Key Colors
-                primary:           $getTone(...$p, tone: 40),
-                primary_container: $getTone(...$p, tone: 82),
-                secondary:           $getTone(...$sec, tone: 40),
-                secondary_container: $getTone(...$sec, tone: 82),
-                tertiary:           $getTone(...$ter, tone: 40),
-                tertiary_container: $getTone(...$ter, tone: 82),
-                destructive:           $getTone(...$err, tone: 40),
-                destructive_container: $getTone(...$err, tone: 82),
-                success:               $getTone(...$suc, tone: 40),
-                success_container:     $getTone(...$suc, tone: 82),
-
-                // Backgrounds (Neutral)
-                // Surface is Tone 98 in MD3, Background Tone 98/99.
-                background: $getTone(...$neu, tone: 90),
-                front:      $getTone(...$neu, tone: 93), // Slightly darker surface (if needed) or same.
-                surface:    $getTone(...$neu, tone: 96), // Cards/Surfaces
-                section:    $getTone(...$neu, tone: 99), // Distinct sections
-
-                // Text & Icons (On Colors)
-                // On Primary is Tone 100 (White) or 10
-                primary_text:           $getTone(...$p, tone: 100),
-                primary_container_text: $getTone(...$p, tone: 10),
-                secondary_text:           $getTone(...$sec, tone: 100),
-                secondary_container_text: $getTone(...$sec, tone: 10),
-                tertiary_text:           $getTone(...$ter, tone: 100),
-                tertiary_container_text: $getTone(...$ter, tone: 10),
-                destructive_text:           $getTone(...$err, tone: 100),
-                destructive_container_text: $getTone(...$err, tone: 10),
-                success_text:               $getTone(...$suc, tone: 100),
-                success_container_text:     $getTone(...$suc, tone: 10),
-
-                // General Text (On Surface)
-                text:         $getTone(...$neu, tone: 10), // Almost black
-                section_text: $getTone(...$neu, tone: 10),
-                subtitle:     $getTone(...$neuV, tone: 40),
-                hint:         $getTone(...$neuV, tone: 50),
-
-                // Outlines / Separators
-                outline:  $getTone(...$neuV, tone: 75), // Inputs etc
-                backline: $getTone(...$neuV, tone: 85), // Borders
-
-                // Extras / Legacy mapping
-                accent: $getTone(...$p, tone: 40),
-                link:   $getTone(...$p, tone: 40),
-                focus:  $getTone(...$neuP, tone: 75), // Highlight ring
-
-                section_header:    $getTone(...$neuP, tone: 40),
-                section_separator: $getTone(...$neuV, tone: 90),
-
-                // Add gray for compatibility if needed, though we use neutrals now
-                gray: $getTone(...$neu, tone: 50),
-                foreground: $getTone(...$neu, tone: 10),
-            ),
-            dark: literal(
-                 // Dark Mode Tones:
-                 // Primary: 70
-                 // OnPrimary: 20
-                 // Container: 24
-                 // OnContainer: 90
-
-                primary:               $getTone(...$p, tone: 70),
-                primary_container:     $getTone(...$p, tone: 24),
-                secondary:             $getTone(...$sec, tone: 70),
-                secondary_container:   $getTone(...$sec, tone: 24),
-                tertiary:              $getTone(...$ter, tone: 70),
-                tertiary_container:    $getTone(...$ter, tone: 24),
-                destructive:           $getTone(...$err, tone: 70),
-                destructive_container: $getTone(...$err, tone: 24),
-                success:               $getTone(...$suc, tone: 70),
-                success_container:     $getTone(...$suc, tone: 24),
-
-                // Dark Backgrounds
-                // Background: Tone 6
-                // Surface: Tone 12
-                background: $getTone(...$neu, tone: 1),
-                front:      $getTone(...$neu, tone: 4), // Slightly lighter
-                surface:    $getTone(...$neu, tone: 7),
-                section:    $getTone(...$neu, tone: 10),
-
-                // Dark Text
-                primary_text:           $getTone(...$p, tone: 10),
-                primary_container_text: $getTone(...$p, tone: 90),
-                secondary_text:           $getTone(...$sec, tone: 10),
-                secondary_container_text: $getTone(...$sec, tone: 90),
-                tertiary_text:           $getTone(...$ter, tone: 10),
-                tertiary_container_text: $getTone(...$ter, tone: 90),
-                destructive_text:           $getTone(...$err, tone: 10),
-                destructive_container_text: $getTone(...$err, tone: 90),
-                success_text:               $getTone(...$suc, tone: 10),
-                success_container_text:     $getTone(...$suc, tone: 90),
-
-                // General Text
-                text:         $getTone(...$neu, tone: 90),
-                section_text: $getTone(...$neu, tone: 90),
-                subtitle:     $getTone(...$neuV, tone: 70),
-                hint:         $getTone(...$neuV, tone: 60),
-
-                // Outlines
-                outline:  $getTone(...$neuV, tone: 25),
-                backline: $getTone(...$neuV, tone: 12),
-
-                // Extras
-                accent: $getTone(...$p, tone: 80),
-                link:   $getTone(...$p, tone: 80),
-                focus:  $getTone(...$neuP, tone: 25),
-
-                section_header:    $getTone(...$neuP, tone: 60),
-                section_separator: $getTone(...$neuV, tone: 3),
-
-                gray: $getTone(...$neu, tone: 50),
-                foreground: $getTone(...$neu, tone: 90),
-            )
-        );
+        return ThemeFactory::fromConfig()->make($primaryHex);
     }
 }
 
 if (!function_exists('gradient')) {
     /**
      * Generates an array of hex colors creating a gradient between two colors.
-     * Supports palette names (from config) or direct hex values.
+     * Supports theme palette names (from config) or direct hex values.
      *
      * @param int $count Number of steps (colors) to generate.
      * @param string|null $from The name of the starting color (palette name or hex).
@@ -532,9 +323,10 @@ if (!function_exists('gradient')) {
         $from = $from ?? config('nexus.gradient.from', 'red');
         $to = $to ?? config('nexus.gradient.to', 'purple');
 
-        $palette = config('nexus.palette', []);
+        $palette = ThemeRegistry::palette();
+        $paletteColors = $palette->colors();
 
-        $resolvePaletteColor = function (string $name) use ($palette) {
+        $resolvePaletteColor = function (string $name) use ($paletteColors) {
             $value = trim($name);
 
             if (preg_match('/^#?[0-9a-fA-F]{6}$/', $value)) {
@@ -543,17 +335,11 @@ if (!function_exists('gradient')) {
 
             $key = trim($value);
 
-            if (!isset($palette[$key])) {
+            if (!isset($paletteColors[$key])) {
                 return null;
             }
 
-            $entry = $palette[$key];
-            if (is_array($entry)) {
-                $first = reset($entry);
-                return is_string($first) ? $first : null;
-            }
-
-            return is_string($entry) ? $entry : null;
+            return $paletteColors[$key];
         };
 
         $hexFrom = $resolvePaletteColor($from);
@@ -563,21 +349,16 @@ if (!function_exists('gradient')) {
             throw new InvalidArgumentException('Gradient colors must be palette names or hex values.');
         }
 
-        // Convert to HSL
-        $hslFrom = rgbToHsl(...hexToRgb($hexFrom));
-        $hslTo = rgbToHsl(...hexToRgb($hexTo));
+        $lchFrom = ColorMath::hexToOklch($hexFrom);
+        $lchTo = ColorMath::hexToOklch($hexTo);
 
         $colors = [];
 
         for ($i = 0; $i < $count; $i++) {
             $t = $count > 1 ? $i / ($count - 1) : 0;
 
-            // Interpolate HSL
-            $h = lerp($hslFrom[0], $hslTo[0], $t);
-            $s = lerp($hslFrom[1], $hslTo[1], $t);
-            $l = lerp($hslFrom[2], $hslTo[2], $t);
-
-            $colors[] = rgbToHex(...hslToRgb($h, $s, $l));
+            $lch = ColorMath::interpolateOklch($lchFrom, $lchTo, $t);
+            $colors[] = ColorMath::oklchToHex(...$lch);
         }
 
         return $colors;

@@ -39,17 +39,9 @@ lerp(0, 100, 0.25); // 25
 - `getTriadicColors(float|int $h): array`
 - `getSplitComplementaryColors(float|int $h): array`
 
-## generateTheme(primaryHex)
-Generates `light` and `dark` palettes based on a primary hex color.
-
-```php
-$theme = generateTheme('#ff00aa');
-$theme->light->primary;
-```
-
 ## gradient(count, from = null, to = null)
-Builds an array of colors interpolated in HSL between two colors. Supports:
-- Palette names from `config('nexus.palette')`
+Builds an array of colors interpolated in OKLCH between two colors. Supports:
+- Palette names from the active theme (`config('nexus.theme')`)
 - Direct hex values
 
 ```php
@@ -57,16 +49,25 @@ $colors = gradient(5, 'red', 'blue');      // palette names
 $colors = gradient(5, '#cc241d', '#458588'); // hex values
 ```
 
-Default palette and endpoints are controlled by:
+Default endpoints are controlled by:
 ```php
 config('nexus.gradient.from');
 config('nexus.gradient.to');
 ```
 
-See `docs/palettes.md` for palette structure and the Gruvbox list.
+See `docs/palettes.md` for theme palette structure and accent lists.
+See `docs/theme.md` for ThemeFactory behavior.
 
 Notes:
 - If a palette name is not found, `gradient()` throws `InvalidArgumentException`.
+
+## generateTheme(primaryHex)
+Builds theme colors via `ThemeFactory` using the active theme palette. Primary is normalized to palette style; secondary and tertiary are picked from the palette by scheme.
+
+```php
+$theme = generateTheme('#ff00aa');
+$theme->light->primary;
+```
 
 ## ui()
 Returns user UI preferences as a `stdClass` with `color`, `drawer`, `dark`.
